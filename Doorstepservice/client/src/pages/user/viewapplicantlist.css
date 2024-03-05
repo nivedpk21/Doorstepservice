@@ -1,0 +1,8 @@
+.buissnessname {
+  color: black;
+  font-size: large;
+ }
+
+.buissnessname:hover {
+  color: green;
+}
