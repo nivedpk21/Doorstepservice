@@ -67,6 +67,54 @@ messageRouter.post("/savereplymessage/:id", checkAuth, async (req, res) => {
   }
 });
 
+
+// view message (in buissness /messages page)
+
+messageRouter.get("/viewbuissnessmessage", checkAuth, async (req, res) => {
+  const buissnessId = req.userData.userId;
+  console.log("buissnessId", buissnessId);
+
+  try {
+    await messageModel
+      .aggregate([
+        {
+          $lookup: { 
+            from: "user_tbs",
+            localField: "userId",
+            foreignField: "loginId",
+            as: "result",
+          },
+        },
+        {
+          $unwind: "$result",
+        },
+        {
+          $match: {
+            buissnessId: new mongoose.Types.ObjectId(buissnessId),
+          },
+        },
+        {
+          $group: {
+            _id: { loginID: "$result.loginId" },
+            name: { $first: "$result.name" },
+            loginId: { $first: "$result.loginId" },
+          },
+        },
+      ])
+      .then((messageData) => {
+        return res.status(200).json({
+          data: messageData,
+          message: "message data fetched successfully",
+          sucess: true,
+          error: false,
+        });
+      });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
 // view message in chatting part (buissness page)
 
 messageRouter.get("/viewchatmessage/:id", checkAuth, async (req, res) => {
@@ -85,7 +133,6 @@ messageRouter.get("/viewchatmessage/:id", checkAuth, async (req, res) => {
 
 messageRouter.get("/viewmessage", checkAuth, async (req, res) => {
   const userId = req.userData.userId;
-  // console.log(userId);
 
   try {
     await messageModel
@@ -109,7 +156,7 @@ messageRouter.get("/viewmessage", checkAuth, async (req, res) => {
         {
           $group: {
             _id: { loginID: "$result.loginId" },
-            name: { $first: "$result.name" },
+            businessname: { $first: "$result.businessname" },
             loginId: { $first: "$result.loginId" },
           },
         },
@@ -136,6 +183,6 @@ messageRouter.get("/viewuserchat/:id", checkAuth, async (req, res) => {
       data: messageData,
     });
   }
-});
+}); 
 
 module.exports = messageRouter;

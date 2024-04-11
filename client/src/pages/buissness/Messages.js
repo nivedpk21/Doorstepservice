@@ -6,11 +6,10 @@ import { Link } from "react-router-dom";
 export default function Messages() {
   const [data, setData] = useState([]);
   const token = localStorage.getItem("token");
-  console.log("token", token);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user/viewmessage", {
+      .get("http://localhost:5000/message/viewbuissnessmessage", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -23,15 +22,36 @@ export default function Messages() {
   return (
     <>
       <Header />
-      <div>
-        <p>messages</p>
+      buissness
+      <div
+        className="border rounded p-2"
+        style={{ margin: "auto", marginTop: "50px", width: "35%", height: "500px" }}
+      >
         {data.map((item) => (
-          <div className="border border-secondary" style={{ width: "500px", height: "130px", margin: "auto" }}>
-            <p>Name:{item.name}</p>
-            <p>{item.message}</p>
-            <Link to={`/viewmessage/${item.loginId}`} className="btn btn-primary">
-              View
-            </Link>
+          <div
+            className="border rounded p-2"
+            style={{ height: "80px", display: "flex", alignItems: "center" }}
+          >
+            <div
+              style={{
+                borderRadius: "50%",
+                height: "60px",
+                width: "60px",
+                backgroundColor: "grey",
+              }}
+            ></div>
+            <div className="p-1">
+              <h6>{item.name}</h6>
+            </div>
+            <div style={{ marginLeft: "auto " }}>
+              <Link
+                to={`/viewmessage/${item.loginId}`}
+                type="button"
+                class="btn btn-outline-primary"
+              >
+                View
+              </Link>
+            </div>
           </div>
         ))}
       </div>

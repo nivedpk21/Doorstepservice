@@ -1,11 +1,25 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Singlejob() {
+  const token = localStorage.getItem("token");
   const { id } = useParams();
   const [data, setData] = useState({});
+  const [address, setAddress] = useState({});
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/user/profile", { headers: { Authorization: `bearer ${token}` } })
+      .then((response) => {
+        console.log(response);
+        const data = response.data.data;
+        setAddress(data);
+      });
+  }, []);
 
   useEffect(() => {
     axios.get(`http://localhost:5000/user/viewsinglejob/${id}`).then((response) => {
@@ -15,9 +29,24 @@ export default function Singlejob() {
     });
   }, []);
 
+  const deleteJob = (jobId) => {
+    axios.get(`http://localhost:5000/user/deletejob/${jobId}`).then((response) => {
+      console.log(response);
+
+      const message = response.data.message;
+      toast.success(message);
+
+      setTimeout(() => {
+        navigate("/viewjob");
+      }, 2000);
+    });
+  };
+
   return (
     <>
       <Header />
+      <Toaster position="top-center" reverseOrder={false} />
+
       <div
         className="container-fluid border rounded  mt-5 p-2"
         style={{ width: "70%", height: "100%", backgroundColor: "white" }}
@@ -33,20 +62,22 @@ export default function Singlejob() {
           }}
         >
           <h5>{data.title}</h5>
-          {/* <button className="btn btn-primary">Apply</button> */}
         </div>
-        <div className="p-2 border rounded-3" style={{ display: "flex", justifyContent: "space-between",alignItems:"center" }}>
-          <div >
+        <div
+          className="p-2 border rounded-3"
+          style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+        >
+          <div>
             <span style={{ fontSize: "small", fontFamily: "serif" }}>category</span>
-            <p >{data.category}</p>
+            <p>{data.category}</p>
           </div>
           <div>
             <span style={{ fontSize: "small", fontFamily: "serif" }}>city</span>
-            <p>{data.city}</p>
+            <p>{address.city}</p>
           </div>
           <div>
             <span style={{ fontSize: "small", fontFamily: "serif" }}>date</span>
-            <p>{data.city}</p>
+            <p>{data.date}</p>
           </div>
           <div>
             <span style={{ fontSize: "small", fontFamily: "serif" }}>budget</span>
@@ -63,27 +94,31 @@ export default function Singlejob() {
           <h6 className="mt-5">Customer details</h6>
           <div className="border rounded p-4" style={{ width: "100%", height: "220px" }}>
             <div>
-              <p>Name</p>
+              <p>{address.name}</p>
               <p>
-                Roseville
+                {address.house},{address.street}
                 <br />
-                Backelstreet
+                {address.town},{address.city}
                 <br />
-                Kozhikode,Kozhikode,Kerala
+                {address.district},{address.state}
                 <br />
-                365245
+                {address.pincode}
               </p>
             </div>
             <div style={{ textAlign: "center" }}>
               <div class="btn-group" role="group" aria-label="Basic outlined example">
                 <button type="button" class="btn btn-outline-primary">
-                  Call
+                  Edit
                 </button>
-                <button type="button" class="btn btn-outline-primary">
-                  Message
-                </button>
-                <button type="button" class="btn btn-outline-primary">
-                  Email
+
+                <button
+                  onClick={() => {
+                    deleteJob(data._id);
+                  }}
+                  type="button"
+                  class="btn btn-outline-primary"
+                >
+                  Delete
                 </button>
               </div>
             </div>

@@ -3,7 +3,18 @@ import Header from "../components/Header";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import { Button, Chip, Container, Grid, Box, MenuItem, InputLabel, FormControl, Select } from "@mui/material";
+import {
+  Button,
+  Chip,
+  Container,
+  Grid,
+  Box,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Select,
+} from "@mui/material";
+import Pagination from "../components/Pagination";
 export default function Joblistings() {
   const token = localStorage.getItem("token");
   console.log(token);
@@ -36,11 +47,25 @@ export default function Joblistings() {
 
   const sendApplication = (jobId) => {
     axios
-      .post(`http://localhost:5000/buissness/apply/${jobId}`, { headers: { Authorization: `Bearer ${token}` } })
+      .post(`http://localhost:5000/buissness/apply/${jobId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         console.log(response);
       });
   };
+
+  const sort = (jobdata) => {
+    const sortedData = jobdata.sort((a, b) => a.budget - b.budget);
+    setJobdata(sortedData);
+  };
+
+  const [currentPage, setCurrentpage] = useState(1);
+  const [postsPerpage, setPostsperpage] = useState(5);
+
+  const lastPostindex = currentPage * postsPerpage;
+  const firstPostindex = lastPostindex - postsPerpage;
+  const currentPageposts = jobdata.slice(firstPostindex, lastPostindex);
 
   return (
     <>
@@ -48,7 +73,7 @@ export default function Joblistings() {
       <Box sx={{ padding: "50px" }}>
         <Grid container spacing={0}>
           <Grid item xs={3} sm={12} lg={3}>
-            <Box sx={{ width: "100%", height: "600px", backgroundColor: "  ", paddingTop: "50px" }}>
+            <Box sx={{ width: "100%", height: "500px", backgroundColor: "  ", paddingTop: "20px" }}>
               <Container maxWidth="sm">
                 <Box
                   sx={{
@@ -69,13 +94,30 @@ export default function Joblistings() {
                   >
                     <h6>Search Filter</h6>
                   </Box>
+                  <div className="mt-4 p-3">
+                    <div class="mb-3">
+                      <select class="form-select form-select-sm" name="" id="">
+                        <option selected>Sort by amount</option>
+                        <option value="">highest</option>
+                        <option value="">lowest</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="text-center">
+                    <button onClick={sort} type="button" class="btn btn-primary">
+                      Apply
+                    </button>
+                  </div>
                 </Box>
               </Container>
             </Box>
           </Grid>
 
           <Grid item xs={9} sm={12} lg={9}>
-            <Box sx={{ width: "100%", height: "600px", backgroundColor: "  ", paddingTop: "50px" }}>
+            <Box
+              sx={{ width: "100%", minHeight: "500px", backgroundColor: "  ", paddingTop: "20px" }}
+            >
               <Container maxWidth="md">
                 <Box
                   sx={{
@@ -87,7 +129,13 @@ export default function Joblistings() {
                     border: "1px solid  rgb(203 213 225)",
                   }}
                 >
-                  <Grid container spacing={1} direction="row" justifyContent="center" alignItems="center">
+                  <Grid
+                    container
+                    spacing={1}
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
                     <Grid item xs={3} sm={12} lg={4}>
                       <Box>
                         <FormControl fullWidth>
@@ -101,9 +149,9 @@ export default function Joblistings() {
                             onChange={inputChange}
                             defaultValue={""}
                           >
-                            <MenuItem value={"Electrical"}>Electrical</MenuItem>
-                            <MenuItem value={"Plumbing"}>Plumbing</MenuItem>
-                            <MenuItem value={"Carpentry"}>Carpentry</MenuItem>
+                            <MenuItem value={"electrical"}>Electrical</MenuItem>
+                            <MenuItem value={"plumbing"}>Plumbing</MenuItem>
+                            <MenuItem value={"pestcontrol"}>pestcontrol</MenuItem>
                           </Select>
                         </FormControl>
                       </Box>
@@ -121,9 +169,9 @@ export default function Joblistings() {
                             onChange={inputChange}
                             defaultValue={""}
                           >
-                            <MenuItem value={"Kozhikode"}>Kozhikode</MenuItem>
+                            <MenuItem value={"kozhikode"}>Kozhikode</MenuItem>
                             <MenuItem value={"kannur"}>kannur</MenuItem>
-                            <MenuItem value={"Kochi"}>Kochi</MenuItem>
+                            <MenuItem value={"kochi"}>Thrissur</MenuItem>
                           </Select>
                         </FormControl>
                       </Box>
@@ -140,7 +188,7 @@ export default function Joblistings() {
               </Container>
 
               {/* Result display */}
-              {jobdata.map((item) => (
+              {currentPageposts.map((item) => (
                 <Container maxWidth="md" sx={{ marginTop: "20px" }}>
                   <Box
                     sx={{
@@ -150,7 +198,13 @@ export default function Joblistings() {
                       padding: "20px",
                     }}
                   >
-                    <Box sx={{ display: "flex", justifyContent: "space-between", alignContent: "center" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignContent: "center",
+                      }}
+                    >
                       <Box sx={{ width: "70%" }}>
                         <Link
                           style={{
@@ -162,7 +216,13 @@ export default function Joblistings() {
                         >
                           <h5>{item.title}</h5>
                         </Link>
-                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                          }}
+                        >
                           <Box sx={{}}>
                             <p>{item.category}</p>
                           </Box>
@@ -178,21 +238,32 @@ export default function Joblistings() {
                         </Box>
                       </Box>
                       <Box sx={{ width: "10%" }}></Box>
-                      <Box sx={{ width: "20%", padding: "10px" }}>
-                        <Button
-                          onClick={() => {
-                            sendApplication(item._id);
-                          }}
-                          variant="contained"
+                      <Box
+                        sx={{
+                          width: "20%",
+                          padding: "10px",
+                          marginLeft: "auto",
+                          textAlign: "right",
+                        }}
+                      >
+                        <Link
+                          to={`/viewjobonsearch/${item._id}`}
+                          className="btn btn-outline-primary"
                         >
-                          Apply
-                        </Button>
+                          View
+                        </Link>
                       </Box>
                     </Box>
                   </Box>
                 </Container>
               ))}
             </Box>
+            <Pagination
+              totalPosts={jobdata.length}
+              postsPerpage={postsPerpage}
+              setCurrentPage={setCurrentpage}
+              currentPage={currentPage}
+            />
           </Grid>
         </Grid>
       </Box>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+
 
 export default function Viewjobonsearch() {
   const [data, setData] = useState({});
@@ -20,11 +22,15 @@ export default function Viewjobonsearch() {
 
   const sendApplication = (jobid) => {
     try {
-      axios.post(`http://localhost:5000/buissness/apply/${jobid}`, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      }).then((response)=>{
-        console.log(response);
-      })
+      axios
+        .post(`http://localhost:5000/buissness/apply/${jobid}`, data, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => {
+          console.log(response);
+          const message = response.data.message;
+          toast.success(message);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -33,6 +39,8 @@ export default function Viewjobonsearch() {
   return (
     <>
       <Header />
+      <Toaster position="top-center" reverseOrder={false} />
+
       <div
         className="container-fluid border rounded  mt-5 p-2"
         style={{ width: "70%", height: "100%", backgroundColor: "white" }}
@@ -48,9 +56,6 @@ export default function Viewjobonsearch() {
           }}
         >
           <h5>{data.title}</h5>
-          <button onClick={()=> {sendApplication(data._id)}} className="btn btn-primary">
-            Apply
-          </button>
         </div>
         <div
           className="p-2 border rounded-3"
@@ -83,30 +88,27 @@ export default function Viewjobonsearch() {
           <h6 className="mt-5">Customer details</h6>
           <div className="border rounded p-4" style={{ width: "100%", height: "220px" }}>
             <div>
-              <p>Name</p>
+              <p>{data.name}</p>
               <p>
-                Roseville
+                {data.house},{data.street}
                 <br />
-                Backelstreet
+                {data.town},{data.city}
                 <br />
-                Kozhikode,Kozhikode,Kerala
+                {data.district},{data.state}
                 <br />
-                365245
+                {data.pincode}
               </p>
             </div>
-            <div style={{ textAlign: "center" }}>
-              <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" class="btn btn-outline-primary">
-                  Call
-                </button>
-                <button type="button" class="btn btn-outline-primary">
-                  Message
-                </button>
-                <button type="button" class="btn btn-outline-primary">
-                  Email
-                </button>
-              </div>
-            </div>
+          </div>
+          <div className="mt-3" style={{ textAlign: "center" }}>
+            <button
+              onClick={() => {
+                sendApplication(data._id);
+              }}
+              className="btn btn-primary"
+            >
+              Apply
+            </button>
           </div>
         </div>
       </div>

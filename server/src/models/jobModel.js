@@ -11,9 +11,8 @@ const jobSchema = new schema({
   category: { type: String },
   city: { type: String },
   date: { type: String },
-  budget: { type: String },
+  budget: { type: Number },
   image: { type: String },
-  address: { type: String },
   userId: { type: mongoose.Types.ObjectId, ref: "user_tb" },
   status: { type: String },
 });

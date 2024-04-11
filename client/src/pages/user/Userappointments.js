@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import Pagination from "../../components/Pagination";
 
 export default function Userappointments() {
   const token = localStorage.getItem("token");
@@ -19,38 +21,62 @@ export default function Userappointments() {
       });
   }, []);
 
+  const [currentPage, setCurrentpage] = useState(1);
+  const [postsPerpage, setPostsperpage] = useState(5);
+
+  const lastPostindex = currentPage * postsPerpage;
+  const firstPostindex = lastPostindex - postsPerpage;
+  const currentPageposts = data.slice(firstPostindex, lastPostindex);
+
   return (
     <>
       <Header />
-
       <div
-        className="container-fluid border border-2 rounded"
+        className="border rounded p-2"
         style={{
-          width: "60%",
-          minHeight: "500px",
+          width: "50%",
+          height: "550px",
+          margin: "auto",
           marginTop: "50px",
-          padding: "10px",
         }}
       >
-        {data.map((item) => (
+        {currentPageposts.map((item) => (
           <div
-            className="container border rounded"
-            style={{ height: "60px", display: "flex", alignItems: "center" }}
+            className="border rounded p-2"
+            style={{
+              height: "100px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
-            <div style={{ width: "30%" }}>
-              <h6>{item.title}</h6>
+            <div>
+              <h5>{item.title}</h5>
             </div>
-            <div style={{ width: "20%" , textAlign: "center" }}>
-              <p>Date{item.date}</p>
+            <div>
+              <p>{item.date}</p>
             </div>
-            <div style={{ width: "50%", textAlign: "center" }}>
-              <p>Agency :{item.category}</p>
+            <div>
+              <p>
+                {item.businessname}
+                <br />
+                {item.city}
+              </p>
+            </div>
+            <div>
+              <Link to={``} type="button" class="btn btn-outline-primary">
+                View
+              </Link>
             </div>
           </div>
         ))}
       </div>
-
-    
+      <Pagination
+        totalPosts={data.length}
+        postsPerpage={postsPerpage}
+        setCurrentPage={setCurrentpage}
+        currentPage={currentPage}
+      />
     </>
   );
 }

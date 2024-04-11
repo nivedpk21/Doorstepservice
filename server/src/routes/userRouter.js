@@ -24,6 +24,7 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
+
 // User Registration
 
 userRouter.post("/register", async (req, res) => {
@@ -74,7 +75,9 @@ userRouter.post("/register", async (req, res) => {
         name: req.body.name,
         email: req.body.email,
         phonenumber: req.body.phonenumber,
-        address: req.body.address,
+        house: req.body.house,
+        street: req.body.street,
+        town: req.body.town,
         state: req.body.state,
         district: req.body.district,
         city: req.body.city,
@@ -278,6 +281,10 @@ userRouter.get("/deleteuser", checkAuth, async (req, res) => {
 userRouter.post("/postjob", checkAuth, upload.single("image"), async (req, res) => {
   const userId = req.userData.userId;
 
+  console.log("bodyee", req.body);
+  const imageDetails = req.body.image;
+  console.log("imageDetails", imageDetails);
+
   try {
     const jobData = {
       title: req.body.title,
@@ -287,7 +294,6 @@ userRouter.post("/postjob", checkAuth, upload.single("image"), async (req, res) 
       date: req.body.date,
       budget: req.body.budget,
       image: req.file.filename,
-      address: req.body.address,
       userId: userId,
       status: "0",
     };
@@ -423,14 +429,16 @@ userRouter.post("/search", async (req, res) => {
   console.log("city:", City);
 
   try {
-    buissnessModel.find({ city: City, category: Category }).then((searchResult) => {
+    const searchresult = await buissnessModel.find({ city: City, category: Category });
+    if (searchresult) {
+      console.log(searchresult);
       return res.status(200).json({
-        data: searchResult,
+        data: searchresult,
         message: "search completed successfully",
         success: true,
         error: false,
       });
-    });
+    }
   } catch (error) {
     console.log(error);
     return res.status(400).json({
@@ -541,7 +549,10 @@ userRouter.get("/approvejobapplication/:id/:jobid", async (req, res) => {
   console.log("loginid approvejob:", loginid);
   console.log("jobid approvejob:", jobid);
   try {
-    const updateStatus = await applicationModel.updateOne({ loginId: loginid }, { $set: { status: "1" } });
+    const updateStatus = await applicationModel.updateOne(
+      { loginId: loginid },
+      { $set: { status: "1" } }
+    );
     console.log("updt sts", updateStatus);
     if (updateStatus) {
       try {
@@ -563,33 +574,16 @@ userRouter.get("/approvejobapplication/:id/:jobid", async (req, res) => {
 //  view appointments
 
 userRouter.get("/appointments", checkAuth, async (req, res) => {
-  const loginid = req.userData.userId;
+  const loginID = req.userData.userId;
+  console.log(loginID);
 
   try {
-    await jobModel.find({ userId: loginid, status: "2" }).then((response) => {
-      return res.status(200).json({
-        data: response,
-        message: "appoinments details fetched successfully",
-      });
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-// view message (in buissness /messages page)
-
-userRouter.get("/viewmessage", checkAuth, async (req, res) => {
-  const buissnessId = req.userData.userId;
-  console.log("buissnessId", buissnessId);
-
-  try {
-    await messageModel
+    await bookingModel
       .aggregate([
         {
           $lookup: {
-            from: "user_tbs",
-            localField: "userId",
+            from: "buissness_tbs",
+            localField: "buissnessId",
             foreignField: "loginId",
             as: "result",
           },
@@ -599,27 +593,29 @@ userRouter.get("/viewmessage", checkAuth, async (req, res) => {
         },
         {
           $match: {
-            buissnessId: new mongoose.Types.ObjectId(buissnessId),
+            userId: new mongoose.Types.ObjectId(loginID),
+            status: "1",
           },
         },
         {
           $group: {
-            _id: { loginID: "$result.loginId" },
-            name: { $first: "$result.name" },
-            loginId: { $first: "$result.loginId" },
+            _id: "$_id",
+            title: { $first: "$title" },
+            date: { $first: "$date" },
+            jobtype: { $first: "$jobtype" },
+            businessname: { $first: "$result.businessname" },
+            city: { $first: "$result.city" },
           },
         },
       ])
-      .then((messageData) => {
+      .then((data) => {
         return res.status(200).json({
-          data: messageData,
-          message: "message data fetched successfully",
-          sucess: true,
-          error: false,
+          data: data,
+          message: "appointment details fetched successfully",
         });
       });
   } catch (error) {
-    console.log(error);
+    return res.status(500).json({ message: " internal server error" });
   }
 });
 
@@ -633,14 +629,14 @@ userRouter.get("/viewbuissnessdetails/:id", async (req, res) => {
       return res.status(200).json({
         data: buissnessData,
         message: "buissness details fetched successfully",
-      });
+      }); 
     });
   } catch (error) {
     console.log(error);
   }
 });
 
-// book service
+// book service 
 
 userRouter.post("/bookservice/:id", checkAuth, async (req, res) => {
   const buissness_id = req.params.id;
@@ -651,6 +647,7 @@ userRouter.post("/bookservice/:id", checkAuth, async (req, res) => {
   console.log("date", dt);
   try {
     const bookingData = {
+      title: req.body.title,
       buissnessId: buissness_id,
       userId: user_id,
       date: req.body.date,
@@ -667,3 +664,4 @@ userRouter.post("/bookservice/:id", checkAuth, async (req, res) => {
   } catch (error) {}
 });
 module.exports = userRouter;
+   

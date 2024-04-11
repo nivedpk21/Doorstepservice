@@ -4,9 +4,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./viewjob.css";
 import toast, { Toaster } from "react-hot-toast";
+import Pagination from "../components/Pagination";
 
 export default function Viewjob() {
   const token = localStorage.getItem("token");
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     axios
@@ -19,8 +21,6 @@ export default function Viewjob() {
         setData(jobData);
       });
   }, []);
-
-  const [data, setData] = useState([]);
 
   const deleteJob = (jobId) => {
     axios.get(`http://localhost:5000/user/deletejob/${jobId}`).then((response) => {
@@ -36,6 +36,12 @@ export default function Viewjob() {
     });
   };
 
+  const [currentPage, setCurrentpage] = useState(1);
+  const [postsPerpage, setPostsperpage] = useState(5);
+
+  const lastPostindex = currentPage * postsPerpage;
+  const firstPostindex = lastPostindex - postsPerpage;
+  const currentPageposts = data.slice(firstPostindex, lastPostindex);
   return (
     <>
       <Header />
@@ -45,13 +51,13 @@ export default function Viewjob() {
         className="container-fluid border border-2 rounded"
         style={{
           width: "60%",
-          height: "100%",
+          minHeight: "500px",
           marginTop: "50px",
           backgroundColor: "white",
           padding: "10px",
         }}
       >
-        {data.map((item) => (
+        {currentPageposts.map((item) => (
           <div
             className="container-fluid border rounded"
             style={{
@@ -63,8 +69,15 @@ export default function Viewjob() {
             }}
           >
             <div style={{ width: "50%" }} className="container">
-              <Link to={`/singlejob/${item._id}`} style={{ textDecoration: "none", color: "#333" }} href="#">
-                <h5 className="jobtitle" style={{ fontFamily: "serif", padding: "0px", margin: "0px" }}>
+              <Link
+                to={`/singlejob/${item._id}`}
+                style={{ textDecoration: "none", color: "#333" }}
+                href="#"
+              >
+                <h5
+                  className="jobtitle"
+                  style={{ fontFamily: "serif", padding: "0px", margin: "0px" }}
+                >
                   {item.title}
                 </h5>
               </Link>
@@ -110,10 +123,21 @@ export default function Viewjob() {
                 </div>
               ) : (
                 <div class="d-grid gap-1 col-6 mx-auto">
-                  <button style={{ height: "30px", padding: "0px" }} class="btn btn-outline-secondary" type="button">
+                  <button
+                    style={{ height: "30px", padding: "0px" }}
+                    class="btn btn-outline-secondary"
+                    type="button"
+                  >
                     Edit
                   </button>
-                  <button style={{ height: "30px", padding: "0px" }} class="btn btn-outline-danger" type="button">
+                  <button
+                    onClick={() => {
+                      deleteJob(item._id);
+                    }}
+                    style={{ height: "30px", padding: "0px" }}
+                    class="btn btn-outline-danger"
+                    type="button"
+                  >
                     Delete
                   </button>
                 </div>
@@ -122,6 +146,12 @@ export default function Viewjob() {
           </div>
         ))}
       </div>
+      <Pagination
+        totalPosts={data.length}
+        postsPerpage={postsPerpage}
+        setCurrentPage={setCurrentpage}
+        currentPage={currentPage}
+      />
     </>
   );
 }

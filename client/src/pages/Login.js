@@ -72,12 +72,10 @@ export default function Login() {
       <Toaster position="top-center" reverseOrder={false} />
 
       <form className="form_container" style={{ marginTop: "50px" }} onSubmit={submit}>
-        <div className="logo_container" />
         <div className="title_container">
           <p className="title">Login to your Account</p>
           <span className="subtitle">
-            Get started with our app, just create an account and enjoy the
-            experience.
+            Get started with our app, just create an account and enjoy the experience.
           </span>
         </div>
         <br />
@@ -85,7 +83,7 @@ export default function Login() {
           <label className="input_label" htmlFor="email_field">
             Username
           </label>
-          <span style={{ color: "red" }}>{formErrors.username}</span>
+          <span style={{ fontSize: "small", color: "red" }}>{formErrors.username}</span>
           <svg
             fill="none"
             viewBox="0 0 24 24"
@@ -122,7 +120,7 @@ export default function Login() {
           <label className="input_label" htmlFor="password_field">
             Password
           </label>
-          <span style={{ color: "red" }}>{formErrors.password}</span>
+          <span style={{ fontSize: "small", color: "red" }}>{formErrors.password}</span>
           <svg
             fill="none"
             viewBox="0 0 24 24"
@@ -159,19 +157,16 @@ export default function Login() {
             id="password_field"
           />
         </div>
-        <button
-          title="Sign In"
-          type="submit"
-          className="sign-in_btn"
-        >
+        <button title="Sign In" type="submit" className="sign-in_btn">
           <span>Sign In</span>
         </button>
-        <div className="separator">
+        {/* <div className="separator">
           <hr className="line" />
           <span>Or</span>
           <hr className="line" />
-        </div>
-        <button title="Sign In" type="submit" className="sign-in_ggl">
+        </div> */}
+
+        {/* <button title="Sign In" type="submit" className="sign-in_ggl">
           <svg
             height={18}
             width={18}
@@ -188,26 +183,15 @@ export default function Login() {
             <clipPath id="B"></clipPath>
             <g transform="matrix(.727273 0 0 .727273 -.954545 -1.45455)">
               <path fill="#fbbc05" clipPath="url(#B)" d="M0 37V11l17 13z" />
-              <path
-                fill="#ea4335"
-                clipPath="url(#B)"
-                d="M0 11l17 13 7-6.1L48 14V0H0z"
-              />
-              <path
-                fill="#34a853"
-                clipPath="url(#B)"
-                d="M0 37l30-23 7.9 1L48 0v48H0z"
-              />
-              <path
-                fill="#4285f4"
-                clipPath="url(#B)"
-                d="M48 48L17 24l-4-3 35-10z"
-              />
+              <path fill="#ea4335" clipPath="url(#B)" d="M0 11l17 13 7-6.1L48 14V0H0z" />
+              <path fill="#34a853" clipPath="url(#B)" d="M0 37l30-23 7.9 1L48 0v48H0z" />
+              <path fill="#4285f4" clipPath="url(#B)" d="M48 48L17 24l-4-3 35-10z" />
             </g>
           </svg>
           <span>Sign In with Google</span>
-        </button>
-        <button title="Sign In" type="submit" className="sign-in_apl">
+        </button> */}
+
+        {/* <button title="Sign In" type="submit" className="sign-in_apl">
           <svg
             preserveAspectRatio="xMidYMid"
             version="1.1"
@@ -225,7 +209,7 @@ export default function Login() {
             </g>
           </svg>
           <span>Sign In with Apple</span>
-        </button>
+        </button> */}
         <p className="note">Terms of use &amp; Conditions</p>
       </form>
     </>

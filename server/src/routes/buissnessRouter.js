@@ -15,23 +15,26 @@ const userRouter = require("./userRouter");
 // Buissness Registration
 
 buissnessRouter.post("/register", async (req, res) => {
-  console.log(req);
+  console.log(req.body);
+  const city = req.body.city.toLowerCase();
+  const category = req.body.category.toLowerCase();
 
   const hashedpass = await bycrypt.hash(req.body.password, 8);
   try {
-    const buissnessData = {
+    const businessData = {
       username: req.body.username,
       password: hashedpass,
       role: "buissness",
       status: "0",
     };
 
-    const existingUsername = await buissnessModel.findOne({
+    const existingUsername = await loginModel.findOne({
       username: req.body.username,
     });
+    console.log("existingUsername", existingUsername);
     if (existingUsername != null) {
       return res.status(400).json({
-        message: "email already registered",
+        message: "username registered",
         success: false,
         error: true,
       });
@@ -40,7 +43,7 @@ buissnessRouter.post("/register", async (req, res) => {
     const existingPhonenumber = await buissnessModel.findOne({
       phonenumber: req.body.phonenumber,
     });
-    if (existingPhonenumber) {
+    if (existingPhonenumber != null) {
       return res.status(400).json({
         message: "phone number is already registered",
         success: false,
@@ -51,26 +54,29 @@ buissnessRouter.post("/register", async (req, res) => {
     const existingEmail = await buissnessModel.findOne({
       email: req.body.email,
     });
-    if (existingEmail) {
+    console.log("existingEmail", existingEmail);
+    if (existingEmail != null) {
       return res.status(400).json({
         message: "email is already registered",
         success: false,
         error: true,
       });
     }
-    const saveLogin = await loginModel(buissnessData).save();
+    const saveLogin = await loginModel(businessData).save();
     if (saveLogin) {
       const regdata = {
-        name: req.body.name,
+        businessname: req.body.businessname,
         email: req.body.email,
         phonenumber: req.body.phonenumber,
-        address: req.body.address,
-        state: req.body.state,
+        building: req.body.building,
+        street: req.body.street,
+        town: req.body.town,
+        city: city,
         district: req.body.district,
-        city: req.body.city,
+        state: req.body.state,
         pincode: req.body.pincode,
         loginId: saveLogin._id,
-        category: req.body.category,
+        category: category,
       };
       const saveReg = await buissnessModel(regdata).save();
       if (saveReg) {
@@ -157,51 +163,15 @@ buissnessRouter.get("/profile", checkAuth, async (req, res) => {
   const userId = req.userData.userId;
   console.log(userId, "user id logged");
   try {
-    wholeDetails = await buissnessModel
-      .aggregate([
-        {
-          $lookup: {
-            from: "login-tbs",
-            localField: "loginId",
-            foreignField: "_id",
-            as: "result",
-          },
-        },
-        {
-          $unwind: "$result",
-        },
-        {
-          $match: {
-            loginId: new mongoose.Types.ObjectId(userId),
-          },
-        },
-        {
-          $group: {
-            _id: "$_id",
-            name: { $first: "$name" },
-            username: { $first: "$result.username" },
-            email: { $first: "$email" },
-            phonenumber: { $first: "$phonenumber" },
-            address: { $first: "$address" },
-            state: { $first: "$state" },
-            district: { $first: "$district" },
-            city: { $first: "$city" },
-            pincode: { $first: "$pincode" },
-            category: { $first: "$category" },
-          },
-        },
-      ])
-      .then((data) => {
-        console.log(data);
-        if (data) {
-          return res.status(200).json({
-            data: data[0],
-            message: "profile details fetched successfully",
-            success: true,
-            error: false,
-          });
-        }
+    const data = await buissnessModel.findOne({ loginId: userId });
+    if (data) {
+      return res.status(200).json({
+        data: data,
+        message: "profile details fetched successfully",
+        success: true,
+        error: false,
       });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -299,7 +269,7 @@ buissnessRouter.post("/viewjoblist", async (req, res) => {
   console.log("CheckCategory", searchterm);
   try {
     await jobModel.find({ category: searchterm, status: "1" }).then((data) => {
-      console.log("data", data);
+      console.log("data hh", data);
 
       return res.status(200).json({
         data: data,
@@ -339,23 +309,61 @@ buissnessRouter.get("/viewjobdetails/:id", async (req, res) => {
 buissnessRouter.get("/viewjobonsearch/:id", async (req, res) => {
   const jobid = req.params.id;
   try {
-    await jobModel.findOne({ _id: jobid }).then((data) => {
-      return res.status(200).json({
-        data: data,
-        message: "job details fetched successfully",
-        success: true,
-        error: false,
+    await jobModel
+      .aggregate([
+        {
+          $lookup: {
+            from: "user_tbs",
+            localField: "userId",
+            foreignField: "loginId",
+            as: "result",
+          },
+        },
+        {
+          $unwind: "$result",
+        },
+        {
+          $match: {
+            _id: new mongoose.Types.ObjectId(jobid),
+          },
+        },
+        {
+          $group: {
+            _id: "$_id",
+            title: { $first: "$title" },
+            description: { $first: "$description" },
+            category: { $first: "$category" },
+            city: { $first: "$city" },
+            date: { $first: "$date" },
+            budget: { $first: "$budget" },
+
+            name: { $first: "$result.name" },
+            email: { $first: "$result.email" },
+            phonenumber: { $first: "$result.phonenumber" },
+            house: { $first: "$result.house" },
+            street: { $first: "$result.street" },
+            town: { $first: "$result.town" },
+            state: { $first: "$result.state" },
+            district: { $first: "$result.district" },
+            pincode: { $first: "$result.pincode" },
+            city: { $first: "$result.city" },
+          },
+        },
+      ])
+      .then((response) => {
+        return res.status(200).json({
+          data: response[0],
+          message: "job details",
+        });
       });
-    });
   } catch (error) {
-    console.log(error);
+    return res.status(500).json({ message: "internal server error" });
   }
 });
 
 // apply job
 
 buissnessRouter.post("/apply/:id", checkAuth, async (req, res) => {
- 
   const loginid = req.userData.userId;
   console.log("loginId:", loginid);
   const jobid = req.params.id;
@@ -386,64 +394,11 @@ buissnessRouter.post("/apply/:id", checkAuth, async (req, res) => {
   }
 });
 
-// view job applications
+// list job applications
 buissnessRouter.get("/viewjobapplications", checkAuth, async (req, res) => {
   const loginid = req.userData.userId;
 
   console.log("loginid:", loginid);
-
-  try {
-    await applicationModel
-      .aggregate([
-        {
-          $lookup: {
-            from: "jobpost_tbs",
-            localField: "jobId",
-            foreignField: "_id",
-            as: "result",
-          },
-        },
-        {
-          $unwind: "$result"
-        },
-        {
-          $match:{
-            loginId: new mongoose.Types.ObjectId(loginid),
-            status: "0"
-          }
-        },
-        {
-          $group:{
-            _id:"$_id",
-            title: {$first:"$result.title"},
-            category: {$first:"$result.category"},
-            city: {$first:"$result.city"},
-            budget: {$first:"$result.budget"},
-            status: {$first:"$status"},
-
-          }
-        }
-      ])
-      .then((jobdata) => {
-        return res.status(200).json({
-          data: jobdata,
-          message: "job applications fetched successfully",
-          success: true,
-          error: false,
-        });
-      });
-  } catch (error) {
-    return res.status(500).json({
-      message: "internal server error",
-    });
-  }
-});
-
-// view appointments
-
-buissnessRouter.get("/viewjobappointments", checkAuth, async (req, res) => {
-  const loginid = req.userData.userId;
-  console.log("loginid", loginid);
 
   try {
     await applicationModel
@@ -462,28 +417,239 @@ buissnessRouter.get("/viewjobappointments", checkAuth, async (req, res) => {
         {
           $match: {
             loginId: new mongoose.Types.ObjectId(loginid),
-            status: "1",
+            status: "0",
           },
         },
         {
           $group: {
             _id: "$_id",
             title: { $first: "$result.title" },
+            category: { $first: "$result.category" },
             city: { $first: "$result.city" },
-            duration: { $first: "$result.duration" },
-            date: { $first: "$result.date" },
+            budget: { $first: "$result.budget" },
+            status: { $first: "$status" },
           },
         },
       ])
-      .then((jobData) => {
+      .then((jobdata) => {
         return res.status(200).json({
-          data: jobData,
-          message: "appointment details fetched successfully",
+          data: jobdata,
+          message: "job applications fetched successfully",
           success: true,
           error: false,
         });
       });
+  } catch (error) {
+    return res.status(500).json({
+      message: "internal server error",
+    });
+  }
+});
+
+// view single job application
+buissnessRouter.get("/viewapplication/:id", async (req, res) => {
+  const ID = req.params.id;
+  console.log(ID);
+
+  try {
+    await jobModel
+      .aggregate([
+        {
+          $lookup: {
+            from: "user_tbs",
+            localField: "userId",
+            foreignField: "loginId",
+            as: "result",
+          },
+        },
+        {
+          $unwind: "$result",
+        },
+        // {
+        //   $match: {
+        //     _id: new mongoose.Types.ObjectId(ID),
+        //   },
+        // },
+        // {
+        //   $group: {
+        //     _id: "$_id",
+        //     title: { $first: "$title" },
+        //     description: { $first: "$description" },
+        //     category: { $first: "$category" },
+        //     city: { $first: "$city" },
+        //     date: { $first: "$date" },
+        //     budget: { $first: "$budget" },
+
+        //     name: { $first: "$result.name" },
+        //     email: { $first: "$result.email" },
+        //     phonenumber: { $first: "$result.phonenumber" },
+        //     house: { $first: "$result.house" },
+        //     street: { $first: "$result.street" },
+        //     town: { $first: "$result.town" },
+        //     state: { $first: "$result.state" },
+        //     district: { $first: "$result.district" },
+        //     pincode: { $first: "$result.pincode" },
+        //     city: { $first: "$result.city" },
+        //   },
+        // },
+      ])
+      .then((response) => {
+        return res.status(200).json({
+          data: response[0],
+          message: "job details",
+        });
+      });
   } catch (error) {}
+});
+
+// view appointments
+
+buissnessRouter.get("/viewjobappointments", checkAuth, async (req, res) => {
+  const ID = req.userData.userId;
+  console.log("buissnessid", ID);
+
+  try {
+    await applicationModel
+      .aggregate([
+        {
+          $lookup: {
+            from: "jobpost_tbs",
+            localField: "jobId",
+            foreignField: "_id",
+            as: "result",
+          },
+        },
+        {
+          $unwind: "$result",
+        },
+        {
+          $match: {
+            loginId: new mongoose.Types.ObjectId(ID),
+            status: "1",
+          },
+        },
+        {
+          $group: {
+            _id: "$_id",
+            jobId: { $first: "$jobId" },
+            title: { $first: "$result.title" },
+            date: { $first: "$result.date" },
+            userId: { $first: "$result.userId" },
+            description: { $first: "$result.description" },
+            budget: { $first: "$result.budget" },
+          },
+        },
+      ])
+      .then((data) => {
+        return res.status(200).json({
+          data: data,
+          message: "job data",
+        });
+      });
+  } catch (error) {
+    return res.status(500).json({
+      message: "internal server error",
+    });
+  }
+});
+
+// customer details
+buissnessRouter.get("/viewuserdetails/:id", async (req, res) => {
+  const userId = req.params.id;
+  console.log("userId", userId);
+  try {
+    const userData = await userModel.findOne({ loginId: userId });
+    if (userData) {
+      return res.status(200).json({
+        data: userData,
+        message: "userdata",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: "internal server error" });
+  }
+});
+
+// view single jobappointments details
+
+buissnessRouter.get("/viewjobappointments/:id", async (req, res) => {
+  const ID = req.params.id;
+  console.log("buissnessid", ID);
+
+  try {
+    await applicationModel
+      .aggregate([
+        {
+          $lookup: {
+            from: "jobpost_tbs",
+            localField: "jobId",
+            foreignField: "_id",
+            as: "result",
+          },
+        },
+        {
+          $unwind: "$result",
+        },
+        {
+          $match: {
+            _id: new mongoose.Types.ObjectId(ID),
+            status: "1",
+          },
+        },
+        {
+          $group: {
+            _id: "$_id",
+            jobId: { $first: "$jobId" },
+            title: { $first: "$result.title" },
+            date: { $first: "$result.date" },
+            userId: { $first: "$result.userId" },
+            description: { $first: "$result.description" },
+            budget: { $first: "$result.budget" },
+            category: { $first: "$result.category" },
+          },
+        },
+      ])
+      .then((data) => {
+        return res.status(200).json({
+          data: data[0],
+          message: "job data",
+        });
+      });
+  } catch (error) {
+    return res.status(500).json({
+      message: "internal server error",
+    });
+  }
+});
+
+// mark job as completed
+buissnessRouter.get("/jobfinished/:applicationid/:jobid", async (req, res) => {
+  const applicationId = req.params.applicationid;
+  const jobID = req.params.jobid;
+
+  try {
+    const updateapplication = await applicationModel.findOneAndUpdate(
+      { _id: applicationId },
+      { $set: { status: "2" } },
+      { new: true }
+    );
+    if (updateapplication) {
+      const updateJob = await jobModel.findOneAndUpdate(
+        { _id: jobID },
+        { $set: { status: "2" } },
+        { new: true }
+      );
+      if (updateJob) {
+        return res.status(200).json({
+          message: "task marked as completed",
+        });
+      }
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: "internal server error",
+    });
+  }
 });
 
 // enquiries
@@ -510,7 +676,10 @@ buissnessRouter.get("/acceptbooking/:id", async (req, res) => {
   const bookingId = req.params.id;
 
   try {
-    const updatestatus = await bookingModel.findOneAndUpdate({ _id: bookingId }, { $set: { status: "1" } });
+    const updatestatus = await bookingModel.findOneAndUpdate(
+      { _id: bookingId },
+      { $set: { status: "1" } }
+    );
 
     if (updatestatus) {
       return res.status(200).json({
@@ -526,7 +695,10 @@ buissnessRouter.get("/acceptbooking/:id", async (req, res) => {
 buissnessRouter.get("/rejectbooking/:id", async (req, res) => {
   const booking_id = req.params.id;
   try {
-    const rejectBooking = await bookingModel.findOneAndUpdate({ _id: booking_id }, { $set: { status: "2" } });
+    const rejectBooking = await bookingModel.findOneAndUpdate(
+      { _id: booking_id },
+      { $set: { status: "2" } }
+    );
     if (rejectBooking) {
       return res.status(200).json({
         message: "booking rejected  ",
@@ -537,11 +709,11 @@ buissnessRouter.get("/rejectbooking/:id", async (req, res) => {
 
 // list bookings in appointments
 
-buissnessRouter.get("/viewbookings", checkAuth, async (req, res) => {
+buissnessRouter.get("/bookingappointments", checkAuth, async (req, res) => {
   const buissness_id = req.userData.userId;
 
   try {
-    await bookingModel.find({ buissnessId: buissness_id }).then((bookingData) => {
+    await bookingModel.find({ buissnessId: buissness_id, status: "1" }).then((bookingData) => {
       return res.status(200).json({
         data: bookingData,
         message: "booking data fetched succesfully",
@@ -549,7 +721,54 @@ buissnessRouter.get("/viewbookings", checkAuth, async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    return res.status(500).json({
+      message: "internal server error",
+    });
   }
 });
 
+// view single booking
+buissnessRouter.get("/bookingappointments/:id", async (req, res) => {
+  const ID = req.params.id;
+  try {
+    const Data = await bookingModel.findOne({ _id: ID });
+    if (Data) {
+      return res.status(200).json({
+        data: Data,
+        message: "user data",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: "internal server error",
+    });
+  }
+});
+
+// mark as booked task completed
+buissnessRouter.get("/updatebooking/:id", async (req, res) => {
+  const bookingID = req.params.id;
+  console.log(bookingID);
+  try {
+    const updatestatus = await bookingModel.findOneAndUpdate(
+      { _id: bookingID },
+      { $set: { status: "2" } },
+      { new: true }
+    );
+    if (updatestatus) {
+      return res.status(200).json({
+        message: "marked booking task as completed",
+      });
+    } else {
+      return res.status(400).json({
+        data: Data,
+        message: "unable to update status",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: "internal server error",
+    });
+  }
+});
 module.exports = buissnessRouter;

@@ -1,36 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Header from "../components/Header";
 import "./postjob.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Postjob() {
-  // const [filedata,setFiledata] = useState()
+  const token = localStorage.getItem("token");
+  const [address, setAddress] = useState({});
+  const navigate = useNavigate();
 
-  const inputChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/user/profile", { headers: { Authorization: `bearer ${token}` } })
+      .then((response) => {
+        console.log(response);
+        const data = response.data.data;
+        setAddress(data);
+      });
+  }, []);
 
-    setInputvalues({ ...inputvalues, [name]: value });
-  };
-  const photoChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    console.log(event);
-
-    setInputvalues({ ...inputvalues, image: event.target.files[0] });
-  };
   const [inputvalues, setInputvalues] = useState({
     title: "",
     description: "",
     category: "",
-    city: "",
     date: "",
     budget: "",
-    address: "",
     image: "",
   });
+  console.log(inputvalues);
 
+  const inputChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputvalues({ ...inputvalues, [name]: value });
+  };
+
+  const photoChange = (event) => {
+    setInputvalues({ ...inputvalues, image: event.target.files[0] });
+  };
+ 
   const validate = (values) => {
     var error = {};
 
@@ -43,17 +52,11 @@ export default function Postjob() {
     if (!values.category) {
       error.category = "select category";
     }
-    if (!values.city) {
-      error.city = "select city";
-    }
     if (!values.date) {
       error.date = "select date";
     }
     if (!values.budget) {
       error.budget = "enter budget";
-    }
-    if (!values.address) {
-      error.address = "enter address";
     }
     if (!values.image) {
       error.image = "upload image";
@@ -61,11 +64,11 @@ export default function Postjob() {
     return error;
   };
 
-  const token = localStorage.getItem("token");
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
   const submit = (e) => {
+    console.log("image", inputvalues.image);
     e.preventDefault();
     setFormErrors(validate(inputvalues));
     setIsSubmit(true);
@@ -75,11 +78,11 @@ export default function Postjob() {
       formdata.append("title", inputvalues.title);
       formdata.append("description", inputvalues.description);
       formdata.append("category", inputvalues.category);
-      formdata.append("city", inputvalues.city);
       formdata.append("date", inputvalues.date);
       formdata.append("budget", inputvalues.budget);
       formdata.append("address", inputvalues.address);
       formdata.append("image", inputvalues.image);
+      console.log(formdata, "formdata");
       // formdata.append("file",filedata)
 
       axios
@@ -94,6 +97,9 @@ export default function Postjob() {
         .catch((error) => {
           console.log(error);
           toast.error(error.response.data.message);
+          setTimeout(() => {
+            navigate("/");
+          }, 2000);
         });
     }
   };
@@ -115,15 +121,27 @@ export default function Postjob() {
                 Job Title
               </label>
               <span className="error-text">{formErrors.title}</span>
-              <input name="title" onChange={inputChange} type="text" className="form-control forminput" />
+              <input
+                name="title"
+                onChange={inputChange}
+                type="text"
+                className="form-control forminput"
+              />
             </div>
 
-            <div className="mb-3">
-              <label for="exampleInputEmail1" className="formlabel">
-                Job Description
+            <div class="mb-3">
+              <label for="" class="formlabel">
+                Description
               </label>
               <span className="error-text">{formErrors.description}</span>
-              <input name="description" onChange={inputChange} type="text" className="form-control forminput" />
+              <textarea
+                onChange={inputChange}
+                style={{ height: "70px" }}
+                class="form-control"
+                name="description"
+                id=""
+                rows="3"
+              ></textarea>
             </div>
 
             <div className="row">
@@ -137,25 +155,9 @@ export default function Postjob() {
                   onChange={inputChange}
                 >
                   <option selected>Select category</option>
-                  <option value="Electrical">Electrical</option>
-                  <option value="Plumbing">Plumbing</option>
-                  <option value="Carpentry">Capentry</option>
-                </select>
-              </div>
-
-              <div className="col-12 col-sm-12 col-lg-6">
-                <label className="formlabel">City</label>
-                <span className="error-text">{formErrors.city}</span>
-                <select
-                  className="form-select forminput"
-                  aria-label="Default select example"
-                  name="city"
-                  onChange={inputChange}
-                >
-                  <option selected>Select city</option>
-                  <option value="Kozhikode">Kozhikode</option>
-                  <option value="Kannur">Kannur</option>
-                  <option value="Vadakara">Vadakara</option>
+                  <option value="electrical">Electrical</option>
+                  <option value="plumbing">Plumbing</option>
+                  <option value="pestcontrol">Pestcontrol</option>
                 </select>
               </div>
             </div>
@@ -168,7 +170,12 @@ export default function Postjob() {
                   </label>
                   <span className="error-text">{formErrors.date}</span>
 
-                  <input onChange={inputChange} name="date" type="date" className="form-control forminput" />
+                  <input
+                    onChange={inputChange}
+                    name="date"
+                    type="date"
+                    className="form-control forminput"
+                  />
                 </div>
               </div>
 
@@ -179,12 +186,17 @@ export default function Postjob() {
                   </label>
                   <span className="error-text">{formErrors.budget}</span>
 
-                  <input onChange={inputChange} name="budget" type="text" className="form-control forminput" />
+                  <input
+                    onChange={inputChange}
+                    name="budget"
+                    type="text"
+                    className="form-control forminput"
+                  />
                 </div>
               </div>
             </div>
 
-            <div className="mb-3">
+            <div className="mb-4">
               <label for="formFile" class="formlabel">
                 Upload images
               </label>
@@ -200,19 +212,15 @@ export default function Postjob() {
               />
             </div>
 
-            <div class="mb-3">
-              <label for="exampleInputEmail1" className="formlabel">
-                Address
-              </label>
-              <span className="error-text">{formErrors.address}</span>
-
-              <textarea
-                onChange={inputChange}
-                name="address"
-                type="text "
-                rows={3}
-                className="form-control forminput"
-              />
+            <div className="border rounded p-3 mb-3" style={{ height: "150px" }}>
+              <h6>Address</h6>
+              <p>
+                {address.house},{address.street},<br />
+                {address.town},{address.city},<br />
+                {address.district},{address.state}
+                <br />
+                {address.pincode}
+              </p>
             </div>
           </form>
 

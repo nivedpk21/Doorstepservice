@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import Pagination from "../../components/Pagination";
 
 export default function Enquiries() {
   const token = localStorage.getItem("token");
@@ -50,30 +51,43 @@ export default function Enquiries() {
     });
   };
 
+  const [currentPage, setCurrentpage] = useState(1);
+  const [postsPerpage, setPostsperpage] = useState(5);
+
+  const lastPostindex = currentPage * postsPerpage;
+  const firstPostindex = lastPostindex - postsPerpage;
+  const currentPageposts = data.slice(firstPostindex, lastPostindex);
+
   return (
     <>
       <Header />
       <Toaster position="top-center" reverseOrder={false} />
-      <div>
-        {data.map((item) => (
+      <div
+        className="border rounded p-2"
+        style={{ width: "50%", minHeight: "500px", margin: "auto", marginTop: "50px" }}
+      >
+        {currentPageposts.map((item) => (
           <div
-            className="border border rounded container-fluid"
+            className="border rounded p-2"
             style={{
-              marginTop: "50px",
-              width: "50%",
               backgroundColor: "white",
-              padding:"10px"
+              display: "flex",
+              alignItems: "center",
             }}
           >
-            <div className="border rounded" style={{height:"110px",display:"flex"}}>
-              <div>
-              <p>{item.jobtype}</p>
-              <p>{item.description}</p>
-              </div>
-              <div>
-              <p>{item.date}</p>
-              </div>
+            <div>
+              <h5>{item.title}</h5>
+              <p>
+                {item.jobtype}
+                <br />
+                {item.date}
+                <br /> <br />
+                Description : <br />
+                {item.description}
+              </p>
+            </div>
 
+            <div style={{ marginLeft: "auto" }}>
               <button
                 onClick={() => {
                   updateStatus(item._id);
@@ -94,6 +108,12 @@ export default function Enquiries() {
           </div>
         ))}
       </div>
+      <Pagination
+        totalPosts={data.length}
+        postsPerpage={postsPerpage}
+        setCurrentPage={setCurrentpage}
+        currentPage={currentPage}
+      />
     </>
   );
 }

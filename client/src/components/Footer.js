@@ -4,7 +4,10 @@ export default function Footer() {
   return (
     <>
       <footer>
-        <div className="container-fluid border" style={{ width: "100%", height: "200px" ,padding:"40px"}}>
+        <div
+          className="container-fluid border"
+          style={{ width: "100%", height: "200px", padding: "40px" }}
+        >
           <ul class="nav justify-content-center">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">
@@ -28,8 +31,8 @@ export default function Footer() {
             </li>
           </ul>
 
-          <hr/>
-          <p style={{textAlign:"center"}}>© 2024 Doorstep Service, Inc</p>
+          <hr />
+          <p style={{ textAlign: "center" }}>© 2024 Doorstep Service, Inc</p>
         </div>
       </footer>
     </>

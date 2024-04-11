@@ -105,13 +105,23 @@ export default function Searchservice() {
                   </div>
 
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
                     <label class="form-check-label" for="flexCheckDefault">
                       2★
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
                     <label class="form-check-label" for="flexCheckDefault">
                       3★
                     </label>
@@ -129,7 +139,7 @@ export default function Searchservice() {
                     </label>
                   </div>
                 </div>
-                <div
+                {/* <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
@@ -167,7 +177,7 @@ export default function Searchservice() {
                     </label>
                   </div>
                   <div></div>
-                </div>
+                </div> */}
               </div>
             </div>
           </Grid>
@@ -208,9 +218,9 @@ export default function Searchservice() {
                             onChange={inputChange}
                             defaultValue={""}
                           >
-                            <MenuItem value={"Electrical"}>Electrical</MenuItem>
-                            <MenuItem value={"Plumbing"}>Plumbing</MenuItem>
-                            <MenuItem value={"Gardening"}>Carpentry</MenuItem>
+                            <MenuItem value={"electrical"}>Electrical</MenuItem>
+                            <MenuItem value={"plumbing"}>Plumbing</MenuItem>
+                            <MenuItem value={"pestcontrol"}>Pestcontrol</MenuItem>
                           </Select>
                         </FormControl>
                       </div>
@@ -229,16 +239,21 @@ export default function Searchservice() {
                             name="city"
                             defaultValue={""}
                           >
-                            <MenuItem value={"Kozhikode"}>Kozhikode</MenuItem>
+                            <MenuItem value={"kozhikode"}>Kozhikode</MenuItem>
                             <MenuItem value={"kannur"}>Kannur</MenuItem>
-                            <MenuItem value={"kochi"}>Kochi</MenuItem>
+                            <MenuItem value={"thrissur"}>Thrissur</MenuItem>
                           </Select>
                         </FormControl>
                       </div>
                     </Grid>
                     <Grid item xs={4}>
                       <div style={{ border: "0px solid black" }}>
-                        <Button style={{ marginLeft: "8px" }} variant="contained" sx={{ height: 54 }} onClick={submit}>
+                        <Button
+                          style={{ marginLeft: "8px" }}
+                          variant="contained"
+                          sx={{ height: 54 }}
+                          onClick={submit}
+                        >
                           Search
                         </Button>
                       </div>
@@ -256,6 +271,7 @@ export default function Searchservice() {
                         maxWidth="md"
                         sx={{
                           border: 1,
+                          borderColor: "rgb(203 213 225)",
                           height: "130px",
                           borderRadius: 2,
                           marginBottom: "10px",
@@ -276,7 +292,7 @@ export default function Searchservice() {
                                   color: "black",
                                 }}
                               >
-                                <h5 className="result-title">{item.name}</h5>
+                                <h5 className="result-title">{item.businessname}</h5>
                               </Link>
                               <p>{item.city}</p>
                               <p style={{ color: "green" }}>Open now</p>

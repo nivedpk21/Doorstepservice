@@ -4,21 +4,36 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function Viewmessage() {
-  const { id } = useParams();
   const token = localStorage.getItem("token");
+  const { id } = useParams();
 
   const [data, setData] = useState([]);
+  const [userData, setUserdata] = useState({});
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/message/viewchatmessage/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+      .get(`http://localhost:5000/message/viewchatmessage/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         console.log(response);
         const messageData = response.data.data;
 
         const sortData = messageData.sort((a, b) => parseInt(a.time) - parseInt(b.time));
-        console.log("sortData", sortData);
-        setData(messageData);
+        setData(sortData);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/buissness/viewuserdetails/${id}`)
+      .then((response) => {
+        console.log(response);
+        const data = response.data.data;
+        setUserdata(data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
@@ -34,58 +49,109 @@ export default function Viewmessage() {
   };
 
   const sendMessage = () => {
-    axios
-      .post(`http://localhost:5000/message/savereplymessage/${id}`, replyData, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        console.log(response);
-
-        const filterData = data.filter((obj) => {
-          return obj._id != id;
+    if (replyData.message != "") {
+      axios
+        .post(`http://localhost:5000/message/savereplymessage/${id}`, replyData, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => {
+          console.log(response);
         });
-        setData(filterData);
-      });
+    }
   };
 
   return (
     <>
       <Header />
       <div
-        className="container-fluid border rounded"
-        style={{ padding: "10px", width: "50%", height: "100%", marginTop: "50px" }}
+        className="border p-3"
+        style={{
+          width: "35%",
+          height: "80px",
+          margin: "50px auto 0 auto",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            borderRadius: "50%",
+            height: "60px",
+            width: "60px",
+            backgroundColor: "grey",
+          }}
+        ></div>
+        <div className="p-1">
+          <h6>{userData.name}</h6>
+        </div>
+        <div style={{ marginLeft: "auto " }}>
+          {/* <div class="dropdown-center">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="#">
+                  Clear Chat
+                </a>
+              </li>
+              
+            </ul>
+          </div> */}
+        </div>
+      </div>
+      <div
+        className="container-fluid border "
+        style={{
+          padding: "10px",
+          width: "35%",
+          height: "450px",
+          marginTop: "0px",
+          overflowY: "auto",
+          overflowX: "hidden",
+          borderTopLeftRadius: "0px",
+          borderTopRightRadius: "0px",
+        }}
       >
         {data.map((item) => (
-          <div className="border rounded" style={{ margin: "2px", padding: "15px" }}>
+          <div className="border rounded p-2">
             {item.type == "reply" ? (
               <>
-                <p style={{ textAlign: "end", fontFamily: "serif" }}>{item.message}</p>
+                <p className=" " style={{ textAlign: "end" }}>
+                  {item.message}
+                </p>
               </>
             ) : (
               <>
-                <p style={{ textAlign: "start", fontFamily: "serif" }}>{item.message}</p>
+                <p style={{ textAlign: "start" }}>{item.message}</p>
               </>
             )}
           </div>
         ))}
-
-        <div style={{ display: "flex" }}>
-          <div style={{ width: "75%" }}>
-            <input
-              name="message"
-              onChange={inputChange}
-              type="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-          </div>
-
-          <div style={{ width: "25%" }}>
-            <button onClick={sendMessage} className="btn btn-primary">
-              Send
-            </button>
-          </div>
+      </div>
+      <div
+        className="border  p-1 mb-5"
+        style={{ width: "35%", marginLeft: "auto", marginRight: "auto" }}
+      >
+        <div class=" " style={{ display: "flex", alignItems: "center" }}>
+          <input
+            onChange={inputChange}
+            style={{ height: "35px" }}
+            type="text"
+            class="form-control"
+            name="message"
+            id=""
+            aria-describedby="helpId"
+            placeholder=""
+          />
+          <button onClick={sendMessage} type="button" class="btn btn-primary">
+            send
+          </button>
         </div>
       </div>
     </>

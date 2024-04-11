@@ -9,7 +9,9 @@ export default function Usermessage() {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/message/viewmessage", { headers: { Authorization: `Bearer ${token}` } })
+      .get("http://localhost:5000/message/viewmessage", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         console.log(response);
         const messageData = response.data.data;
@@ -19,18 +21,35 @@ export default function Usermessage() {
   return (
     <>
       <Header />
-      <p>hehehhe</p>
       <div
-        className="container-fluid border rounded "
-        style={{ width: "60%", height: "550px", marginTop: "50px", padding: "10px" }}
+        className="border rounded p-2"
+        style={{ margin: "auto", marginTop: "50px", width: "35%", height: "500px" }}
       >
         {data.map((item) => (
           <div
-            className="border rounded"
-            style={{ textAlign: "center", width: "100%", height: "95px", padding: "10px" }}
+            className="border rounded p-2"
+            style={{ height: "80px", display: "flex", alignItems: "center" }}
           >
-            <p>{item.name}</p>
-            <Link to={`/viewuserchat/${item.loginId}`}>View</Link>
+            <div
+              style={{
+                borderRadius: "50%",
+                height: "60px",
+                width: "60px",
+                backgroundColor: "grey",
+              }}
+            ></div>
+            <div className="p-1">
+              <h6>{item.businessname}</h6>
+            </div>
+            <div style={{ marginLeft: "auto " }}>
+              <Link
+                to={`/viewuserchat/${item.loginId}`}
+                type="button"
+                class="btn btn-outline-primary"
+              >
+                View
+              </Link>
+            </div>
           </div>
         ))}
       </div>

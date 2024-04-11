@@ -1,49 +1,81 @@
-import React, { useEffect, useState } from 'react'
-import './verifications.css'
-import Header from '../../components/Header'
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-
-
-
+import React, { useEffect, useState } from "react";
+import "./verifications.css";
+import Header from "../../components/Header";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Pagination from "../../components/Pagination";
+import Navigation from "../../components/Navigation";
 
 export default function Verifications() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:5000/admin/buissnessverification").then((response) => {
+      console.log(response, "res logged");
+      const data = response.data.data;
+      setData(data);
+    });
+  }, []);
 
-    useEffect(() => {
-        axios.get('http://localhost:5000/admin/buissnessverification').then((response) => {
-            console.log(response, "res logged");
-            const data = response.data.data
-            setData(data)
-        })
-    }, []);
+  const [currentPage, setCurrentpage] = useState(1);
+  const [postsPerpage, setPostsperpage] = useState(5);
 
-    const [data, setData] = useState([])
+  const lastPostindex = currentPage * postsPerpage;
+  const firstPostindex = lastPostindex - postsPerpage;
+  const currentPageposts = data.slice(firstPostindex, lastPostindex);
 
-    
-
-
-
-
-
-return (
+  return (
     <>
-        <Header />
-        <div style={{ width: "100%", height: "75px", border: "1px solid" }}>
-            <p style={{ textAlign: "center" }}>pending buisness profile verifications</p>
+      <Navigation />
+      <div style={{ backgroundColor: " ", paddingTop: "30px" }}>
+        <div className="p-1">
+          <h5 style={{ textAlign: "center",color:"grey" }}>Buissnes Verification</h5>
         </div>
-        {data.map((item) => (
-            <div style={{ width: "500px", height: "100%", border: "1px solid", margin: "auto", textAlign: "center" }}>
-                <p>name: {item.name}</p>
-                <p>username: {item.username}</p>
-                <p>category: {item.category}</p>
-                <p>email: {item.email}</p>
-                <p> _id:{item._id}</p>
-                <p>loginid: {item.loginId}</p>
-                <Link className='btn btn-primary' to={`/buissnessverification/${item._id}`}>VIEW</Link>
+        <div
+          className="border rounded-4 p-2"
+          style={{
+            backgroundColor: "white",
+            width: "50%",
+            minHeight: "550px",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          {currentPageposts.map((item) => (
+            <div
+              className="border rounded  mb-1 p-2"
+              style={{
+                height: "120px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <div>
+                <h5>{item.businessname}</h5>
+                <p>
+                  {item.category} <br />
+                  {item.city},{item.district},{item.state}
+                </p>
+              </div>
+              <div>
+                <Link
+                  to={`/buissnessverification/${item._id}`}
+                  type="button"
+                  class="btn btn-outline-primary"
+                >
+                  View
+                </Link>
+              </div>
             </div>
-        ))
-        }
+          ))}
+        </div>
+        <Pagination
+          totalPosts={data.length}
+          postsPerpage={postsPerpage}
+          setCurrentPage={setCurrentpage}
+          currentPage={currentPage}
+        />
+      </div>
     </>
-)
+  );
 }
-

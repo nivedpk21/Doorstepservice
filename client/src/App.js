@@ -29,6 +29,11 @@ import Singlejob from "./pages/user/Singlejob";
 import Viewjobonsearch from "./pages/buissness/Viewjobonsearch";
 import Usermessage from "./pages/user/Usermessage";
 import Viewuserchat from "./pages/user/Viewuserchat";
+import Viewapplication from "./pages/buissness/Viewapplication";
+import Appointmentdetails from "./pages/buissness/Appointmentdetails";
+import Bookings from "./pages/buissness/Bookings";
+import Bookingdetails from "./pages/buissness/Bookingdetails";
+import Adminmessages from "./pages/admin/Adminmessages";
 
 function App() {
   return (
@@ -36,15 +41,16 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/register" element={<Registration />}></Route>
-        <Route path="/userprofile" element={<Userprofile />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/buissnessprofile" element={<Buissnessprofile />}></Route>
+        <Route path="/userprofile" element={<Userprofile />}></Route>
+        <Route path="/searchservice" element={<Searchservice />}></Route>
         <Route path="/postjob" element={<Postjob />}></Route>
         <Route path="/viewjob" element={<Viewjob />}></Route>
+        <Route path="/userappointments" element={<Userappointments />}></Route>
+        <Route path="/buissnessprofile" element={<Buissnessprofile />}></Route>
         <Route path="/viewjoblistings" element={<Joblistings />}></Route>
         <Route path="/verifications" element={<Verifications />}></Route>
         <Route path="/buissnessverification/:id" element={<Buissnessverification />}></Route>
-        <Route path="/searchservice" element={<Searchservice />}></Route>
         <Route path="/viewbuissnessprofile" element={<Viewbuissnessprofile />}></Route>
         <Route path="/jobapprovals" element={<Jobapprovals />}></Route>
         <Route path="/viewjobapproval/:id" element={<Viewjobapproval />}></Route>
@@ -54,7 +60,6 @@ function App() {
         <Route path="/viewapplicantprofile/:id/:jobid" element={<Applicantprofile />}></Route>
         <Route path="/applications" element={<Applications />}></Route>
         <Route path="/buissnessappointments" element={<Appointments />}></Route>
-        <Route path="/userappointments" element={<Userappointments />}></Route>
         <Route path="/buissnessmessages" element={<Messages />}></Route>
         <Route path="/viewmessage/:id" element={<Viewmessage />}></Route>
         <Route path="/editjob/:id" element={<Editjob />}></Route>
@@ -64,6 +69,11 @@ function App() {
         <Route path="/viewjobonsearch/:id" element={<Viewjobonsearch />}></Route>
         <Route path="/usermessages" element={<Usermessage />}></Route>
         <Route path="/viewuserchat/:id" element={<Viewuserchat />}></Route>
+        <Route path="/viewapplication/:id" element={<Viewapplication />}></Route>
+        <Route path="/appointmentdetalis/:id" element={<Appointmentdetails />}></Route>
+        <Route path="/jobbookings" element={<Bookings />}></Route>
+        <Route path="/bookingdetalis/:id" element={<Bookingdetails />}></Route>
+        <Route path="/adminmessage" element={<Adminmessages />}></Route>
       </Routes>
     </BrowserRouter>
   );

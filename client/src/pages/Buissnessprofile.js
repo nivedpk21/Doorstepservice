@@ -70,7 +70,7 @@ export default function Buissnessprofile() {
                 </button>
               </div>
               <div style={{ marginTop: "13px", color: "white" }}>
-                <h5>Buissness Name</h5>
+                <h5>{data.businessname}</h5>
               </div>
               <div
                 style={{
@@ -88,7 +88,7 @@ export default function Buissnessprofile() {
                       color: "white",
                     }}
                   >
-                    Category
+                    {data.category}
                   </p>
                 </div>
                 <div>

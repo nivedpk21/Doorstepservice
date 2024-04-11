@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Applications() {
   const token = localStorage.getItem("token");
@@ -39,14 +40,18 @@ export default function Applications() {
             <div style={{ width: "75%" }}>
               <h5>{item.title}</h5>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <p style={{ color: "red" }}>{item.status == "0" ? "Pending approval" : "approved"}</p>
+                <p style={{ color: "red" }}>
+                  {item.status == "0" ? "Pending approval" : "approved"}
+                </p>
                 <p>{item.category}</p>
                 <p>{item.city}</p>
                 <p>{item.budget}$</p>
               </div>
             </div>
             <div style={{ width: "25%", textAlign: "center" }}>
-              <button className="btn btn-primary">View</button>
+              <Link to={`/viewapplication/${item._id}`} className="btn btn-primary">
+                View
+              </Link>
             </div>
           </div>
         ))}
