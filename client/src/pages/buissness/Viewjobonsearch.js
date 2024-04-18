@@ -11,7 +11,7 @@ export default function Viewjobonsearch() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/buissness/viewjobonsearch/${id}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/buissness/viewjobonsearch/${id}`).then((response) => {
       console.log(response);
       const data = response.data.data;
       setData(data);
@@ -23,7 +23,7 @@ export default function Viewjobonsearch() {
   const sendApplication = (jobid) => {
     try {
       axios
-        .post(`http://localhost:5000/buissness/apply/${jobid}`, data, {
+        .post(`https://doorstepservice.onrender.com/buissness/apply/${jobid}`, data, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {

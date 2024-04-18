@@ -16,7 +16,7 @@ export default function Applicantprofile() {
   console.log("jobid", jobid);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/user/viewapplicantprofile/${id}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/user/viewapplicantprofile/${id}`).then((response) => {
       console.log(response);
       const data = response.data.data;
       setData(data);
@@ -25,7 +25,7 @@ export default function Applicantprofile() {
 
   const updateStatus = (loginId) => {
     console.log("BuissnessloginId:", loginId);
-    axios.get(`http://localhost:5000/user/approvejob/${loginId}/${jobid}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/user/approvejob/${loginId}/${jobid}`).then((response) => {
       console.log(response);
     });
   };
@@ -42,7 +42,7 @@ export default function Applicantprofile() {
     console.log("token:", token);
 
     axios
-      .post(`http://localhost:5000/user/message/${loginid}`, messagedata, {
+      .post(`https://doorstepservice.onrender.com/user/message/${loginid}`, messagedata, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

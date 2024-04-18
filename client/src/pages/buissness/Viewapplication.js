@@ -9,7 +9,7 @@ export default function Viewapplication() {
   console.log(id);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/buissness/viewapplication/${id}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/buissness/viewapplication/${id}`).then((response) => {
       console.log(response);
       const data = response.data.data;
       setData(data);

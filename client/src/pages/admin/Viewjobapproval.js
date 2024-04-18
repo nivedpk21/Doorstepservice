@@ -11,7 +11,7 @@ export default function Viewjobapproval() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/admin/viewjobpost/${id}`)
+      .get(`https://doorstepservice.onrender.com/admin/viewjobpost/${id}`)
       .then((response) => {
         console.log("resssss", response);
         console.log("hi");
@@ -26,7 +26,7 @@ export default function Viewjobapproval() {
   const [data, setData] = useState({});
 
   const updateStatus = (jobID) => {
-    axios.get(`http://localhost:5000/admin/updatejobstatus/${jobID}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/admin/updatejobstatus/${jobID}`).then((response) => {
       console.log(response);
       const message = response.data.message;
       toast.success(message);

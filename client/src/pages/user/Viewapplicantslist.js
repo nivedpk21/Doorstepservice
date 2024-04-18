@@ -11,7 +11,7 @@ export default function Viewapplicantslist() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/user/viewjobapplications/${id}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/user/viewjobapplications/${id}`).then((response) => {
       console.log("response:", response);
       const data = response.data.data;
       setData(data);
@@ -19,7 +19,7 @@ export default function Viewapplicantslist() {
   }, []);
 
   const approve = (buissnessId) => {
-    axios.get(`http://localhost:5000/user/approvejobapplication/${buissnessId}/${id}`).then((response)=>{
+    axios.get(`https://doorstepservice.onrender.com/user/approvejobapplication/${buissnessId}/${id}`).then((response)=>{
       console.log(response);
     })
   };

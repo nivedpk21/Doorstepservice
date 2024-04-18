@@ -10,7 +10,7 @@ export default function Userprofile() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/user/profile`, {
+      .get(`https://doorstepservice.onrender.com/user/profile`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

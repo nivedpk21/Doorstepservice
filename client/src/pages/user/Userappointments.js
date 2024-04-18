@@ -11,7 +11,7 @@ export default function Userappointments() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/user/appointments`, {
+      .get(`https://doorstepservice.onrender.com/user/appointments`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

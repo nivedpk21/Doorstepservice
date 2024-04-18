@@ -12,7 +12,7 @@ export default function Postjob() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user/profile", { headers: { Authorization: `bearer ${token}` } })
+      .get("https://doorstepservice.onrender.com/user/profile", { headers: { Authorization: `bearer ${token}` } })
       .then((response) => {
         console.log(response);
         const data = response.data.data;
@@ -86,7 +86,7 @@ export default function Postjob() {
       // formdata.append("file",filedata)
 
       axios
-        .post("http://localhost:5000/user/postjob", formdata, {
+        .post("https://doorstepservice.onrender.com/user/postjob", formdata, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {

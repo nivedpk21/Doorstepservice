@@ -7,7 +7,7 @@ export default function Buissnessonsearch() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/user/viewfullbuissnessprofile/${id}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/user/viewfullbuissnessprofile/${id}`).then((response) => {
       console.log("response", response);
       const data = response.data.data;
       setData(data);
@@ -31,7 +31,7 @@ export default function Buissnessonsearch() {
 
   const sendMessage = (buissnessId) => {
     axios
-      .post(`http://localhost:5000/message/sendmessage/${buissnessId}`, messageData, {
+      .post(`https://doorstepservice.onrender.com/message/sendmessage/${buissnessId}`, messageData, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

@@ -10,7 +10,7 @@ export default function Bookingdetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/buissness/bookingappointments/${id}`)
+      .get(`https://doorstepservice.onrender.com/buissness/bookingappointments/${id}`)
       .then((response) => {
         const booking = response.data.data;
         console.log("bookingdata", booking);
@@ -24,7 +24,7 @@ export default function Bookingdetails() {
   const userId = data.userId;
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/buissness/viewuserdetails/${userId}`)
+      .get(`https://doorstepservice.onrender.com/buissness/viewuserdetails/${userId}`)
       .then((response) => {
         console.log("customer", response);
         const data = response.data.data;

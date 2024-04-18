@@ -13,7 +13,7 @@ export default function Singlejob() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user/profile", { headers: { Authorization: `bearer ${token}` } })
+      .get("https://doorstepservice.onrender.com/user/profile", { headers: { Authorization: `bearer ${token}` } })
       .then((response) => {
         console.log(response);
         const data = response.data.data;
@@ -22,7 +22,7 @@ export default function Singlejob() {
   }, []);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/user/viewsinglejob/${id}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/user/viewsinglejob/${id}`).then((response) => {
       console.log(response);
       const jobdata = response.data.data;
       setData(jobdata);
@@ -30,7 +30,7 @@ export default function Singlejob() {
   }, []);
 
   const deleteJob = (jobId) => {
-    axios.get(`http://localhost:5000/user/deletejob/${jobId}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/user/deletejob/${jobId}`).then((response) => {
       console.log(response);
 
       const message = response.data.message;

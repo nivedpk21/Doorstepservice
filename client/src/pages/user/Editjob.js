@@ -23,7 +23,7 @@ export default function Editjob() {
   console.log(token);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/user/viewpostedjob/${id}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/user/viewpostedjob/${id}`).then((response) => {
       console.log(response);
       const jobdata = response.data.data;
       setData(jobdata);
@@ -81,7 +81,7 @@ export default function Editjob() {
 
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       axios
-        .post(`http://localhost:5000/user/savejob/${id}`, data, {
+        .post(`https://doorstepservice.onrender.com/user/savejob/${id}`, data, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {

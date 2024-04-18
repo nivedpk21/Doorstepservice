@@ -10,7 +10,7 @@ export default function Viewjoblisting() {
   console.log("id:", id);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/buissness/viewjobdetails/${id}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/buissness/viewjobdetails/${id}`).then((response) => {
       console.log("response logged", response);
       const jobdata = response.data.data;
       setData(jobdata);

@@ -9,7 +9,7 @@ export default function Applications() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/buissness/viewjobapplications`, {
+      .get(`https://doorstepservice.onrender.com/buissness/viewjobapplications`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

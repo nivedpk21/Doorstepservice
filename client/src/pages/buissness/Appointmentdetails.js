@@ -10,7 +10,7 @@ export default function Appointmentdetails() {
   const [profile, setProfile] = useState({});
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/buissness/viewjobappointments/${id}`)
+      .get(`https://doorstepservice.onrender.com/buissness/viewjobappointments/${id}`)
       .then((response) => {
         const jobData = response.data.data;
         console.log("jobdata:", jobData);
@@ -24,7 +24,7 @@ export default function Appointmentdetails() {
   const userId = data.userId;
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/buissness/viewuserdetails/${userId}`)
+      .get(`https://doorstepservice.onrender.com/buissness/viewuserdetails/${userId}`)
       .then((response) => {
         console.log("customer", response);
         const data = response.data.data;

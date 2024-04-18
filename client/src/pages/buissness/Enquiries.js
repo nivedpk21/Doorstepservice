@@ -9,7 +9,7 @@ export default function Enquiries() {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/buissness/enquiries", {
+      .get("https://doorstepservice.onrender.com/buissness/enquiries", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -23,7 +23,7 @@ export default function Enquiries() {
   }, []);
 
   const updateStatus = (bookingId) => {
-    axios.get(`http://localhost:5000/buissness/acceptbooking/${bookingId}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/buissness/acceptbooking/${bookingId}`).then((response) => {
       console.log(response);
 
       const filterData = data.filter((obj) => {
@@ -38,7 +38,7 @@ export default function Enquiries() {
   };
 
   const rejectBooking = (bookingId) => {
-    axios.get(`http://localhost:5000/buissness/rejectbooking/${bookingId}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/buissness/rejectbooking/${bookingId}`).then((response) => {
       console.log(response);
       const message = response.data.message;
 

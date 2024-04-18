@@ -49,7 +49,7 @@ export default function Bookservice() {
 
     if (Object.keys(formErrors).length === 0 && isSubmit)
       axios
-        .post(`http://localhost:5000/user/bookservice/${id}`, bookingData, {
+        .post(`https://doorstepservice.onrender.com/user/bookservice/${id}`, bookingData, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
@@ -64,7 +64,7 @@ export default function Bookservice() {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/user/viewbuissnessdetails/${id}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/user/viewbuissnessdetails/${id}`).then((response) => {
       console.log(response);
       const buissnessData = response.data.data;
       setData(buissnessData);
@@ -75,7 +75,7 @@ export default function Bookservice() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user/profile", {
+      .get("https://doorstepservice.onrender.com/user/profile", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

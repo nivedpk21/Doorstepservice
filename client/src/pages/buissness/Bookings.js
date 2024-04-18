@@ -7,7 +7,7 @@ export default function Bookings() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/buissness/bookingappointments", {
+      .get("https://doorstepservice.onrender.com/buissness/bookingappointments", {
         headers: { Authorization: `bearer ${token}` },
       })
       .then((response) => {
@@ -23,7 +23,7 @@ export default function Bookings() {
   const updateStatus = (bookingId) => {
     console.log(bookingId);
     axios
-      .get(`http://localhost:5000/buissness/updatebooking/${bookingId}`)
+      .get(`https://doorstepservice.onrender.com/buissness/updatebooking/${bookingId}`)
       .then((response) => {
         console.log(response);
       })

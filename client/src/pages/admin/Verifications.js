@@ -9,7 +9,7 @@ import Navigation from "../../components/Navigation";
 export default function Verifications() {
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5000/admin/buissnessverification").then((response) => {
+    axios.get("https://doorstepservice.onrender.com/admin/buissnessverification").then((response) => {
       console.log(response, "res logged");
       const data = response.data.data;
       setData(data);

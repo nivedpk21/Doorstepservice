@@ -9,7 +9,7 @@ export default function Jobapprovals() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/admin/jobapprovals").then((response) => {
+    axios.get("https://doorstepservice.onrender.com/admin/jobapprovals").then((response) => {
       console.log("response logged:", response);
       const data = response.data.data;
       console.log("data logged", data);

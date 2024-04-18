@@ -12,7 +12,7 @@ export default function Viewmessage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/message/viewchatmessage/${id}`, {
+      .get(`https://doorstepservice.onrender.com/message/viewchatmessage/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -26,7 +26,7 @@ export default function Viewmessage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/buissness/viewuserdetails/${id}`)
+      .get(`https://doorstepservice.onrender.com/buissness/viewuserdetails/${id}`)
       .then((response) => {
         console.log(response);
         const data = response.data.data;
@@ -51,7 +51,7 @@ export default function Viewmessage() {
   const sendMessage = () => {
     if (replyData.message != "") {
       axios
-        .post(`http://localhost:5000/message/savereplymessage/${id}`, replyData, {
+        .post(`https://doorstepservice.onrender.com/message/savereplymessage/${id}`, replyData, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {

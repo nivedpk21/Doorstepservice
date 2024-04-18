@@ -8,7 +8,7 @@ export default function Appointments() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/buissness/viewjobappointments", {
+      .get("https://doorstepservice.onrender.com/buissness/viewjobappointments", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -23,7 +23,7 @@ export default function Appointments() {
 
   const taskcompleted = (applicationId, jobId) => {
     axios
-      .get(`http://localhost:5000/buissness/jobfinished/${applicationId}/${jobId}`)
+      .get(`https://doorstepservice.onrender.com/buissness/jobfinished/${applicationId}/${jobId}`)
       .then((response) => {
         console.log(response);
       });

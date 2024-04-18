@@ -12,7 +12,7 @@ export default function Viewuserchat() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/message/viewuserchat/${id}`, {
+      .get(`https://doorstepservice.onrender.com/message/viewuserchat/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -25,7 +25,7 @@ export default function Viewuserchat() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/user/viewbuissnessdetails/${id}`)
+      .get(`https://doorstepservice.onrender.com/user/viewbuissnessdetails/${id}`)
       .then((response) => {
         console.log(response);
         const data = response.data.data;
@@ -50,7 +50,7 @@ export default function Viewuserchat() {
   };
   const sendMessage = () => {
     axios
-      .post(`http://localhost:5000/message/sendmessage/${id}`, messageData, {
+      .post(`https://doorstepservice.onrender.com/message/sendmessage/${id}`, messageData, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

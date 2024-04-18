@@ -9,7 +9,7 @@ export default function Messages() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/message/viewbuissnessmessage", {
+      .get("https://doorstepservice.onrender.com/message/viewbuissnessmessage", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

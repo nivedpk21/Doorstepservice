@@ -85,7 +85,7 @@ export default function Registration() {
     console.log(Object.keys(formErrors).length);
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       axios
-        .post("http://localhost:5000/user/register", inputValues, {
+        .post("https://doorstepservice.onrender.com/user/register", inputValues, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
@@ -180,7 +180,7 @@ export default function Registration() {
 
     if (Object.keys(newformErrors).length === 0 && newisSubmit) {
       axios
-        .post("http://localhost:5000/buissness/register", newinputValues, {
+        .post("https://doorstepservice.onrender.com/buissness/register", newinputValues, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {

@@ -52,7 +52,7 @@ export default function Searchservice() {
     console.log("data", data);
 
     if (Object.keys(data).length !== 0) {
-      axios.post("http://localhost:5000/user/search", data).then((response) => {
+      axios.post("https://doorstepservice.onrender.com/user/search", data).then((response) => {
         console.log(response);
         const data = response.data.data;
         setSearchresult(data);

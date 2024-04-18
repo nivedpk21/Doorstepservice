@@ -12,7 +12,7 @@ export default function Viewjob() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user/viewjobpost", {
+      .get("https://doorstepservice.onrender.com/user/viewjobpost", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -23,7 +23,7 @@ export default function Viewjob() {
   }, []);
 
   const deleteJob = (jobId) => {
-    axios.get(`http://localhost:5000/user/deletejob/${jobId}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/user/deletejob/${jobId}`).then((response) => {
       console.log(response);
 
       const filterData = data.filter((obj) => {

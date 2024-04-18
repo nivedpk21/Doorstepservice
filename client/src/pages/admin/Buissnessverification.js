@@ -12,7 +12,7 @@ export default function Buissnessverification() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/admin/viewbuissnessprofile/${id}`).then((response) => {
+    axios.get(`https://doorstepservice.onrender.com/admin/viewbuissnessprofile/${id}`).then((response) => {
       console.log(response);
       const data = response.data.data;
       setData(data);
@@ -21,7 +21,7 @@ export default function Buissnessverification() {
 
   const approve = (loginId) => {
     axios
-      .get(`http://localhost:5000/admin/updatestatus/${loginId}`)
+      .get(`https://doorstepservice.onrender.com/admin/updatestatus/${loginId}`)
       .then((response) => {
         console.log(response);
         const message = response.data.message;

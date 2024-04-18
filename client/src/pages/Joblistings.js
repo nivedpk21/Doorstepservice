@@ -36,7 +36,7 @@ export default function Joblistings() {
     e.preventDefault();
     console.log("submit", data);
 
-    axios.post("http://localhost:5000/buissness/viewjoblist", data).then((response) => {
+    axios.post("https://doorstepservice.onrender.com/buissness/viewjoblist", data).then((response) => {
       console.log(response);
       const jobdata = response.data.data;
       setJobdata(jobdata);
@@ -47,7 +47,7 @@ export default function Joblistings() {
 
   const sendApplication = (jobId) => {
     axios
-      .post(`http://localhost:5000/buissness/apply/${jobId}`, {
+      .post(`https://doorstepservice.onrender.com/buissness/apply/${jobId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

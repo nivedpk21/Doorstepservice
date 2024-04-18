@@ -8,7 +8,7 @@ export default function Viewbuissnessprofile() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/buissness/profile", {
+      .get("https://doorstepservice.onrender.com/buissness/profile", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
