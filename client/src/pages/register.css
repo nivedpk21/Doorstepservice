@@ -1,10 +1,24 @@
-.form-label{
+.form-label {
   font-family: serif;
   font-size: 13px;
   color: green;
 }
-.form-control{
+.form-control {
   height: 30px;
 }
 
- 
+.registration-maindiv {
+  width: 50%;
+  height: auto;
+  margin-top: 50px;
+  padding: 0 30px 0 30px;
+}
+
+/* small screen */
+@media only screen and (max-width: 576px) {
+  .registration-maindiv {
+    width: 85%;
+    height: auto;
+    margin-top: 30px;
+  }
+}

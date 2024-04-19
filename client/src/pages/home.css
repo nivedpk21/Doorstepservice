@@ -1,20 +1,44 @@
-.landing-div{
-  height:590px;
-  background-color: cyan;
-  padding: 150px;
+/* landing text div */
+.landing-textdiv {
+  height: 600px;
+  background: #244034;
+  padding: 50px;
+}
+.landing-textdiv h1 {
+  text-align: left;
+  color: white;
+  font-family: serif;
+  font-size: 50px;
+  margin-top: 50px;
+}
+.landing-textdiv p {
+  text-align: left;
+  color: #d2f34c;
+  font-family: cursive;
+  font-size: 25px;
+  margin-top: 25px;
+}
+.landing-buttondiv {
+  text-align: left;
+  margin-top: 40px;
 }
 
+/* landing image div */
+.landing-imagediv {
+  height: 600px;
+  background: #244034;
+}
+.landing-imagediv img {
+  width: 80%;
+}
 
-
-
-
-
-
-
-
-
-
-
+/* categories section */
+.categories-div {
+  height: 550px;
+  margin-bottom: 50px;
+  background: white;
+}
+/* card css */
 .card {
   margin: 10px;
   box-sizing: border-box;
@@ -36,22 +60,147 @@
   /* font-weight: bolder; */
   color: black;
 }
-
 .card:hover {
   border: 1px solid black;
   transform: scale(1.05);
 }
-
 .card:active {
   transform: scale(0.95) rotateZ(1.7deg);
 }
 
-@media screen and (max-width: 400px) {
-  .headercontainer {
-    justify-content: center;
-    min-height: 130px;
+/* registartion section */
+.buissness-div {
+  height: 400px;
+  text-align: center;
+  background: #f2f9d8;
+  padding: 20px;
+}
+.user-div {
+  height: 400px;
+  text-align: center;
+  background: #d2f34c;
+  padding: 20px;
+}
+/* white space */
+.white-space {
+  height: 250px;
+  background: white;
+}
+
+/* Small devices */
+@media only screen and (max-width: 576px) {
+  .landing-textdiv {
+    height: 600px;
+    background: #244034;
+    padding: 25px;
+  }
+  .landing-textdiv h1 {
+    text-align: left;
+    color: white;
+    font-family: serif;
+    font-size: 40px;
+    margin-top: 40px;
+  }
+  .landing-textdiv p {
+    text-align: left;
+    color: #d2f34c;
+    font-family: cursive;
+    font-size: 25px;
+    margin-top: 30px;
+  }
+  .landing-buttondiv {
+    text-align: left;
+    margin-top: 50px;
+  }
+  /* landing image div */
+  .landing-imagediv {
+    display: none;
+  }
+  /* categories section */
+  .categories-div {
+    height: 1000px;
+    margin-bottom: 50px;
+    background: white;
   }
   .card {
-    width: 30%;
+    margin: 10px;
+    box-sizing: border-box;
+
+    background: rgba(217, 217, 217, 0.58);
+    border: 1px solid white;
+    box-shadow: 10px 17px 51px white; /* 12px 17px 51px rgba(0, 0, 0, 0.22) */
+    backdrop-filter: blur(6px);
+    border-radius: 17px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s;
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 254px;
+    justify-content: center;
+    user-select: none;
+    /* font-weight: bolder; */
+    color: black;
+  }
+}
+
+/* Medium devices */
+@media only screen and (min-width: 577px) and (max-width: 992px) {
+  /* landing text div */
+  .landing-textdiv {
+    height: 600px;
+    background: #244034;
+    padding: 50px;
+  }
+  .landing-textdiv h1 {
+    text-align: left;
+    color: white;
+    font-family: serif;
+    font-size: 50px;
+    margin-top: 50px;
+  }
+  .landing-textdiv p {
+    text-align: left;
+    color: #d2f34c;
+    font-family: cursive;
+    font-size: 25px;
+    margin-top: 25px;
+  }
+  .landing-buttondiv {
+    text-align: left;
+    margin-top: 40px;
+  }
+  /* landing image div */
+  .landing-imagediv {
+    display: none;
+  }
+
+  /* categories section */
+  .categories-div {
+    height: 950px;
+    margin-bottom: 50px;
+    background: white;
+  }
+  .card {
+    width: 190px;
+  }
+
+  /* registartion section */
+  .buissness-div {
+    height: 350px;
+    text-align: center;
+    background: #f2f9d8;
+    padding: 20px;
+  }
+  .user-div {
+    height: 350px;
+    text-align: center;
+    background: #d2f34c;
+    padding: 20px;
+  }
+  .white-space {
+    height: 300px;
+    background: white;
   }
 }

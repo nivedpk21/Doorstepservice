@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import "./editjob.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Navigation from "../../components/Navigation";
 
 export default function Editjob() {
   const { id } = useParams();
@@ -91,7 +92,7 @@ export default function Editjob() {
   };
   return (
     <>
-      <Header />
+      <Navigation />
 
       <div>
         <div

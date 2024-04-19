@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "./viewjob.css";
 import toast, { Toaster } from "react-hot-toast";
 import Pagination from "../components/Pagination";
+import Navigation from "../components/Navigation";
 
 export default function Viewjob() {
   const token = localStorage.getItem("token");
@@ -44,7 +45,7 @@ export default function Viewjob() {
   const currentPageposts = data.slice(firstPostindex, lastPostindex);
   return (
     <>
-      <Header />
+      <Navigation />
       <Toaster position="top-center" reverseOrder={false} />
 
       <div

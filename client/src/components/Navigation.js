@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./navigation.css";
 import Avatar from "@mui/material/Avatar";
 
 export default function Navigation() {
-  const [activeLink, setActiveLink] = useState("");
+  const [active, setActive] = useState("login");
   const navigate = useNavigate();
   const role = localStorage.getItem("role");
   const logout = () => {
@@ -14,10 +14,6 @@ export default function Navigation() {
     navigate("/");
   };
 
-  const handleSetActiveLink = (link) => {
-    setActiveLink(link);
-    console.log("activeLink", activeLink);
-  };
   return (
     <>
       <header>
@@ -33,9 +29,9 @@ export default function Navigation() {
       <header>
         {/*----------------------------navigation------------------------------------------------- */}
 
-        {role === "admin" ? (   // ADMIN----------------------------------
+        {role === "admin" ? ( // ADMIN----------------------------------
           <>
-            <nav class="navbar navbar-expand-lg bg-body-light sticky-top ">
+            <nav class="navbar navbar-expand-lg bg-body-light sticky-top border-bottom">
               <div class="container-fluid">
                 <button
                   class="navbar-toggler"
@@ -52,8 +48,7 @@ export default function Navigation() {
                   <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                       <a
-                        onClick={() => handleSetActiveLink("home")}
-                        className={activeLink == "home" ? "nav-link newactive" : "nav-link"}
+                        className={active == "home" ? "nav-link newactive" : "nav-link"}
                         aria-current="page"
                         href="/"
                       >
@@ -108,9 +103,12 @@ export default function Navigation() {
           </>
         ) : role === "user" ? ( // USER ----------------------------------
           <>
-            <nav class="navbar navbar-expand-lg bg-body-light sticky-top">
+            <nav
+              class="navbar navbar-expand-lg bg-body-light sticky-top border-bottom"
+            >
               <div class="container-fluid">
                 <button
+                  style={{ color: "white", backgroundColor: "white" }}
                   class="navbar-toggler"
                   type="button"
                   data-bs-toggle="collapse"
@@ -124,7 +122,7 @@ export default function Navigation() {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="/">
+                      <a class="nav-link " aria-current="page" href="/">
                         Home
                       </a>
                     </li>
@@ -164,7 +162,11 @@ export default function Navigation() {
                       alignItems: "center",
                     }}
                   >
-                    <Avatar sx={{ width: "39px", height: "39px",backgroundColor:"black" }} alt="Remy Sharp" src="#">
+                    <Avatar
+                      sx={{ width: "39px", height: "39px", backgroundColor: "black" }}
+                      alt="Remy Sharp"
+                      src="#"
+                    >
                       U
                     </Avatar>
                     <button
@@ -277,55 +279,46 @@ export default function Navigation() {
           </>
         ) : (
           <>
-            <nav class="navbar navbar-expand-lg bg-body-light sticky-top">
-              <div class="container-fluid">
-                <button
-                  class="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item ">
-                      <a
-                        // onClick={() => {
-                        //   setActive("home");
-                        // }}
-                        // className={active == "home" ? "nav-link set" : "nav-link "}
-                        aria-current="page"
-                        href="/"
-                        class="nav-link "
-                      >
-                        Home
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a
-                        // onClick={() => {
-                        //   setActive("login");
-                        // }}
-                        // className={active == "login" ? "nav-link set" : "nav-link "}
-                        href="/login"
-                        class="nav-link "
-                      >
-                        Login
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link " href="/register">
-                        Register
-                      </a>
-                    </li>
-                  </ul>
+              <nav className="border-bottom navbar navbar-expand-lg bg-body-light sticky-top" >
+                <div className=" container-fluid">
+                  <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                  >
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
+                      <li className="nav-item ">
+                        <Link aria-current="page" to={"/"} className="nav-link ">
+                          Home
+                        </Link>
+                      </li>
+                      <li className="nav-item abc">
+                        <a
+                          href="/login"
+                          onClick={() => {
+                            setActive("login");
+                          }}
+                          className={active == "login" ? "nav-link activecolor" : "nav-link"}
+                        >
+                          Login
+                        </a>
+                      </li>
+                      <li className="nav-item ">
+                        <Link to={"/register"} className="nav-link ">
+                          Register
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            </nav>
+              </nav>
           </>
         )}
       </header>

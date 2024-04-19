@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Navigation from "../../components/Navigation";
 
 export default function Usermessage() {
   const token = localStorage.getItem("token");
@@ -20,7 +21,7 @@ export default function Usermessage() {
   }, []);
   return (
     <>
-      <Header />
+      <Navigation />
       <div
         className="border rounded p-2"
         style={{ margin: "auto", marginTop: "50px", width: "35%", height: "500px" }}

@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import Navigation from "../../components/Navigation";
 
 export default function Singlejob() {
   const token = localStorage.getItem("token");
@@ -44,7 +45,7 @@ export default function Singlejob() {
 
   return (
     <>
-      <Header />
+      <Navigation />
       <Toaster position="top-center" reverseOrder={false} />
 
       <div

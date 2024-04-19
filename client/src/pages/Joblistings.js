@@ -15,6 +15,7 @@ import {
   Select,
 } from "@mui/material";
 import Pagination from "../components/Pagination";
+import Navigation from "../components/Navigation";
 export default function Joblistings() {
   const token = localStorage.getItem("token");
   console.log(token);
@@ -69,7 +70,7 @@ export default function Joblistings() {
 
   return (
     <>
-      <Header />
+      <Navigation />
       <Box sx={{ padding: "50px" }}>
         <Grid container spacing={0}>
           <Grid item xs={3} sm={12} lg={3}>

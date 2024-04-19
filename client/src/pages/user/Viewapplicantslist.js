@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import "./viewapplicantlist.css";
+import Navigation from "../../components/Navigation";
 
 export default function Viewapplicantslist() {
   const { id } = useParams(); // jobid
@@ -26,7 +27,7 @@ export default function Viewapplicantslist() {
 
   return (
     <>
-      <Header />
+      <Navigation />
       <div
         className="mm container-fluid border rounded p-2"
         style={{ width: "50%", height: "550px", marginTop: "50px" }}

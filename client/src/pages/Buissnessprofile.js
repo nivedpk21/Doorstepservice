@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import axios from "axios";
+import Navigation from "../components/Navigation";
 
 export default function Buissnessprofile() {
   const token = localStorage.getItem("token");
@@ -24,7 +25,7 @@ export default function Buissnessprofile() {
 
   return (
     <>
-      <Header />
+      <Navigation />
 
       <section>
         <div

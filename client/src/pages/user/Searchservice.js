@@ -20,6 +20,7 @@ import {
   Box,
 } from "@mui/material";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import Navigation from "../../components/Navigation";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -70,14 +71,14 @@ export default function Searchservice() {
 
   return (
     <>
-      <Header />
+      <Navigation />
 
       {/* mui design */}
 
       <div>
         <Grid container spacing={0}>
           <Grid item xs={3}>
-            <div className="border" style={{ height: "590px", padding: "10px" }}>
+            <div className="" style={{ height: "590px", padding: "10px" }}>
               <div
                 className="container border rounded"
                 style={{

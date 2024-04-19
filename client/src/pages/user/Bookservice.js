@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import Navigation from "../../components/Navigation";
 
 export default function Bookservice() {
   const { id } = useParams();
@@ -87,7 +88,7 @@ export default function Bookservice() {
 
   return (
     <>
-      <Header />
+      <Navigation />
       <Toaster position="top-center" reverseOrder={false} />
 
       <div className="border rounded" style={{ width: "50%", height: "100%", margin: "50px auto" }}>

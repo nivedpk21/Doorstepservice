@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Pagination from "../../components/Pagination";
+import Navigation from "../../components/Navigation";
 
 export default function Userappointments() {
   const token = localStorage.getItem("token");
@@ -30,7 +31,7 @@ export default function Userappointments() {
 
   return (
     <>
-      <Header />
+      <Navigation />
       <div
         className="border rounded p-2"
         style={{

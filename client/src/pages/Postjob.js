@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Header from "../components/Header";
 import "./postjob.css";
 import { useNavigate } from "react-router-dom";
+import Navigation from "../components/Navigation";
 
 export default function Postjob() {
   const token = localStorage.getItem("token");
@@ -12,7 +13,9 @@ export default function Postjob() {
 
   useEffect(() => {
     axios
-      .get("https://doorstepservice.onrender.com/user/profile", { headers: { Authorization: `bearer ${token}` } })
+      .get("https://doorstepservice.onrender.com/user/profile", {
+        headers: { Authorization: `bearer ${token}` },
+      })
       .then((response) => {
         console.log(response);
         const data = response.data.data;
@@ -39,7 +42,7 @@ export default function Postjob() {
   const photoChange = (event) => {
     setInputvalues({ ...inputvalues, image: event.target.files[0] });
   };
- 
+
   const validate = (values) => {
     var error = {};
 
@@ -106,7 +109,7 @@ export default function Postjob() {
 
   return (
     <>
-      <Header />
+      <Navigation />
       <Toaster position="top-center" reverseOrder={false} />
 
       <div className="main-div container-fluid border border-2 rounded ">

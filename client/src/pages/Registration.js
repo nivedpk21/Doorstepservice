@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import "./register.css";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import Navigation from "../components/Navigation";
 
 export default function Registration() {
   const [active, setActive] = useState("user");
@@ -197,13 +198,10 @@ export default function Registration() {
 
   return (
     <>
-      <Header />
+      <Navigation />
       <Toaster position="top-center" reverseOrder={false} />
 
-      <div
-        className="container-fluid border rounded-4 "
-        style={{ width: "50%", height: "100%", marginTop: "50px", padding: "0 30px 0 30px" }}
-      >
+      <div className="registration-maindiv container-fluid border rounded-4 ">
         <div className="container-fluid" style={{ textAlign: "center", padding: "20px" }}>
           <h5>Registration</h5>
           <p style={{ fontSize: "13px", color: "grey" }}>
@@ -238,14 +236,14 @@ export default function Registration() {
           <>
             <div>
               <div class="row justify-content-center align-items-center ">
-                <div class="col">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                   <div>
                     {/* form ---------------------------------------------------*/}
                     <div class="mb-3">
                       <label for="" class="form-label">
                         Name
                       </label>
-                      <span style={{ color: "red" }}>{formErrors.name}</span>
+                      <span className="error-text">{formErrors.name}</span>
                       <input
                         onChange={inputChange}
                         type="text"
@@ -260,7 +258,7 @@ export default function Registration() {
                       <label for="" class="form-label">
                         Username
                       </label>
-                      <span style={{ color: "red" }}>{formErrors.username}</span>
+                      <span className="error-text">{formErrors.username}</span>
                       <input
                         onChange={inputChange}
                         type="text"
@@ -275,7 +273,7 @@ export default function Registration() {
                       <label for="" class="form-label">
                         Email
                       </label>
-                      <span style={{ color: "red" }}>{formErrors.email}</span>
+                      <span className="error-text">{formErrors.email}</span>
                       <input
                         onChange={inputChange}
                         type="email"
@@ -290,7 +288,7 @@ export default function Registration() {
                       <label for="" class="form-label">
                         Phonenumber
                       </label>
-                      <span style={{ color: "red" }}>{formErrors.phonenumber}</span>
+                      <span className="error-text">{formErrors.phonenumber}</span>
 
                       <input
                         onChange={inputChange}
@@ -306,7 +304,7 @@ export default function Registration() {
                       <label for="" class="form-label">
                         Password
                       </label>
-                      <span style={{ color: "red" }}>{formErrors.password}</span>
+                      <span className="error-text">{formErrors.password}</span>
 
                       <input
                         onChange={inputChange}
@@ -326,7 +324,7 @@ export default function Registration() {
                       <label for="" class="form-label">
                         House
                       </label>
-                      <span style={{ color: "red" }}>{formErrors.house}</span>
+                      <span className="error-text">{formErrors.house}</span>
 
                       <input
                         onChange={inputChange}
@@ -343,7 +341,7 @@ export default function Registration() {
                         <label for="" class="form-label">
                           Street
                         </label>
-                        <span style={{ color: "red" }}>{formErrors.street}</span>
+                        <span className="error-text">{formErrors.street}</span>
 
                         <input
                           onChange={inputChange}
@@ -359,7 +357,7 @@ export default function Registration() {
                         <label for="" class="form-label">
                           Town
                         </label>
-                        <span style={{ color: "red" }}>{formErrors.town}</span>
+                        <span className="error-text">{formErrors.town}</span>
 
                         <input
                           onChange={inputChange}
@@ -377,7 +375,7 @@ export default function Registration() {
                         <label for="" class="form-label">
                           State
                         </label>
-                        <span style={{ color: "red" }}>{formErrors.state}</span>
+                        <span className="error-text">{formErrors.state}</span>
 
                         <select
                           onChange={inputChange}
@@ -396,7 +394,7 @@ export default function Registration() {
                         <label for="" class="form-label">
                           District
                         </label>
-                        <span style={{ color: "red" }}>{formErrors.district}</span>
+                        <span className="error-text">{formErrors.district}</span>
 
                         <select
                           onChange={inputChange}
@@ -416,7 +414,7 @@ export default function Registration() {
                       <label for="" class="form-label">
                         City
                       </label>
-                      <span style={{ color: "red" }}>{formErrors.city}</span>
+                      <span className="error-text">{formErrors.city}</span>
 
                       <input
                         onChange={inputChange}
@@ -432,7 +430,7 @@ export default function Registration() {
                       <label for="" class="form-label">
                         Pincode
                       </label>
-                      <span style={{ color: "red" }}>{formErrors.pincode}</span>
+                      <span className="error-text">{formErrors.pincode}</span>
 
                       <input
                         onChange={inputChange}
@@ -472,39 +470,118 @@ export default function Registration() {
         ) : (
           // -----------------buissness form---------------------------------------------------------------------------------
           <>
-            <div>
-              <div class="row justify-content-center align-items-center ">
-                <div class="col">
-                  <div>
-                    {/* form ---------------------------------------------------*/}
-                    <div class="mb-3">
-                      <label for="" class="form-label">
-                        Buissness Name
-                      </label>
-                      <span style={{ fontSize: "small", color: "red" }}>
-                        {newformErrors.businessname}
-                      </span>
-                      <input
-                        onChange={newinputChange}
-                        type="text"
-                        class="form-control"
-                        name="businessname"
-                        placeholder=""
-                      />
-                    </div>
+            <div class="row justify-content-center align-items-center ">
+              <div class="col-6 col-sm-12 col-md-12 col-lg-6" style={{width:"100%"}}>
+                <div >
+                  {/* form ---------------------------------------------------*/}
+                  <div class="mb-3">
+                    <label for="" class="form-label">
+                      Buissness Name
+                    </label>
+                    <span className="error-text">{newformErrors.businessname}</span>
+                    <input
+                      onChange={newinputChange}
+                      type="text"
+                      class="form-control"
+                      name="businessname"
+                      placeholder=""
+                    />
+                  </div>
 
+                  <div class="mb-3">
+                    <label for="" class="form-label">
+                      Username
+                    </label>
+                    <span className="error-text">{newformErrors.username}</span>
+                    <input
+                      onChange={newinputChange}
+                      type="text"
+                      class="form-control"
+                      name="username"
+                      id=""
+                      placeholder=""
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="" class="form-label">
+                      Email
+                    </label>
+                    <span className="error-text">{newformErrors.email}</span>
+                    <input
+                      onChange={newinputChange}
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      id=""
+                      placeholder="abc@mail.com"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="" class="form-label">
+                      Phonenumber
+                    </label>
+                    <span className="error-text">{newformErrors.phonenumber}</span>
+
+                    <input
+                      onChange={newinputChange}
+                      type="text"
+                      class="form-control"
+                      name="phonenumber"
+                      id=""
+                      placeholder=""
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="" class="form-label">
+                      Password
+                    </label>
+                    <span className="error-text">{newformErrors.password}</span>
+
+                    <input
+                      onChange={newinputChange}
+                      type="password"
+                      class="form-control"
+                      name="password"
+                      id=""
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* col 2 ------------------------------*/}
+              <div class="col">
+                <div>
+                  <div class="mb-3">
+                    <label for="" class="form-label">
+                      Building name/no:
+                    </label>
+                    <span className="error-text">{newformErrors.building}</span>
+
+                    <input
+                      onChange={newinputChange}
+                      type="text"
+                      class="form-control"
+                      name="building"
+                      id=""
+                      placeholder=""
+                    />
+                  </div>
+
+                  <div style={{ display: "flex" }}>
                     <div class="mb-3">
                       <label for="" class="form-label">
-                        Username
+                        Street
                       </label>
-                      <span style={{ fontSize: "small", color: "red" }}>
-                        {newformErrors.username}
-                      </span>
+                      <span className="error-text">{newformErrors.street}</span>
+
                       <input
                         onChange={newinputChange}
                         type="text"
                         class="form-control"
-                        name="username"
+                        name="street"
                         id=""
                         placeholder=""
                       />
@@ -512,213 +589,110 @@ export default function Registration() {
 
                     <div class="mb-3">
                       <label for="" class="form-label">
-                        Email
+                        Town
                       </label>
-                      <span style={{ fontSize: "small", color: "red" }}>{newformErrors.email}</span>
-                      <input
-                        onChange={newinputChange}
-                        type="email"
-                        class="form-control"
-                        name="email"
-                        id=""
-                        placeholder="abc@mail.com"
-                      />
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="" class="form-label">
-                        Phonenumber
-                      </label>
-                      <span style={{ fontSize: "small", color: "red" }}>
-                        {newformErrors.phonenumber}
-                      </span>
+                      <span className="error-text">{newformErrors.town}</span>
 
                       <input
                         onChange={newinputChange}
                         type="text"
                         class="form-control"
-                        name="phonenumber"
-                        id=""
-                        placeholder=""
-                      />
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="" class="form-label">
-                        Password
-                      </label>
-                      <span style={{ fontSize: "small", color: "red" }}>
-                        {newformErrors.password}
-                      </span>
-
-                      <input
-                        onChange={newinputChange}
-                        type="password"
-                        class="form-control"
-                        name="password"
+                        name="town"
                         id=""
                         placeholder=""
                       />
                     </div>
                   </div>
-                </div>
-                {/* col 2 ------------------------------*/}
-                <div class="col">
-                  <div>
+
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <div class="mb-3">
                       <label for="" class="form-label">
-                        Building name/no:
+                        State
                       </label>
-                      <span style={{ fontSize: "small", color: "red" }}>
-                        {newformErrors.building}
-                      </span>
+                      <span className="error-text">{newformErrors.state}</span>
 
-                      <input
+                      <select
                         onChange={newinputChange}
-                        type="text"
-                        class="form-control"
-                        name="building"
+                        class="form-select form-select-sm"
+                        name="state"
                         id=""
-                        placeholder=""
-                      />
-                    </div>
-
-                    <div style={{ display: "flex" }}>
-                      <div class="mb-3">
-                        <label for="" class="form-label">
-                          Street
-                        </label>
-                        <span style={{ fontSize: "small", color: "red" }}>
-                          {newformErrors.street}
-                        </span>
-
-                        <input
-                          onChange={newinputChange}
-                          type="text"
-                          class="form-control"
-                          name="street"
-                          id=""
-                          placeholder=""
-                        />
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="" class="form-label">
-                          Town
-                        </label>
-                        <span style={{ fontSize: "small", color: "red" }}>
-                          {newformErrors.town}
-                        </span>
-
-                        <input
-                          onChange={newinputChange}
-                          type="text"
-                          class="form-control"
-                          name="town"
-                          id=""
-                          placeholder=""
-                        />
-                      </div>
-                    </div>
-
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <div class="mb-3">
-                        <label for="" class="form-label">
-                          State
-                        </label>
-                        <span style={{ fontSize: "small", color: "red" }}>
-                          {newformErrors.state}
-                        </span>
-
-                        <select
-                          onChange={newinputChange}
-                          class="form-select form-select-sm"
-                          name="state"
-                          id=""
-                        >
-                          <option selected>Select one</option>
-                          <option value="kerala">Kerala</option>
-                          <option value="karnataka">Karnataka</option>
-                          <option value="tamilnadu">TamilNadu</option>
-                        </select>
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="" class="form-label">
-                          District
-                        </label>
-                        <span style={{ fontSize: "small", color: "red" }}>
-                          {newformErrors.district}
-                        </span>
-
-                        <select
-                          onChange={newinputChange}
-                          class="form-select form-select-sm"
-                          name="district"
-                          id=""
-                        >
-                          <option selected>Select one</option>
-                          <option value="kozhikode">kozhikode</option>
-                          <option value="kannur">kannur</option>
-                          <option value="thrissur">thrissur</option>
-                        </select>
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="" class="form-label">
-                          category
-                        </label>
-                        <span style={{ fontSize: "small", color: "red" }}>
-                          {newformErrors.category}
-                        </span>
-
-                        <select
-                          onChange={newinputChange}
-                          class="form-select form-select-sm"
-                          name="category"
-                          id=""
-                        >
-                          <option selected>Select one</option>
-                          <option value="electrical">Electrical</option>
-                          <option value="plumbing">Plumbing</option>
-                          <option value="pestcontrol">Pestcontrol</option>
-                        </select>
-                      </div>
+                      >
+                        <option selected>Select one</option>
+                        <option value="kerala">Kerala</option>
+                        <option value="karnataka">Karnataka</option>
+                        <option value="tamilnadu">TamilNadu</option>
+                      </select>
                     </div>
 
                     <div class="mb-3">
                       <label for="" class="form-label">
-                        City
+                        District
                       </label>
-                      <span style={{ fontSize: "small", color: "red" }}>{newformErrors.city}</span>
+                      <span className="error-text">{newformErrors.district}</span>
 
-                      <input
+                      <select
                         onChange={newinputChange}
-                        type="text"
-                        class="form-control"
-                        name="city"
+                        class="form-select form-select-sm"
+                        name="district"
                         id=""
-                        placeholder=""
-                      />
+                      >
+                        <option selected>Select one</option>
+                        <option value="kozhikode">kozhikode</option>
+                        <option value="kannur">kannur</option>
+                        <option value="thrissur">thrissur</option>
+                      </select>
                     </div>
 
                     <div class="mb-3">
                       <label for="" class="form-label">
-                        Pincode
+                        category
                       </label>
-                      <span style={{ fontSize: "small", color: "red" }}>
-                        {newformErrors.pincode}
-                      </span>
+                      <span className="error-text">{newformErrors.category}</span>
 
-                      <input
+                      <select
                         onChange={newinputChange}
-                        type="text"
-                        class="form-control"
-                        name="pincode"
+                        class="form-select form-select-sm"
+                        name="category"
                         id=""
-                        placeholder=""
-                      />
+                      >
+                        <option selected>Select one</option>
+                        <option value="electrical">Electrical</option>
+                        <option value="plumbing">Plumbing</option>
+                        <option value="pestcontrol">Pestcontrol</option>
+                      </select>
                     </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="" class="form-label">
+                      City
+                    </label>
+                    <span className="error-text">{newformErrors.city}</span>
+
+                    <input
+                      onChange={newinputChange}
+                      type="text"
+                      class="form-control"
+                      name="city"
+                      id=""
+                      placeholder=""
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="" class="form-label">
+                      Pincode
+                    </label>
+                    <span className="error-text">{newformErrors.pincode}</span>
+
+                    <input
+                      onChange={newinputChange}
+                      type="text"
+                      class="form-control"
+                      name="pincode"
+                      id=""
+                      placeholder=""
+                    />
                   </div>
                 </div>
               </div>

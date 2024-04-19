@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Navigation from "../../components/Navigation";
 
 export default function Viewuserchat() {
   const { id } = useParams();
@@ -60,7 +61,7 @@ export default function Viewuserchat() {
   console.log("data", data);
   return (
     <>
-      <Header />
+      <Navigation />
 
       <div
         className="border p-3"

@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./applicantprofile.css";
+import Navigation from "../../components/Navigation";
 
 export default function Applicantprofile() {
   const { id, jobid } = useParams();
@@ -52,7 +53,7 @@ export default function Applicantprofile() {
 
   return (
     <>
-      <Header />
+      <Navigation />
 
       <section>
         <div

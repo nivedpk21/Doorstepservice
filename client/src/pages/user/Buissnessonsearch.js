@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import Navigation from "../../components/Navigation";
 
 export default function Buissnessonsearch() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`https://doorstepservice.onrender.com/user/viewfullbuissnessprofile/${id}`).then((response) => {
-      console.log("response", response);
-      const data = response.data.data;
-      setData(data);
-    });
+    axios
+      .get(`https://doorstepservice.onrender.com/user/viewfullbuissnessprofile/${id}`)
+      .then((response) => {
+        console.log("response", response);
+        const data = response.data.data;
+        setData(data);
+      });
   }, []);
 
   const [data, setData] = useState({});
@@ -31,16 +34,20 @@ export default function Buissnessonsearch() {
 
   const sendMessage = (buissnessId) => {
     axios
-      .post(`https://doorstepservice.onrender.com/message/sendmessage/${buissnessId}`, messageData, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://doorstepservice.onrender.com/message/sendmessage/${buissnessId}`,
+        messageData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((response) => {
         console.log(response);
       });
   };
   return (
     <>
-      <Header />
+      <Navigation />
 
       <section>
         <div

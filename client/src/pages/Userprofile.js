@@ -3,6 +3,7 @@ import "./userprofile.css";
 import Header from "../components/Header";
 import axios from "axios";
 import Userprofiledata from "./user/Userprofiledata";
+import Navigation from "../components/Navigation";
 
 export default function Userprofile() {
   const token = localStorage.getItem("token");
@@ -21,7 +22,7 @@ export default function Userprofile() {
 
   return (
     <>
-      <Header />
+      <Navigation />
       <div>
         <div
           className="container"
