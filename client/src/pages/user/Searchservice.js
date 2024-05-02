@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import Header from "../../components/Header";
+import Navigation from "../../components/Navigation";
 import "./searchservice.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import "./searchservice.css";
 import {
+  Typography,
+  CssBaseline,
+  AppBar,
+  Toolbar,
   FormControl,
   Grid,
   IconButton,
@@ -13,14 +18,11 @@ import {
   MenuItem,
   Paper,
   Select,
-  TextField,
   styled,
   Stack,
   Container,
   Box,
 } from "@mui/material";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import Navigation from "../../components/Navigation";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -77,70 +79,84 @@ export default function Searchservice() {
 
       <div>
         <Grid container spacing={0}>
-          <Grid item xs={3}>
-            <div className="" style={{ height: "590px", padding: "10px" }}>
-              <div
-                className="container border rounded"
-                style={{
-                  width: "100%",
-                  height: "500px",
-                  marginTop: "40px",
-                  padding: "15px",
-                }}
-              >
-                <div className="border-bottom p-2">
-                  <h6 style={{ textAlign: "center" }}>Search Filter</h6>
-                </div>
-                <div
-                  style={{
-                    width: "100%",
-                    padding: "10px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    flexWrap: "wrap",
-                    marginTop: "50px",
-                  }}
+          <Grid item xs={12} sm={12} md={3} lg={3}>
+            <nav class="navbar navbar-expand-lg bg-body-light">
+              <div class="container-fluid">
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent2"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
                 >
-                  <div>
-                    <p>Rating</p>
-                  </div>
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+                  <div className="" style={{ height: "590px", width: "100%", padding: "0px" }}>
+                    <div
+                      className="container border rounded"
+                      style={{
+                        width: "100%",
+                        height: "500px",
+                        marginTop: "40px",
+                        padding: "10px",
+                      }}
+                    >
+                      <div className="border-bottom p-2">
+                        <h6 style={{ textAlign: "center" }}>Search Filter</h6>
+                      </div>
+                      <div
+                        style={{
+                          width: "100%",
+                          padding: "10px",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          flexWrap: "wrap",
+                          marginTop: "50px",
+                        }}
+                      >
+                        <div>
+                          <p>Rating</p>
+                        </div>
 
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      2★
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      3★
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                      // checked
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      4★
-                    </label>
-                  </div>
-                </div>
-                {/* <div
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="flexCheckDefault"
+                          />
+                          <label class="form-check-label" for="flexCheckDefault">
+                            2★
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="flexCheckDefault"
+                          />
+                          <label class="form-check-label" for="flexCheckDefault">
+                            3★
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="flexCheckChecked"
+                            // checked
+                          />
+                          <label class="form-check-label" for="flexCheckChecked">
+                            4★
+                          </label>
+                        </div>
+                      </div>
+                      {/* <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
@@ -179,36 +195,40 @@ export default function Searchservice() {
                   </div>
                   <div></div>
                 </div> */}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            </nav>
+            {/* navbar */}
           </Grid>
-          <Grid item xs={9}>
-            <div style={{ border: "0px solid black ", height: "590px" }}>
+          <Grid item xs={12} lg={9}>
+            <div style={{ border: "0px solid black ", height: "590px", width: "100%" }}>
               {/* search item main div */}
               <div
                 style={{
                   borderBottom: "0px solid black",
                   minHeight: "150px",
-                  //   padding: "50px",
+                  // padding: "50px",
                 }}
               >
                 {/* search grid */}
 
-                <div style={{ padding: "50px" }}>
+                <div style={{ padding: "60px" }}>
                   <Grid
                     container
-                    spacing={0}
+                    spacing={1}
                     direction="row"
                     justifyContent="center"
                     alignItems="center"
                     style={{
                       border: "1px solid  rgb(148 163 184)",
-                      padding: "10px",
+                      padding: "5px",
                       borderRadius: "12px",
                     }}
                   >
-                    <Grid item xs={4}>
-                      <div style={{ border: "0px solid black" }}>
+                    <Grid item xs={12} lg={4} style={{ padding: "0px" }}>
+                      <div style={{ border: "0px solid black", padding: "0px" }}>
                         <FormControl fullWidth>
                           <InputLabel id="demo-simple-select-label">category</InputLabel>
                           <Select
@@ -226,7 +246,7 @@ export default function Searchservice() {
                         </FormControl>
                       </div>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={12} lg={4} style={{ padding: "0px" }}>
                       <div style={{ border: "0px solid black" }}>
                         <FormControl fullWidth>
                           <InputLabel id="demo-simple-select-label">city</InputLabel>
@@ -247,10 +267,10 @@ export default function Searchservice() {
                         </FormControl>
                       </div>
                     </Grid>
-                    <Grid item xs={4}>
-                      <div style={{ border: "0px solid black" }}>
+                    <Grid item xs={12} lg={4} style={{ padding: "4px" }}>
+                      <div style={{ border: "0px solid black", textAlign: "center" }}>
                         <Button
-                          style={{ marginLeft: "8px" }}
+                          style={{ marginLeft: "0px", width: "100%" }}
                           variant="contained"
                           sx={{ height: 54 }}
                           onClick={submit}
@@ -279,12 +299,12 @@ export default function Searchservice() {
                         }}
                       >
                         <Grid container spacing={1} alignItems="center" sx={{ padding: "10px" }}>
-                          <Grid item xs={3}>
+                          <Grid item xs={6} sm={3} lg={3}>
                             <Container>
                               <img src="./images/smartphone.jpg" style={{ width: "110px" }} />
                             </Container>
                           </Grid>
-                          <Grid item xs={6}>
+                          <Grid item xs={6} sm={6} lg={6}>
                             <Container>
                               <Link
                                 to={`/viewbuissnessprofileonsearch/${item._id}`}
@@ -299,7 +319,7 @@ export default function Searchservice() {
                               <p style={{ color: "green" }}>Open now</p>
                             </Container>
                           </Grid>
-                          <Grid item xs={3}>
+                          <Grid item xs={12} sm={3} lg={3}>
                             <Container>
                               <Stack spacing={1}>
                                 <Link

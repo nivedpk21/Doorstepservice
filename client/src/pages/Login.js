@@ -71,6 +71,7 @@ export default function Login() {
     <>
       <Navigation />
       <Toaster position="top-center" reverseOrder={false} />
+
       <div className="margin-topdiv">
         <form className="form_container " onSubmit={submit}>
           <div className="title_container">
