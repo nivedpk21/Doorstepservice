@@ -1,8 +1,23 @@
 .formlabel {
-    font-family: serif;
-    font-size: 14px;
-    color: #333;
+  font-family: serif;
+  font-size: 14px;
+  color: #333;
 }
 .forminput {
-    height: 50px;
+  height: 50px;
+}
+.editjob-div {
+  width: 50%;
+}
+
+@media only screen and (max-width: 576px) {
+  .editjob-div {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 992px) {
+  .editjob-div {
+    width: 70%;
+  }
 }

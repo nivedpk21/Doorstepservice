@@ -49,13 +49,12 @@ export default function Viewjob() {
       <Toaster position="top-center" reverseOrder={false} />
 
       <div
-        className="container-fluid border border-2 rounded"
+        className="joblist-div container-fluid border border-2 rounded"
         style={{
-          width: "60%",
           minHeight: "500px",
           marginTop: "50px",
           backgroundColor: "white",
-          padding: "10px",
+          padding: "5px",
         }}
       >
         {currentPageposts.map((item) => (
@@ -67,6 +66,7 @@ export default function Viewjob() {
               display: "flex",
               padding: "10px",
               alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
             <div style={{ width: "50%" }} className="container">

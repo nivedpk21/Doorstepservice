@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Navigation from "../../components/Navigation";
+import "./singlejob.css";
 
 export default function Singlejob() {
   const token = localStorage.getItem("token");
@@ -14,7 +15,9 @@ export default function Singlejob() {
 
   useEffect(() => {
     axios
-      .get("https://doorstepservice.onrender.com/user/profile", { headers: { Authorization: `bearer ${token}` } })
+      .get("https://doorstepservice.onrender.com/user/profile", {
+        headers: { Authorization: `bearer ${token}` },
+      })
       .then((response) => {
         console.log(response);
         const data = response.data.data;
@@ -49,8 +52,8 @@ export default function Singlejob() {
       <Toaster position="top-center" reverseOrder={false} />
 
       <div
-        className="container-fluid border rounded  mt-5 p-2"
-        style={{ width: "70%", height: "100%", backgroundColor: "white" }}
+        className="viewjob-div container-fluid border rounded  mt-5 p-2"
+        style={{ height: "100%", backgroundColor: "white" }}
       >
         <div
           className="container-fluid "

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header";
 import "./editjob.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -40,8 +39,8 @@ export default function Editjob() {
   console.log(data);
 
   const setSelectedValue = (event) => {
-     setData({...data,city:event.target.value})
-  }
+    setData({ ...data, city: event.target.value });
+  };
 
   const [formErrors, setFormErrors] = useState({});
 
@@ -96,9 +95,8 @@ export default function Editjob() {
 
       <div>
         <div
-          className="container-fluid border border-2  rounded "
+          className="editjob-div container-fluid border border-2  rounded "
           style={{
-            width: "50%",
             height: "100%",
             marginTop: "50px",
             padding: "0px",
@@ -167,7 +165,7 @@ export default function Editjob() {
                       onChange={inputChange}
                       name="category"
                     >
-                      <option > select</option>
+                      <option> select</option>
                       <option value="Electrical"> Electrical</option>
                       <option value="Plumbing"> Plumbing</option>
                       <option value="Carpentry"> Carpentry</option>
@@ -183,7 +181,7 @@ export default function Editjob() {
                       onChange={setSelectedValue}
                       name="category"
                     >
-                      <option > select</option>
+                      <option> select</option>
                       <option value="Kozhikode"> Kozhikode</option>
                       <option value="Kannur"> Kannur</option>
                       <option value="Vadakara"> Vadakara</option>
@@ -281,7 +279,7 @@ export default function Editjob() {
                     </span>
 
                     <textarea
-                    value={data.address}
+                      value={data.address}
                       onChange={inputChange}
                       name="address"
                       type="text "

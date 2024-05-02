@@ -1,0 +1,9 @@
+.viewjob-div {
+  width: 70%;
+}
+
+@media only screen and (max-width: 576px) {
+  .viewjob-div {
+    width: 95%;
+  }
+}
