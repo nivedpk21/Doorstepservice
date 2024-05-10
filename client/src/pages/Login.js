@@ -8,6 +8,7 @@ import Navigation from "../components/Navigation";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [inputvalues, setInputvalues] = useState({
     username: "",
     password: "",
@@ -41,12 +42,14 @@ export default function Login() {
     setIsSubmit(true);
 
     if (Object.keys(formErrors).length === 0 && isSubmit) {
+      setLoading(true);
       axios
         .post("https://doorstepservice.onrender.com/user/login", inputvalues)
         .then((response) => {
           console.log("response", response);
           const data = response.data;
           if (data) {
+            setLoading(false);
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("role", response.data.data.role);
 
@@ -160,7 +163,16 @@ export default function Login() {
             />
           </div>
           <button title="Sign In" type="submit" className="sign-in_btn">
-            <span>Sign In</span>
+            {loading ? (
+              <>
+                <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                <span role="status"> Logging in...</span>
+              </>
+            ) : (
+              <>
+                <span>Sign In</span>
+              </>
+            )}
           </button>
           {/* <div className="separator">
           <hr className="line" />
