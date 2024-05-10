@@ -471,8 +471,8 @@ export default function Registration() {
           // -----------------buissness form---------------------------------------------------------------------------------
           <>
             <div class="row justify-content-center align-items-center ">
-              <div class="col-6 col-sm-12 col-md-12 col-lg-6" style={{width:"100%"}}>
-                <div >
+              <div class="col-6 col-sm-12 col-md-12 col-lg-6" >
+                <div>
                   {/* form ---------------------------------------------------*/}
                   <div class="mb-3">
                     <label for="" class="form-label">
@@ -552,7 +552,7 @@ export default function Registration() {
                 </div>
               </div>
               {/* col 2 ------------------------------*/}
-              <div class="col">
+              <div class="col-6 col-sm-12 col-md-12 col-lg-6"> 
                 <div>
                   <div class="mb-3">
                     <label for="" class="form-label">
@@ -570,7 +570,7 @@ export default function Registration() {
                     />
                   </div>
 
-                  <div style={{ display: "flex" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <div class="mb-3">
                       <label for="" class="form-label">
                         Street
