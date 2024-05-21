@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Navigation from "../../components/Navigation";
 
 export default function Messages() {
   const [data, setData] = useState([]);
@@ -21,7 +22,7 @@ export default function Messages() {
   }, []);
   return (
     <>
-      <Header />
+      <Navigation />
       buissness
       <div
         className="border rounded p-2"

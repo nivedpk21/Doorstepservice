@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import "./viewjoblisting.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Navigation from "../../components/Navigation";
 
 export default function Viewjoblisting() {
   const { id } = useParams();
@@ -22,7 +23,7 @@ export default function Viewjoblisting() {
 
   return (
     <>
-      <Header />
+      <Navigation />
 
       <div
         className="container-fluid border rounded  mt-5 p-2"

@@ -1,8 +1,61 @@
 .profile-div {
-  background-color: #244034;
-  opacity: 0.8;
-  background-image: radial-gradient(#d9dbfd 0.5px, transparent 0.5px),
-    radial-gradient(#d9dbfd 0.5px, #244034 0.5px);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
+  width: 80%;
+  height: 160px;
+  padding: 10px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.about-main-div {
+  display: flex;
+  justify-content: space-between;
+  padding: 50px;
+  background-color: #eff6f3;
+}
+
+.about-div {
+  width: 65%;
+  height: 300px;
+  background-color: white;
+}
+
+.address-div {
+  width: 25%;
+  height: 300px;
+  text-align: center;
+  background-color: white;
+}
+
+@media only screen and (max-width: 576px) {
+}
+
+@media only screen and (min-width: 577px) and (max-width: 992px) {
+  .profile-div {
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .location-div {
+    margin-left: -50px;
+    margin-top: -5px;
+  }
+  .rating-div {
+    margin-left: -100px;
+  }
+
+  .about-main-div {
+    flex-wrap: wrap;
+    padding: 25px;
+  }
+  .about-div {
+    width: 100%;
+  }
+  .address-div {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

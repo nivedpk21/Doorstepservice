@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import axios from "axios";
+import Navigation from "../../components/Navigation";
 export default function Bookings() {
   const token = localStorage.getItem("token");
   const [bookingData, setBookingData] = useState([]);
@@ -33,7 +34,7 @@ export default function Bookings() {
   };
   return (
     <>
-      <Header />
+      <Navigation />
 
       <div
         className="container-fluid border rounded   mt-5 p-2"

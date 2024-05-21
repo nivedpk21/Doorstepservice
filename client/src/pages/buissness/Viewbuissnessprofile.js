@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header";
 import "./viewbuissnessprofile.css";
 import axios from "axios";
+import Navigation from "../../components/Navigation";
 
 export default function Viewbuissnessprofile() {
   const token = localStorage.getItem("token");
@@ -24,35 +24,24 @@ export default function Viewbuissnessprofile() {
   const [data, setData] = useState({});
   return (
     <>
-      <Header />
+      <Navigation />
       <section>
         <div
-          className="p-5"
+          className="p-1"
           style={{
             width: "100%",
-            height: "300px",
+            height: "200px",
             margin: "auto",
             backgroundColor: "#244034",
           }}
         >
-          <div
-            className=" container  rounded" //profile-div
-            style={{
-              width: "80%",
-              height: "160px",
-              padding: "10px",
-              marginTop: "20px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
+          <div className="profile-div container rounded border">
             <div>
               <div
                 style={{
                   width: "140px",
                   height: "140px",
-                  borderRadius: "50%",
+                  borderRadius: "12px",
                   backgroundColor: "white",
                   margin: "auto",
                   //   marginLeft: "40px",
@@ -60,22 +49,22 @@ export default function Viewbuissnessprofile() {
               ></div>
             </div>
 
-            <div className="p-3">
+            <div className="p-0 name-div">
               <h5 style={{ color: "white", margin: "0" }}>{data.businessname}</h5>
               <p style={{ color: "white", margin: "0" }}>{data.category}</p>
             </div>
 
-            <div className="p-3">
+            <div className="p-0 location-div">
               <p style={{ color: "white", margin: "0" }}>Location</p>
               <h5 style={{ color: "white", margin: "0" }}>{data.city}</h5>
             </div>
 
-            <div className="p-3">
-              <p style={{ color: "white", margin: "0" }}>Buissness time</p>
-              <h5 style={{ color: "white", margin: "0" }}>mon - fri : 9:00Am - 10:00Pm </h5>
+            <div className="p-0">
+              <p style={{ color: "white", margin: "0" }}>Business time</p>
+              <h5 style={{ color: "white", margin: "0" }}>9:00Am - 10:00Pm</h5>
             </div>
 
-            <div className="p-3">
+            <div className="p-0 rating-div">
               <p style={{ color: "white", margin: "0" }}>Rating</p>
               <h5 style={{ color: "white", margin: "0" }}>3 *****</h5>
             </div>
@@ -83,19 +72,8 @@ export default function Viewbuissnessprofile() {
         </div>
       </section>
       <section>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: "0px",
-            padding: "50px",
-            backgroundColor: "#eff6f3",
-          }}
-        >
-          <div
-            className=" rounded-4 p-3"
-            style={{ width: "65%", height: "300px", backgroundColor: "white" }}
-          >
+        <div className="about-main-div">
+          <div className="about-div rounded-4 p-3">
             <h5>Overview</h5>
             <p className="mt-4" style={{ lineHeight: "30px" }}>
               Hello my name is Ariana Gande Connor and I’m a Financial Supervisor from Netherlands,
@@ -103,17 +81,8 @@ export default function Viewbuissnessprofile() {
               malesuada suscipit nunc non volutpat. Sed porta nulla id orci laoreet tempor non
             </p>
           </div>
-          <div
-            className="rounded-3 p-3"
-            style={{
-              width: "25%",
-              height: "300px",
-              textAlign: "center",
-              padding: "0",
-              backgroundColor: "white",
-            }}
-          >
-            <div style={{ minHeight: "140px" }}>
+          <div className="address-div rounded-3 p-3">
+            <div style={{ minHeight: "140px",textAlign:"center" }}>
               <h5>Address</h5>
               <p>
                 {data.building},{data.street},<br />

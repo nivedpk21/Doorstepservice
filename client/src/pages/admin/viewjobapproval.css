@@ -1,0 +1,11 @@
+.vja-main-div {
+  width: 70%;
+  height: auto;
+  background-color: white;
+}
+
+@media only screen and (max-width: 576px) {
+  .vja-main-div {
+    width: 90%;
+  }
+}

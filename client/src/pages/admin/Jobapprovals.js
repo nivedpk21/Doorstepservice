@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Pagination from "../../components/Pagination";
 import Navigation from "../../components/Navigation";
+import "./jobapprovals.css";
 
 export default function Jobapprovals() {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -14,6 +15,7 @@ export default function Jobapprovals() {
       const data = response.data.data;
       console.log("data logged", data);
       setData(data);
+      setLoading(false);
     });
   }, []);
 
@@ -27,54 +29,65 @@ export default function Jobapprovals() {
   return (
     <>
       <Navigation />
-
-      <div className="p-1">
-        <h5 style={{ textAlign: "center", color: "grey", marginTop: "30px" }}>Job Approval</h5>
-      </div>
-      <div
-        className="border rounded p-2"
-        style={{
-          width: "50%",
-          minHeight: "550px",
-          marginLeft: "auto",
-          marginRight: "auto",
-        }}
-      >
-        {currentPageposts.map((item) => (
+      {loading ? (
+        <>
           <div
-            className="border rounded mb-1 p-2"
             style={{
-              height: "120px",
+              width: "100%",
+              height: "500px",
               display: "flex",
-              justifyContent: "space-between",
               alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <div>
-              <h5>{item.title}</h5>
-              <p>
-                {item.category} <br />
-                {item.city}
-              </p>
-            </div>
-            <div>
-              <Link
-                to={`/viewjobapproval/${item._id}`}
-                type="button"
-                class="btn btn-outline-primary"
-              >
-                View
-              </Link>
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
             </div>
           </div>
-        ))}
-      </div>
-      <Pagination
-        totalPosts={data.length}
-        postsPerpage={postsPerpage}
-        setCurrentPage={setCurrentpage}
-        currentPage={currentPage}
-      />
+        </>
+      ) : (
+        <>
+          <div className="p-1">
+            <h5 style={{ textAlign: "center", color: "grey", marginTop: "30px" }}>Job Approval</h5>
+          </div>
+          <div className="ja-main-div border rounded p-2">
+            {currentPageposts.map((item) => (
+              <div
+                className="border rounded mb-1 p-2"
+                style={{
+                  height: "120px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <div>
+                  <h5>{item.title}</h5>
+                  <p>
+                    {item.category} <br />
+                    {item.city}
+                  </p>
+                </div>
+                <div>
+                  <Link
+                    to={`/viewjobapproval/${item._id}`}
+                    type="button"
+                    class="btn btn-outline-primary"
+                  >
+                    View
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+          <Pagination
+            totalPosts={data.length}
+            postsPerpage={postsPerpage}
+            setCurrentPage={setCurrentpage}
+            currentPage={currentPage}
+          />
+        </>
+      )}
     </>
   );
 }

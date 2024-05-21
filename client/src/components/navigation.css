@@ -8,6 +8,6 @@
 .nav-link:hover {
   color: #d2f34c;
 }
-.activecolor {
-  color: red;
+.navbar-nav .nav-link.active {
+  color: #d2f34c;
 }

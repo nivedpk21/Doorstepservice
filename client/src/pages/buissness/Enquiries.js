@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Pagination from "../../components/Pagination";
+import Navigation from "../../components/Navigation";
 
 export default function Enquiries() {
   const token = localStorage.getItem("token");
@@ -60,7 +61,7 @@ export default function Enquiries() {
 
   return (
     <>
-      <Header />
+      <Navigation />
       <Toaster position="top-center" reverseOrder={false} />
       <div
         className="border rounded p-2"

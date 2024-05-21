@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import axios from "axios";
+import Navigation from "../../components/Navigation";
 
 export default function Appointments() {
   const token = localStorage.getItem("token");
@@ -31,7 +32,7 @@ export default function Appointments() {
 
   return (
     <>
-      <Header />
+      <Navigation />
       <div
         className="container-fluid border rounded   mt-5 p-2"
         style={{ width: "50%", height: "550px", background: "white" }}

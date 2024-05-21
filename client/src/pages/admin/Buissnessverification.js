@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./buissnessverification.css";
-import Header from "../../components/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
@@ -12,11 +11,13 @@ export default function Buissnessverification() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    axios.get(`https://doorstepservice.onrender.com/admin/viewbuissnessprofile/${id}`).then((response) => {
-      console.log(response);
-      const data = response.data.data;
-      setData(data);
-    });
+    axios
+      .get(`https://doorstepservice.onrender.com/admin/viewbuissnessprofile/${id}`)
+      .then((response) => {
+        console.log(response);
+        const data = response.data.data;
+        setData(data);
+      });
   }, []);
 
   const approve = (loginId) => {
@@ -42,16 +43,7 @@ export default function Buissnessverification() {
     <>
       <Navigation />
       <Toaster position="top-center" reverseOrder={false} />
-      <div
-        className="border rounded"
-        style={{
-          width: "50%",
-          height: "auto",
-          marginLeft: "auto",
-          marginRight: "auto",
-          marginTop: "50px",
-        }}
-      >
+      <div className="bvp-main-div border rounded">
         <div className="border-bottom" style={{ height: "50px" }}></div>
         <div className="p-3">
           <h5>{data.businessname}</h5>

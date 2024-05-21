@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import Navigation from "../../components/Navigation";
 
 
 export default function Viewjobonsearch() {
@@ -38,7 +39,7 @@ export default function Viewjobonsearch() {
 
   return (
     <>
-      <Header />
+      <Navigation />
       <Toaster position="top-center" reverseOrder={false} />
 
       <div

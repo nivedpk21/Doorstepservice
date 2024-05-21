@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Header from "../../components/Header";
+import Navigation from "../../components/Navigation";
 
 export default function Viewapplication() {
   const { id } = useParams();
@@ -17,7 +18,7 @@ export default function Viewapplication() {
   },[]);
   return (
     <>
-      <Header />
+      <Navigation />
  
       <div
         className="container-fluid border rounded  mt-5 p-2"

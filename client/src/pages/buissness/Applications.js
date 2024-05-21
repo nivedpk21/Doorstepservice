@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Navigation from "../../components/Navigation";
 
 export default function Applications() {
   const token = localStorage.getItem("token");
@@ -21,7 +22,7 @@ export default function Applications() {
 
   return (
     <>
-      <Header />
+      <Navigation />
       <div
         className="container-fluid border border-2 rounded "
         style={{ width: "50%", height: "500px", marginTop: "50px", padding: "10px" }}

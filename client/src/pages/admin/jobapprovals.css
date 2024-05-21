@@ -1,0 +1,19 @@
+.ja-main-div {
+  width: 60%;
+  max-width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 500px;
+}
+
+@media only screen and (max-width: 576px) {
+  .ja-main-div {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 992px) {
+  .ja-main-div {
+    width: 90%;
+  }
+}

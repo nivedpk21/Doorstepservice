@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Navigation from "../../components/Navigation";
 
 export default function Viewmessage() {
   const token = localStorage.getItem("token");
@@ -62,7 +63,7 @@ export default function Viewmessage() {
 
   return (
     <>
-      <Header />
+      <Navigation />
       <div
         className="border p-3"
         style={{

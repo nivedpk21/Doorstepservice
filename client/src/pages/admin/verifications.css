@@ -1,0 +1,17 @@
+.bv-main-div {
+  background-color: white;
+  width: 50%;
+  max-width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 500px;
+}
+
+@media only screen and (max-width: 576px) {
+  .bv-main-div {
+    width: 90%;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

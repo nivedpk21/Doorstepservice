@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./navigation.css";
 import Avatar from "@mui/material/Avatar";
 
 export default function Navigation() {
-  const [active, setActive] = useState("login");
   const navigate = useNavigate();
   const role = localStorage.getItem("role");
   const logout = () => {
@@ -13,6 +12,8 @@ export default function Navigation() {
 
     navigate("/");
   };
+  const location = window.location;
+  console.log(location);
 
   return (
     <>
@@ -47,11 +48,7 @@ export default function Navigation() {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a
-                        className={active == "home" ? "nav-link newactive" : "nav-link"}
-                        aria-current="page"
-                        href="/"
-                      >
+                      <a className="nav-link" aria-current="page" href="/">
                         Homes
                       </a>
                     </li>
@@ -103,9 +100,7 @@ export default function Navigation() {
           </>
         ) : role === "user" ? ( // USER ----------------------------------
           <>
-            <nav
-              class="navbar navbar-expand-lg bg-body-light sticky-top border-bottom"
-            >
+            <nav class="navbar navbar-expand-lg bg-body-light sticky-top border-bottom">
               <div class="container-fluid">
                 <button
                   style={{ color: "white", backgroundColor: "white" }}
@@ -199,29 +194,33 @@ export default function Navigation() {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="/">
+                      <NavLink className="nav-link" activeClassName="active" to="/">
                         Home
-                      </a>
+                      </NavLink>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="/viewbuissnessprofile">
+                      <NavLink
+                        activeClassName="active"
+                        className="nav-link"
+                        to="/viewbuissnessprofile"
+                      >
                         Profile
-                      </a>
+                      </NavLink>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="/viewjoblistings">
+                      <NavLink className="nav-link" activeClassName="active" to="/viewjoblistings">
                         Searchjobs
-                      </a>
+                      </NavLink>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link " href="/applications">
+                      <NavLink className="nav-link" activeClassName="active" to="/applications">
                         Applications
-                      </a>
+                      </NavLink>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link " href="/enquiries">
+                      <NavLink className="nav-link" activeClassName="active" to="/enquiries">
                         Enquiries
-                      </a>
+                      </NavLink>
                     </li>
                     <li class="nav-item dropdown">
                       <a
@@ -235,21 +234,29 @@ export default function Navigation() {
                       </a>
                       <ul class="dropdown-menu">
                         <li>
-                          <a class="dropdown-item" href="/buissnessappointments">
+                          <NavLink
+                            className="nav-link"
+                            activeClassName="active"
+                            to="/buissnessappointments"
+                          >
                             Job Contracts
-                          </a>
+                          </NavLink>
                         </li>
                         <li>
-                          <a class="dropdown-item" href="/jobbookings">
-                            Regular Bookings
-                          </a>
+                          <NavLink className="nav-link" activeClassName="active" to="/jobbookings">
+                            Bookings
+                          </NavLink>
                         </li>
                       </ul>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link " href="/buissnessmessages">
+                      <NavLink
+                        className="nav-link"
+                        activeClassName="active"
+                        to="/buissnessmessages"
+                      >
                         Messages
-                      </a>
+                      </NavLink>
                     </li>
                   </ul>
                 </div>
@@ -279,46 +286,40 @@ export default function Navigation() {
           </>
         ) : (
           <>
-              <nav className="border-bottom navbar navbar-expand-lg bg-body-light sticky-top" >
-                <div className=" container-fluid">
-                  <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                  >
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class=" collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
-                      <li className="nav-item ">
-                        <Link aria-current="page" to={"/"} className="nav-link ">
-                          Home
-                        </Link>
-                      </li>
-                      <li className="nav-item abc">
-                        <a
-                          href="/login"
-                          onClick={() => {
-                            setActive("login");
-                          }}
-                          className={active == "login" ? "nav-link activecolor" : "nav-link"}
-                        >
-                          Login
-                        </a>
-                      </li>
-                      <li className="nav-item ">
-                        <Link to={"/register"} className="nav-link ">
-                          Register
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
+            <nav className="border-bottom navbar navbar-expand-lg bg-body-light sticky-top">
+              <div className=" container-fluid">
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
+                    <li className="nav-item">
+                      <NavLink to="/" className="nav-link" activeClassName="active">
+                        Home
+                      </NavLink>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink to="/login" className="nav-link">
+                        Login
+                      </NavLink>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink to="/register" className="nav-link">
+                        Register
+                      </NavLink>
+                    </li>
+                  </ul>
                 </div>
-              </nav>
+              </div>
+            </nav>
           </>
         )}
       </header>

@@ -1,0 +1,13 @@
+.bvp-main-div {
+  width: 50%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
+@media only screen and (max-width: 576px) {
+  .bvp-main-div {
+    width: 90%;
+  }
+}

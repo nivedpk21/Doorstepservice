@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Navigation from "../../components/Navigation";
+import "./viewjobapproval.css";
 
 export default function Viewjobapproval() {
   const { id } = useParams();
@@ -26,11 +26,13 @@ export default function Viewjobapproval() {
   const [data, setData] = useState({});
 
   const updateStatus = (jobID) => {
-    axios.get(`https://doorstepservice.onrender.com/admin/updatejobstatus/${jobID}`).then((response) => {
-      console.log(response);
-      const message = response.data.message;
-      toast.success(message);
-    });
+    axios
+      .get(`https://doorstepservice.onrender.com/admin/updatejobstatus/${jobID}`)
+      .then((response) => {
+        console.log(response);
+        const message = response.data.message;
+        toast.success(message);
+      });
   };
 
   return (
@@ -38,10 +40,7 @@ export default function Viewjobapproval() {
       <Navigation />
       <Toaster position="top-center" reverseOrder={false} />
 
-      <div
-        className="container-fluid border rounded  mt-5 p-2"
-        style={{ width: "70%", height: "100%", backgroundColor: "white" }}
-      >
+      <div className="vja-main-div container-fluid border rounded  mt-5 p-2">
         <div
           className="container-fluid "
           style={{
