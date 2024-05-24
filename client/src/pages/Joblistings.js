@@ -37,11 +37,13 @@ export default function Joblistings() {
     e.preventDefault();
     console.log("submit", data);
 
-    axios.post("https://doorstepservice.onrender.com/buissness/viewjoblist", data).then((response) => {
-      console.log(response);
-      const jobdata = response.data.data;
-      setJobdata(jobdata);
-    });
+    axios
+      .post("https://doorstepservice.onrender.com/buissness/viewjoblist", data)
+      .then((response) => {
+        console.log(response);
+        const jobdata = response.data.data;
+        setJobdata(jobdata);
+      });
   };
 
   const [jobdata, setJobdata] = useState([]);
@@ -73,49 +75,73 @@ export default function Joblistings() {
       <Navigation />
       <Box sx={{ padding: "50px" }}>
         <Grid container spacing={0}>
-          <Grid item xs={3} sm={12} lg={3}>
-            <Box sx={{ width: "100%", height: "500px", backgroundColor: "  ", paddingTop: "20px" }}>
-              <Container maxWidth="sm">
-                <Box
-                  sx={{
-                    height: "500px",
-                    backgroundColor: "white",
-                    border: "1px solid rgb(203 213 225)",
-                    borderRadius: "14px",
-                    padding: "5px",
-                  }}
+          <Grid item xs={12} sm={12} lg={3}>
+            <nav class="navbar navbar-expand-lg bg-body-light">
+              <div class="container-fluid">
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent2"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
                 >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent2">
                   <Box
                     sx={{
-                      height: "60px",
-                      backgroundColor: "white",
-                      padding: "20px",
-                      borderBottom: "1px solid rgb(203 213 225)",
+                      width: "100%",
+                      height: "300px",
+                      backgroundColor: "  ",
+                      paddingTop: "20px",
                     }}
                   >
-                    <h6>Search Filter</h6>
-                  </Box>
-                  <div className="mt-4 p-3">
-                    <div class="mb-3">
-                      <select class="form-select form-select-sm" name="" id="">
-                        <option selected>Sort by amount</option>
-                        <option value="">highest</option>
-                        <option value="">lowest</option>
-                      </select>
-                    </div>
-                  </div>
+                    <Container maxWidth="sm">
+                      <Box
+                        sx={{
+                          height: "250px",
+                          backgroundColor: "white",
+                          border: "1px solid rgb(203 213 225)",
+                          borderRadius: "14px",
+                          padding: "5px",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            height: "60px",
+                            backgroundColor: "white",
+                            padding: "20px",
+                            borderBottom: "1px solid rgb(203 213 225)",
+                          }}
+                        >
+                          <h6>Search Filter</h6>
+                        </Box>
+                        <div className="mt-4 p-3">
+                          <div class="mb-3">
+                            <select class="form-select form-select-sm" name="" id="">
+                              <option selected>Sort by amount</option>
+                              <option value="">highest</option>
+                              <option value="">lowest</option>
+                            </select>
+                          </div>
+                        </div>
 
-                  <div className="text-center">
-                    <button onClick={sort} type="button" class="btn btn-primary">
-                      Apply
-                    </button>
-                  </div>
-                </Box>
-              </Container>
-            </Box>
+                        <div className="text-center">
+                          <button onClick={sort} type="button" class="btn btn-primary">
+                            Apply
+                          </button>
+                        </div>
+                      </Box>
+                    </Container>
+                  </Box>
+                </div>
+              </div>
+            </nav>
           </Grid>
 
-          <Grid item xs={9} sm={12} lg={9}>
+          <Grid item xs={12} sm={12} lg={9}>
             <Box
               sx={{ width: "100%", minHeight: "500px", backgroundColor: "  ", paddingTop: "20px" }}
             >
@@ -137,7 +163,7 @@ export default function Joblistings() {
                     justifyContent="center"
                     alignItems="center"
                   >
-                    <Grid item xs={3} sm={12} lg={4}>
+                    <Grid item xs={12} sm={12} lg={4}>
                       <Box>
                         <FormControl fullWidth>
                           <InputLabel id="demo-simple-select-label">Category</InputLabel>
@@ -157,7 +183,7 @@ export default function Joblistings() {
                         </FormControl>
                       </Box>
                     </Grid>
-                    <Grid item xs={3} sm={12} lg={4}>
+                    <Grid item xs={12} sm={12} lg={4}>
                       <Box>
                         <FormControl fullWidth>
                           <InputLabel id="demo-simple-select-label">City</InputLabel>
@@ -177,7 +203,7 @@ export default function Joblistings() {
                         </FormControl>
                       </Box>
                     </Grid>
-                    <Grid item xs={3} sm={12} lg={4}>
+                    <Grid item xs={12} sm={12} lg={4}>
                       <Box sx={{ padding: "10px" }}>
                         <Button onClick={submit} variant="contained">
                           Search

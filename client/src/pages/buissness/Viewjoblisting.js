@@ -11,12 +11,14 @@ export default function Viewjoblisting() {
   console.log("id:", id);
 
   useEffect(() => {
-    axios.get(`https://doorstepservice.onrender.com/buissness/viewjobdetails/${id}`).then((response) => {
-      console.log("response logged", response);
-      const jobdata = response.data.data;
-      setData(jobdata);
-      console.log("jobdata", jobdata);
-    });
+    axios
+      .get(`https://doorstepservice.onrender.com/buissness/viewjobdetails/${id}`)
+      .then((response) => {
+        console.log("response logged", response);
+        const jobdata = response.data.data;
+        setData(jobdata);
+        console.log("jobdata", jobdata);
+      });
   }, []);
 
   const [data, setData] = useState({});
