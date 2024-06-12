@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Navigation from "../../components/Navigation";
-
+import "./viewjobonsearch.css";
 
 export default function Viewjobonsearch() {
   const [data, setData] = useState({});
@@ -12,11 +11,13 @@ export default function Viewjobonsearch() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`https://doorstepservice.onrender.com/buissness/viewjobonsearch/${id}`).then((response) => {
-      console.log(response);
-      const data = response.data.data;
-      setData(data);
-    });
+    axios
+      .get(`https://doorstepservice.onrender.com/buissness/viewjobonsearch/${id}`)
+      .then((response) => {
+        console.log(response);
+        const data = response.data.data;
+        setData(data);
+      });
   }, []);
 
   const token = localStorage.getItem("token");
@@ -42,10 +43,7 @@ export default function Viewjobonsearch() {
       <Navigation />
       <Toaster position="top-center" reverseOrder={false} />
 
-      <div
-        className="container-fluid border rounded  mt-5 p-2"
-        style={{ width: "70%", height: "100%", backgroundColor: "white" }}
-      >
+      <div className="vj-main-div container-fluid border rounded  mt-5 p-2">
         <div
           className="container-fluid "
           style={{

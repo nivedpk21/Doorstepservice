@@ -19,6 +19,7 @@ import Navigation from "../components/Navigation";
 export default function Joblistings() {
   const token = localStorage.getItem("token");
   console.log(token);
+  const [jobdata, setJobdata] = useState([]);
 
   const [data, setData] = useState({
     category: "",
@@ -42,11 +43,10 @@ export default function Joblistings() {
       .then((response) => {
         console.log(response);
         const jobdata = response.data.data;
+
         setJobdata(jobdata);
       });
   };
-
-  const [jobdata, setJobdata] = useState([]);
 
   const sendApplication = (jobId) => {
     axios
@@ -216,11 +216,11 @@ export default function Joblistings() {
 
               {/* Result display */}
               {currentPageposts.map((item) => (
-                <Container maxWidth="md" sx={{ marginTop: "20px" }}>
+                <Container minWidth="md" sx={{ marginTop: "20px" }}>
                   <Box
                     sx={{
                       border: "1px solid rgb(203 213 225)",
-                      height: "105px",
+                      height: "auto",
                       borderRadius: "12px",
                       padding: "20px",
                     }}
@@ -246,6 +246,7 @@ export default function Joblistings() {
                         <Box
                           sx={{
                             display: "flex",
+                            flexWrap: "wrap",
                             justifyContent: "space-between",
                             alignItems: "center",
                           }}
@@ -260,7 +261,7 @@ export default function Joblistings() {
                             <p>{item.date}</p>
                           </Box>
                           <Box sx={{}}>
-                            <p>{item.budget}</p>
+                            <p>Rs{item.budget}</p>
                           </Box>
                         </Box>
                       </Box>
