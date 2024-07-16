@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./userprofile.css";
-import Header from "../components/Header";
 import axios from "axios";
 import Userprofiledata from "./user/Userprofiledata";
 import Navigation from "../components/Navigation";

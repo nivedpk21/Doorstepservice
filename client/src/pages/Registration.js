@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "../components/Header";
 import "./register.css";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";

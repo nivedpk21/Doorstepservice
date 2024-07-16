@@ -1,13 +1,26 @@
 .nav-link {
-  color: black;
+  color: #1f2938;
   font-family: serif;
   font-size: 20px;
+  font-weight: 500;
   padding: 5px;
   margin: 5px;
 }
 .nav-link:hover {
-  color: #d2f34c;
+  color: #9777fa;
 }
 .navbar-nav .nav-link.active {
-  color: #d2f34c;
+  color: #9777fa;
+}
+.logout-div {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 576px) {
+}
+
+@media only screen and (min-width: 577px) and (max-width: 992px) {
 }

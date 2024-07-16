@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import Header from "../components/Header";
 import "./postjob.css";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../components/Navigation";

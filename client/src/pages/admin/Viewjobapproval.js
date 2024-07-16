@@ -4,10 +4,12 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Navigation from "../../components/Navigation";
 import "./viewjobapproval.css";
+import Loading from "../../components/Loading";
 
 export default function Viewjobapproval() {
   const { id } = useParams();
   console.log(id);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -17,6 +19,7 @@ export default function Viewjobapproval() {
         console.log("hi");
         const data = response.data.data;
         setData(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -40,81 +43,90 @@ export default function Viewjobapproval() {
       <Navigation />
       <Toaster position="top-center" reverseOrder={false} />
 
-      <div className="vja-main-div container-fluid border rounded  mt-5 p-2">
-        <div
-          className="container-fluid "
-          style={{
-            width: "100%",
-            height: "100px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <h5>{data.title}</h5>
-          {/* <button className="btn btn-primary">Apply</button> */}
-        </div>
-        <div
-          className="p-2 border rounded-3"
-          style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
-        >
-          <div>
-            <span style={{ fontSize: "small", fontFamily: "serif" }}>category</span>
-            <p>{data.category}</p>
-          </div>
-          <div>
-            <span style={{ fontSize: "small", fontFamily: "serif" }}>city</span>
-            <p>{data.city}</p>
-          </div>
-          <div>
-            <span style={{ fontSize: "small", fontFamily: "serif" }}>date</span>
-            <p>{data.city}</p>
-          </div>
-          <div>
-            <span style={{ fontSize: "small", fontFamily: "serif" }}>budget</span>
-            <p>{data.budget}</p>
-          </div>
-        </div>
-        <div className="p-2 mt-4">
-          <h6>Description</h6>
-          <p style={{ textAlign: "justify" }}>{data.description}</p>
-
-          <h6 className="mt-5">Images</h6>
-          <div className="border rounded" style={{ width: "100%", height: "250px" }}></div>
-
-          <h6 className="mt-5">Customer details</h6>
-          <div className="border rounded p-4" style={{ width: "100%", height: "220px" }}>
-            <div>
-              <p>{data.name}</p>
-              <p>
-                {data.house},{data.street}
-                <br />
-                {data.town},{data.city}
-                <br />
-                {data.district},{data.state}
-                <br />
-                {data.pincode}
-              </p>
+      {loading ? (
+        <>
+          {" "}
+          <Loading />{" "}
+        </>
+      ) : (
+        <>
+          <div className="vja-main-div container-fluid border rounded  mt-5 p-2">
+            <div
+              className="container-fluid "
+              style={{
+                width: "100%",
+                height: "100px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <h5>{data.title}</h5>
+              {/* <button className="btn btn-primary">Apply</button> */}
             </div>
-            <div style={{ textAlign: "center" }}>
-              <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button
-                  onClick={() => {
-                    updateStatus(data._id);
-                  }}
-                  type="button"
-                  class="btn btn-outline-primary"
-                >
-                  Approve
-                </button>
-                <button type="button" class="btn btn-outline-primary">
-                  Reject
-                </button>
+            <div
+              className="p-2 border rounded-3"
+              style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+            >
+              <div>
+                <span style={{ fontSize: "small", fontFamily: "serif" }}>category</span>
+                <p>{data.category}</p>
+              </div>
+              <div>
+                <span style={{ fontSize: "small", fontFamily: "serif" }}>city</span>
+                <p>{data.city}</p>
+              </div>
+              <div>
+                <span style={{ fontSize: "small", fontFamily: "serif" }}>date</span>
+                <p>{data.city}</p>
+              </div>
+              <div>
+                <span style={{ fontSize: "small", fontFamily: "serif" }}>budget</span>
+                <p>{data.budget}</p>
+              </div>
+            </div>
+            <div className="p-2 mt-4">
+              <h6>Description</h6>
+              <p style={{ textAlign: "justify" }}>{data.description}</p>
+
+              <h6 className="mt-5">Images</h6>
+              <div className="border rounded" style={{ width: "100%", height: "250px" }}></div>
+
+              <h6 className="mt-5">Customer details</h6>
+              <div className="border rounded p-4" style={{ width: "100%", height: "220px" }}>
+                <div>
+                  <p>{data.name}</p>
+                  <p>
+                    {data.house},{data.street}
+                    <br />
+                    {data.town},{data.city}
+                    <br />
+                    {data.district},{data.state}
+                    <br />
+                    {data.pincode}
+                  </p>
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  <div class="btn-group" role="group" aria-label="Basic outlined example">
+                    <button
+                      onClick={() => {
+                        updateStatus(data._id);
+                      }}
+                      type="button"
+                      class="btn btn-outline-primary"
+                    >
+                      Approve
+                    </button>
+                    <button type="button" class="btn btn-outline-primary">
+                      Reject
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
 
       <div style={{ minHeight: "300px" }}></div>
     </>

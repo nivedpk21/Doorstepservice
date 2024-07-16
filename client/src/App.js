@@ -33,7 +33,6 @@ import Viewapplication from "./pages/buissness/Viewapplication";
 import Appointmentdetails from "./pages/buissness/Appointmentdetails";
 import Bookings from "./pages/buissness/Bookings";
 import Bookingdetails from "./pages/buissness/Bookingdetails";
-import Adminmessages from "./pages/admin/Adminmessages";
 
 function App() {
   return (
@@ -73,10 +72,9 @@ function App() {
         <Route path="/appointmentdetalis/:id" element={<Appointmentdetails />}></Route>
         <Route path="/jobbookings" element={<Bookings />}></Route>
         <Route path="/bookingdetalis/:id" element={<Bookingdetails />}></Route>
-        <Route path="/adminmessage" element={<Adminmessages />}></Route>
       </Routes>
     </BrowserRouter>
-  );
+  ); 
 }
 
 export default App;

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./login.css";
-import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
@@ -112,7 +111,7 @@ export default function Login() {
               />
             </svg>
             <input
-              placeholder="enter username"
+              placeholder="admin"
               title="Inpit title"
               name="username"
               onChange={inputChange}
@@ -153,7 +152,7 @@ export default function Login() {
               />
             </svg>
             <input
-              placeholder="Password"
+              placeholder="123"
               title="Inpit title"
               name="password"
               onChange={inputChange}

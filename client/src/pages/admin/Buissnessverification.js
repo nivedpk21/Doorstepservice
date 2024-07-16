@@ -4,11 +4,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Navigation from "../../components/Navigation";
+import Loading from "../../components/Loading";
 
 export default function Buissnessverification() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -17,6 +19,7 @@ export default function Buissnessverification() {
         console.log(response);
         const data = response.data.data;
         setData(data);
+        setLoading(false);
       });
   }, []);
 
@@ -43,53 +46,61 @@ export default function Buissnessverification() {
     <>
       <Navigation />
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="bvp-main-div border rounded">
-        <div className="border-bottom" style={{ height: "50px" }}></div>
-        <div className="p-3">
-          <h5>{data.businessname}</h5>
-          <p>
-            {data.category} <br />
-            {data.city}
-          </p>
+      {loading ? (
+        <>
+          <Loading />
+        </>
+      ) : (
+        <>
+          <div className="bvp-main-div border rounded">
+            <div className="border-bottom" style={{ height: "50px" }}></div>
+            <div className="p-3">
+              <h5>{data.businessname}</h5>
+              <p>
+                {data.category} <br />
+                {data.city}
+              </p>
 
-          <div className="border rounded p-2 mt-5" style={{ height: "150px" }}>
-            <h6>Address</h6>
-            <p>
-              {data.building},{data.street}
-              <br />
-              {data.town},{data.city}
-              <br />
-              {data.district},{data.state}
-              <br />
-              {data.pincode}
-            </p>
-          </div>
+              <div className="border rounded p-2 mt-5" style={{ height: "150px" }}>
+                <h6>Address</h6>
+                <p>
+                  {data.building},{data.street}
+                  <br />
+                  {data.town},{data.city}
+                  <br />
+                  {data.district},{data.state}
+                  <br />
+                  {data.pincode}
+                </p>
+              </div>
 
-          <div className="border rounded p-2 mt-5" style={{ height: "150px" }}>
-            <h6>Contact Details</h6>
-            <p>
-              Phone number:{data.phonenumber}
-              <br />
-              Email : {data.email}
-            </p>
-          </div>
+              <div className="border rounded p-2 mt-5" style={{ height: "150px" }}>
+                <h6>Contact Details</h6>
+                <p>
+                  Phone number:{data.phonenumber}
+                  <br />
+                  Email : {data.email}
+                </p>
+              </div>
 
-          <div className="mt-4" style={{ textAlign: "center" }}>
-            <button
-              onClick={() => {
-                approve(data.loginId);
-              }}
-              type="button"
-              class="btn btn-primary"
-            >
-              Approve
-            </button>
-            <button type="button" class="btn btn-outline-danger">
-              Reject
-            </button>
+              <div className="mt-4" style={{ textAlign: "center" }}>
+                <button
+                  onClick={() => {
+                    approve(data.loginId);
+                  }}
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  Approve
+                </button>
+                <button type="button" class="btn btn-outline-danger">
+                  Reject
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   );
 }

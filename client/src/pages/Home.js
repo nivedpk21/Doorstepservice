@@ -9,26 +9,24 @@ export default function Home() {
     <React.Fragment>
       <Navigation />
       <>
-        {/* landing section */}
         <section>
           <div className="row justify-content-center align-items-center ">
-            {/* landing text div */}
             <div className="landing-textdiv col-12 col-sm-12 col-md-12 col-lg-6 ">
               <h1>Experience effortless service booking. Elevate your routine with us!</h1>
-              <p>Explore seamless booking services for home .</p>
+              <p>Explore seamless booking services for home </p>
               <div className="landing-buttondiv">
                 <Link
                   to={"/login"}
                   type="button"
                   className="btn rounded-0 m-1"
-                  style={{ backgroundColor: "#d2f34c", color: "black", fontFamily: "serif" }}
+                  style={{ backgroundColor: "#1F2938", color: "white", fontFamily: "serif" }}
                 >
                   Login
                 </Link>
                 <Link
                   to={"/register"}
                   type="button"
-                  className="btn btn-outline-light rounded-0"
+                  className="btn btn-outline-dark rounded-0"
                   style={{ fontFamily: "serif" }}
                 >
                   Register
@@ -82,7 +80,7 @@ export default function Home() {
         </section>
 
         {/* registration section */}
-        <section>
+        <section >
           <div className="row">
             <div className="buissness-div col-sm-12 col-md-6 col-lg-6">
               <h3 style={{ textAlign: "center", color: "black", marginTop: 75 }}>

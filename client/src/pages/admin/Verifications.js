@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Pagination from "../../components/Pagination";
 import Navigation from "../../components/Navigation";
+import Loading from "../../components/Loading";
 
 export default function Verifications() {
   const [loading, setLoading] = useState(true);
@@ -31,19 +32,7 @@ export default function Verifications() {
       <Navigation />
       {loading ? (
         <>
-          <div
-            style={{
-              width: "100%",
-              height: "500px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <div class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-          </div>
+          <Loading />
         </>
       ) : (
         <>

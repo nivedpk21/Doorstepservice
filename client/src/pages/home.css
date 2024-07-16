@@ -1,7 +1,7 @@
 /* landing text div */
 .landing-textdiv {
   height: 600px;
-  background: #244034;
+  background: #BEACFE;
   padding: 50px;
 }
 .landing-textdiv h1 {
@@ -13,7 +13,7 @@
 }
 .landing-textdiv p {
   text-align: left;
-  color: #d2f34c;
+  color: #1F2938;
   font-family: cursive;
   font-size: 25px;
   margin-top: 25px;
@@ -26,7 +26,7 @@
 /* landing image div */
 .landing-imagediv {
   height: 600px;
-  background: #244034;
+  background: #BEACFE;
 }
 .landing-imagediv img {
   width: 80%;
@@ -72,13 +72,13 @@
 .buissness-div {
   height: 400px;
   text-align: center;
-  background: #f2f9d8;
+  background: #D1E8F2;
   padding: 20px;
 }
 .user-div {
   height: 400px;
   text-align: center;
-  background: #d2f34c;
+  background: #BEACFE;
   padding: 20px;
 }
 /* white space */
@@ -91,19 +91,16 @@
 @media only screen and (max-width: 576px) {
   .landing-textdiv {
     height: 600px;
-    background: #244034;
     padding: 25px;
   }
   .landing-textdiv h1 {
     text-align: left;
-    color: white;
     font-family: serif;
     font-size: 40px;
     margin-top: 40px;
   }
   .landing-textdiv p {
     text-align: left;
-    color: #d2f34c;
     font-family: cursive;
     font-size: 25px;
     margin-top: 30px;
@@ -150,7 +147,6 @@
   /* landing text div */
   .landing-textdiv {
     height: 600px;
-    background: #244034;
     padding: 50px;
   }
   .landing-textdiv h1 {
@@ -162,7 +158,6 @@
   }
   .landing-textdiv p {
     text-align: left;
-    color: #d2f34c;
     font-family: cursive;
     font-size: 25px;
     margin-top: 25px;
@@ -190,13 +185,11 @@
   .buissness-div {
     height: 350px;
     text-align: center;
-    background: #f2f9d8;
     padding: 20px;
   }
   .user-div {
     height: 350px;
     text-align: center;
-    background: #d2f34c;
     padding: 20px;
   }
   .white-space {

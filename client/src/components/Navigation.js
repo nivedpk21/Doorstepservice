@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./navigation.css";
 import Avatar from "@mui/material/Avatar";
@@ -18,22 +18,21 @@ export default function Navigation() {
   return (
     <>
       <header>
-        <div className="container-fluid header-container border-bottom">
-          <div>
-            <div className="brand-div">
-              <img className="brand-logo" src="./images/repairing-service.png" />
-              <h3 className="brand-name">Doorstep Service</h3>
-            </div>
-          </div>
-        </div>
-      </header>
-      <header className="border-bottom">
         {/*----------------------------navigation------------------------------------------------- */}
 
-        {role === "admin" ? ( // ADMIN----------------------------------
+        {role === "admin" ? ( // ADMIN-----------------------------------
           <>
-            <nav class="navbar navbar-expand-lg bg-body-light sticky-top border-bottom">
-              <div class="container-fluid">
+            <nav className="navbar navbar-expand-lg bg-body-light sticky-top border-bottom">
+              <div className="container-fluid">
+                <NavLink className="navbar-brand" to="/">
+                  <img
+                    className="d-inline-block align-text-center"
+                    src="./images/repairing-service.png"
+                    alt="logo"
+                    width="45"
+                  />
+                  Doorstep Service
+                </NavLink>
                 <button
                   class="navbar-toggler"
                   type="button"
@@ -43,56 +42,44 @@ export default function Navigation() {
                   aria-expanded="false"
                   aria-label="Toggle navigation"
                 >
-                  <span class="navbar-toggler-icon"></span>
+                  <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul className="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a className="nav-link" aria-current="page" href="/">
+                      <NavLink className="nav-link" to="/">
                         Homes
-                      </a>
+                      </NavLink>
                     </li>
                     <li class="nav-item">
-                      <a className="nav-link" href="/verifications">
+                      <NavLink className="nav-link" to="/verifications">
                         Verifications
-                      </a>
+                      </NavLink>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link " href="/jobapprovals">
+                    <li className="nav-item">
+                      <NavLink className="nav-link " to="/jobapprovals">
                         JobApprovals
-                      </a>
+                      </NavLink>
                     </li>
-                    {/* <li class="nav-item">
-                      <a class="nav-link " href="/adminmessage">
-                        Messages
-                      </a>
-                    </li> */}
                   </ul>
-                </div>
 
-                <div>
-                  <div
-                    style={{
-                      display: "flex",
-                      textAlign: "center",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Avatar
-                      sx={{ width: "39px", height: "39px", backgroundColor: "green" }}
-                      alt="Remy Sharp"
-                      src="#"
-                    >
-                      A
-                    </Avatar>
-                    <button
-                      onClick={logout}
-                      className="btn btn-danger"
-                      style={{ width: "70px", height: "35px", padding: "0", marginLeft: "6px" }}
-                    >
-                      Logout
-                    </button>
+                  <div>
+                    <div className="logout-div">
+                      <Avatar
+                        sx={{ width: "29px", height: "29px", backgroundColor: "green" }}
+                        alt="Remy Sharp"
+                        src="#"
+                      >
+                        A
+                      </Avatar>
+                      <button
+                        onClick={logout}
+                        className="btn btn-danger btn-sm"
+                        style={{ marginLeft: "6px" }}
+                      >
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -102,6 +89,15 @@ export default function Navigation() {
           <>
             <nav class="navbar navbar-expand-lg bg-body-light sticky-top border-bottom">
               <div class="container-fluid">
+                <NavLink className="navbar-brand" to="/">
+                  <img
+                    className="d-inline-block align-text-center"
+                    src="./images/repairing-service.png"
+                    alt="logo"
+                    width="45"
+                  />
+                  Doorstep Service
+                </NavLink>
                 <button
                   style={{ color: "white", backgroundColor: "white" }}
                   class="navbar-toggler"
@@ -117,34 +113,34 @@ export default function Navigation() {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link " aria-current="page" href="/">
+                      <NavLink class="nav-link " aria-current="page" to="/">
                         Home
-                      </a>
+                      </NavLink>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="/searchservice">
+                      <NavLink class="nav-link" to="/searchservice">
                         Services
-                      </a>
+                      </NavLink>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link " href="/postjob">
+                      <NavLink class="nav-link " to="/postjob">
                         Postjob
-                      </a>
+                      </NavLink>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link " href="/viewjob">
+                      <NavLink class="nav-link " to="/viewjob">
                         Viewjobs
-                      </a>
+                      </NavLink>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link " href="/userappointments">
+                      <NavLink class="nav-link " to="/userappointments">
                         Appointments
-                      </a>
+                      </NavLink>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link " href="/usermessages">
+                      <NavLink class="nav-link " to="/usermessages">
                         Messages
-                      </a>
+                      </NavLink>
                     </li>
                   </ul>
                 </div>
@@ -176,7 +172,7 @@ export default function Navigation() {
               </div>
             </nav>
           </>
-        ) : role == "buissness" ? (
+        ) : role == "buissness" ? ( // BUSINESS-----------------------------
           <>
             <nav class="navbar navbar-expand-lg bg-body-light sticky-top">
               <div class="container-fluid">
@@ -223,7 +219,7 @@ export default function Navigation() {
                       </NavLink>
                     </li>
                     <li class="nav-item dropdown">
-                      <a
+                      <NavLink
                         class="nav-link dropdown-toggle"
                         href="#"
                         role="button"
@@ -231,7 +227,7 @@ export default function Navigation() {
                         aria-expanded="false"
                       >
                         Appointments
-                      </a>
+                      </NavLink>
                       <ul class="dropdown-menu">
                         <li>
                           <NavLink
@@ -287,9 +283,18 @@ export default function Navigation() {
         ) : (
           <>
             <nav className="border-bottom navbar navbar-expand-lg bg-body-light sticky-top">
-              <div className=" container-fluid">
+              <div className="container-fluid">
+                <NavLink className="navbar-brand" to="/">
+                  <img
+                    className="d-inline-block align-text-center"
+                    src="./images/repairing-service.png"
+                    alt="logo"
+                    width="45"
+                  />
+                  Doorstep Service
+                </NavLink>
                 <button
-                  class="navbar-toggler"
+                  className="navbar-toggler"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#navbarSupportedContent"
@@ -297,12 +302,12 @@ export default function Navigation() {
                   aria-expanded="false"
                   aria-label="Toggle navigation"
                 >
-                  <span class="navbar-toggler-icon"></span>
+                  <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class=" collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
+                <div className=" collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul className="navbar-nav me-auto ms-auto mb-2">
                     <li className="nav-item">
-                      <NavLink to="/" className="nav-link" activeClassName="active">
+                      <NavLink to="/" className="nav-link">
                         Home
                       </NavLink>
                     </li>
