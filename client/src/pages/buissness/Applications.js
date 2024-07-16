@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Navigation from "../../components/Navigation";
@@ -17,6 +16,9 @@ export default function Applications() {
         console.log("response", response);
         const data = response.data.data;
         setData(data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 

@@ -37,7 +37,10 @@ export default function Buissnessprofile() {
             alignItems: "center",
           }}
         >
-          <div className="container border- imagecontainer" style={{ display: "flex", alignItems: "center" }}>
+          <div
+            className="container border- imagecontainer"
+            style={{ display: "flex", alignItems: "center" }}
+          >
             <div>
               <img
                 src="/images/smartphone.jpg"
@@ -147,7 +150,10 @@ export default function Buissnessprofile() {
             justifyContent: "center",
           }}
         >
-          <div className="border border-2 row container" style={{ padding: "10px", borderRadius: "10px" }}>
+          <div
+            className="border border-2 row container"
+            style={{ padding: "10px", borderRadius: "10px" }}
+          >
             <div className=" col-sm-12 col-lg-7 p-1">
               <div
                 className=" border border-2 rounded"
@@ -161,12 +167,12 @@ export default function Buissnessprofile() {
               >
                 <h5>About</h5>
                 <p style={{ fontFamily: "serif", marginTop: "30px" }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat.
-                  <br /> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                  anim id est laborum.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  <br /> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                  sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
               </div>
             </div>
@@ -198,7 +204,12 @@ export default function Buissnessprofile() {
                     // border: "1px solid black",
                   }}
                 >
-                  <div class="btn-group" role="group" aria-label="Basic outlined example" style={{ padding: "20px" }}>
+                  <div
+                    class="btn-group"
+                    role="group"
+                    aria-label="Basic outlined example"
+                    style={{ padding: "20px" }}
+                  >
                     <button type="button" class="btn btn-outline-success">
                       Edit
                     </button>

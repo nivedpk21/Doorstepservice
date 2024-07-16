@@ -27,7 +27,7 @@ export default function Navigation() {
           </div>
         </div>
       </header>
-      <header>
+      <header className="border-bottom">
         {/*----------------------------navigation------------------------------------------------- */}
 
         {role === "admin" ? ( // ADMIN----------------------------------
