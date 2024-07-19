@@ -17,6 +17,9 @@ export default function Viewjoblisting() {
         const jobdata = response.data.data;
         setData(jobdata);
         console.log("jobdata", jobdata);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 

@@ -11,7 +11,6 @@ export default function Registration() {
   // ---------------------------------- user form ----------------------------------------------------
 
   const token = localStorage.getItem("token");
-  const [isSubmit, setIsSubmit] = useState(false);
   const [formErrors, setformErrors] = useState({});
   console.log(formErrors);
 
@@ -79,11 +78,11 @@ export default function Registration() {
 
   const submit = (e) => {
     e.preventDefault();
-    setformErrors(validate(inputValues));
-    setIsSubmit(true);
+    const newFormErrors = validate(inputValues);
+    setformErrors(newFormErrors);
 
-    console.log(Object.keys(formErrors).length);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
+    console.log(Object.keys(newFormErrors).length);
+    if (Object.keys(formErrors).length === 0) {
       axios
         .post("https://doorstepservice.onrender.com/user/register", inputValues, {
           headers: { Authorization: `Bearer ${token}` },
@@ -102,7 +101,6 @@ export default function Registration() {
 
   //     ------------------------buissnessform -----------------
 
-  const [newisSubmit, setnewIsSubmit] = useState(false);
   const [newformErrors, setnewformErrors] = useState({});
   console.log(newformErrors);
 
@@ -175,10 +173,10 @@ export default function Registration() {
 
   const newsubmit = (e) => {
     e.preventDefault();
-    setnewformErrors(newvalidate(newinputValues));
-    setnewIsSubmit(true);
+    const validFormErrors = newvalidate(newinputValues);
+    setnewformErrors(validFormErrors);
 
-    if (Object.keys(newformErrors).length === 0 && newisSubmit) {
+    if (Object.keys(validFormErrors).length === 0) {
       axios
         .post("https://doorstepservice.onrender.com/buissness/register", newinputValues, {
           headers: { Authorization: `Bearer ${token}` },
@@ -470,7 +468,7 @@ export default function Registration() {
           // -----------------buissness form---------------------------------------------------------------------------------
           <>
             <div class="row justify-content-center align-items-center ">
-              <div class="col-6 col-sm-12 col-md-12 col-lg-6" >
+              <div class="col-6 col-sm-12 col-md-12 col-lg-6">
                 <div>
                   {/* form ---------------------------------------------------*/}
                   <div class="mb-3">
@@ -551,7 +549,7 @@ export default function Registration() {
                 </div>
               </div>
               {/* col 2 ------------------------------*/}
-              <div class="col-6 col-sm-12 col-md-12 col-lg-6"> 
+              <div class="col-6 col-sm-12 col-md-12 col-lg-6">
                 <div>
                   <div class="mb-3">
                     <label for="" class="form-label">

@@ -33,14 +33,13 @@ export default function Login() {
   };
 
   const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
 
   const submit = (e) => {
     e.preventDefault();
-    setFormErrors(validate(inputvalues));
-    setIsSubmit(true);
+    const newFormErrors = validate(inputvalues);
+    setFormErrors(newFormErrors);
 
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
+    if (Object.keys(newFormErrors).length === 0) {
       setLoading(true);
       axios
         .post("https://doorstepservice.onrender.com/user/login", inputvalues)

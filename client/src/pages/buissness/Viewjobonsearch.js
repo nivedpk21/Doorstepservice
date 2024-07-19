@@ -17,6 +17,9 @@ export default function Viewjobonsearch() {
         console.log(response);
         const data = response.data.data;
         setData(data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
@@ -32,6 +35,9 @@ export default function Viewjobonsearch() {
           console.log(response);
           const message = response.data.message;
           toast.success(message);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     } catch (error) {
       console.log(error);

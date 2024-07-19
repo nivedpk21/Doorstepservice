@@ -4,6 +4,7 @@ import Navigation from "../components/Navigation";
 
 export default function Buissnessprofile() {
   const token = localStorage.getItem("token");
+  const [data, setData] = useState({});
 
   useEffect(() => {
     axios
@@ -19,8 +20,6 @@ export default function Buissnessprofile() {
         console.log(error);
       });
   }, []);
-
-  const [data, setData] = useState({});
 
   return (
     <>

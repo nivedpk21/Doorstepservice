@@ -21,21 +21,29 @@ export default function Viewjob() {
         console.log(response);
         const jobData = response.data.data;
         setData(jobData);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
   const deleteJob = (jobId) => {
-    axios.get(`https://doorstepservice.onrender.com/user/deletejob/${jobId}`).then((response) => {
-      console.log(response);
+    axios
+      .get(`https://doorstepservice.onrender.com/user/deletejob/${jobId}`)
+      .then((response) => {
+        console.log(response);
 
-      const filterData = data.filter((obj) => {
-        return obj._id != jobId;
+        const filterData = data.filter((obj) => {
+          return obj._id != jobId;
+        });
+        setData(filterData);
+
+        const message = response.data.message;
+        toast.success(message);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      setData(filterData);
-
-      const message = response.data.message;
-      toast.success(message);
-    });
   };
 
   const [currentPage, setCurrentpage] = useState(1);

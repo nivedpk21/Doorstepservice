@@ -16,6 +16,9 @@ export default function Usermessage() {
         console.log(response);
         const messageData = response.data.data;
         setData(messageData);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
   return (

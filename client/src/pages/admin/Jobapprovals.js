@@ -11,13 +11,18 @@ export default function Jobapprovals() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("https://doorstepservice.onrender.com/admin/jobapprovals").then((response) => {
-      console.log("response logged:", response);
-      const data = response.data.data;
-      console.log("data logged", data);
-      setData(data);
-      setLoading(false);
-    });
+    axios
+      .get("https://doorstepservice.onrender.com/admin/jobapprovals")
+      .then((response) => {
+        console.log("response logged:", response);
+        const data = response.data.data;
+        console.log("data logged", data);
+        setData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const [currentPage, setCurrentpage] = useState(1);

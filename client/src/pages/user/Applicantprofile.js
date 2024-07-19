@@ -16,18 +16,28 @@ export default function Applicantprofile() {
   console.log("jobid", jobid);
 
   useEffect(() => {
-    axios.get(`https://doorstepservice.onrender.com/user/viewapplicantprofile/${id}`).then((response) => {
-      console.log(response);
-      const data = response.data.data;
-      setData(data);
-    });
+    axios
+      .get(`https://doorstepservice.onrender.com/user/viewapplicantprofile/${id}`)
+      .then((response) => {
+        console.log(response);
+        const data = response.data.data;
+        setData(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const updateStatus = (loginId) => {
     console.log("BuissnessloginId:", loginId);
-    axios.get(`https://doorstepservice.onrender.com/user/approvejob/${loginId}/${jobid}`).then((response) => {
-      console.log(response);
-    });
+    axios
+      .get(`https://doorstepservice.onrender.com/user/approvejob/${loginId}/${jobid}`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const inputchange = (event) => {
@@ -47,6 +57,9 @@ export default function Applicantprofile() {
       })
       .then((response) => {
         console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -64,7 +77,10 @@ export default function Applicantprofile() {
             alignItems: "center",
           }}
         >
-          <div className="container border- imagecontainer" style={{ display: "flex", alignItems: "center" }}>
+          <div
+            className="container border- imagecontainer"
+            style={{ display: "flex", alignItems: "center" }}
+          >
             <div>
               <img
                 src="/images/smartphone.jpg"
@@ -174,7 +190,10 @@ export default function Applicantprofile() {
             justifyContent: "center",
           }}
         >
-          <div className="border border row container" style={{ padding: "10px", borderRadius: "10px" }}>
+          <div
+            className="border border row container"
+            style={{ padding: "10px", borderRadius: "10px" }}
+          >
             <div className=" col-sm-12 col-lg-7 p-1">
               <div
                 className=" border rounded"
@@ -188,12 +207,12 @@ export default function Applicantprofile() {
               >
                 <h5>About</h5>
                 <p style={{ fontFamily: "serif", marginTop: "30px" }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat.
-                  <br /> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                  anim id est laborum.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  <br /> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                  sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
               </div>
             </div>
@@ -213,7 +232,7 @@ export default function Applicantprofile() {
                 <div style={{ height: "166px" }}>
                   <h5>Address</h5>
                   <p style={{ fontFamily: "serif", marginTop: "30px" }}>
-                    {data.address} <br/>
+                    {data.address} <br />
                     {data.city},{data.state}
                   </p>
                 </div>
@@ -225,7 +244,12 @@ export default function Applicantprofile() {
                     // border: "1px solid black",
                   }}
                 >
-                  <div class="btn-group" role="group" aria-label="Basic outlined example" style={{ padding: "20px" }}>
+                  <div
+                    class="btn-group"
+                    role="group"
+                    aria-label="Basic outlined example"
+                    style={{ padding: "20px" }}
+                  >
                     <button type="button" class="btn btn-outline-success">
                       Call
                     </button>
@@ -311,17 +335,31 @@ export default function Applicantprofile() {
       </section>
 
       {/* <!-- Modal --> ---------------------------------------*/}
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel">
                 Chat
               </h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
             <div class="modal-body ">
-              <div className="container border border-2" style={{ width: "100%", height: "300px" }}></div>
+              <div
+                className="container border border-2"
+                style={{ width: "100%", height: "300px" }}
+              ></div>
               <div
                 style={{
                   display: "flex",

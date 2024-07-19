@@ -20,6 +20,9 @@ export default function Buissnessverification() {
         const data = response.data.data;
         setData(data);
         setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
@@ -29,8 +32,6 @@ export default function Buissnessverification() {
       .then((response) => {
         console.log(response);
         const message = response.data.message;
-        console.log(message);
-
         toast.success(message);
 
         setTimeout(() => {

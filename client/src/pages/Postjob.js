@@ -19,6 +19,9 @@ export default function Postjob() {
         console.log(response);
         const data = response.data.data;
         setAddress(data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 

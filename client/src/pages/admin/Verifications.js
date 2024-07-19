@@ -17,6 +17,9 @@ export default function Verifications() {
         console.log(response, "res logged");
         const data = response.data.data;
         setData(data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 

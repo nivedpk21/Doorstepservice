@@ -64,11 +64,16 @@ export default function Bookservice() {
   };
 
   useEffect(() => {
-    axios.get(`https://doorstepservice.onrender.com/user/viewbuissnessdetails/${id}`).then((response) => {
-      console.log(response);
-      const buissnessData = response.data.data;
-      setData(buissnessData);
-    });
+    axios
+      .get(`https://doorstepservice.onrender.com/user/viewbuissnessdetails/${id}`)
+      .then((response) => {
+        console.log(response);
+        const buissnessData = response.data.data;
+        setData(buissnessData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const token = localStorage.getItem("token");
@@ -82,6 +87,9 @@ export default function Bookservice() {
         console.log("userdata", response);
         const userData = response.data.data;
         setUserdata(userData);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 

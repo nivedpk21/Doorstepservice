@@ -35,6 +35,9 @@ export default function Viewjobapproval() {
         console.log(response);
         const message = response.data.message;
         toast.success(message);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 

@@ -629,14 +629,14 @@ userRouter.get("/viewbuissnessdetails/:id", async (req, res) => {
       return res.status(200).json({
         data: buissnessData,
         message: "buissness details fetched successfully",
-      }); 
+      });
     });
   } catch (error) {
     console.log(error);
   }
 });
 
-// book service 
+// book service
 
 userRouter.post("/bookservice/:id", checkAuth, async (req, res) => {
   const buissness_id = req.params.id;
@@ -664,4 +664,3 @@ userRouter.post("/bookservice/:id", checkAuth, async (req, res) => {
   } catch (error) {}
 });
 module.exports = userRouter;
-   

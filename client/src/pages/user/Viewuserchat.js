@@ -20,6 +20,9 @@ export default function Viewuserchat() {
         const message = response.data.data;
         const sortData = message.sort((a, b) => parseInt(a.time) - parseInt(b.time));
         setData(sortData);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
@@ -30,6 +33,9 @@ export default function Viewuserchat() {
         console.log(response);
         const data = response.data.data;
         setBusinessdata(data);
+      })
+      .catch((error) => {
+        console.log(error);
       })
       .catch((error) => {
         console.log(error);
@@ -55,6 +61,9 @@ export default function Viewuserchat() {
       })
       .then((response) => {
         console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
   console.log("data", data);

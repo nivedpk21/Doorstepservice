@@ -11,17 +11,27 @@ export default function Viewapplicantslist() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get(`https://doorstepservice.onrender.com/user/viewjobapplications/${id}`).then((response) => {
-      console.log("response:", response);
-      const data = response.data.data;
-      setData(data);
-    });
+    axios
+      .get(`https://doorstepservice.onrender.com/user/viewjobapplications/${id}`)
+      .then((response) => {
+        console.log("response:", response);
+        const data = response.data.data;
+        setData(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const approve = (buissnessId) => {
-    axios.get(`https://doorstepservice.onrender.com/user/approvejobapplication/${buissnessId}/${id}`).then((response)=>{
-      console.log(response);
-    })
+    axios
+      .get(`https://doorstepservice.onrender.com/user/approvejobapplication/${buissnessId}/${id}`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -34,7 +44,12 @@ export default function Viewapplicantslist() {
         {data.map((item) => (
           <div
             className="border rounded p-3"
-            style={{ width: "100%", height: "90px", display: "flex", justifyContent: "space-between" }}
+            style={{
+              width: "100%",
+              height: "90px",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
           >
             <div style={{ width: "40%" }}>
               <Link

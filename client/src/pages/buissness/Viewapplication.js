@@ -9,16 +9,21 @@ export default function Viewapplication() {
   console.log(id);
 
   useEffect(() => {
-    axios.get(`https://doorstepservice.onrender.com/buissness/viewapplication/${id}`).then((response) => {
-      console.log(response);
-      const data = response.data.data;
-      setData(data);
-    });
-  },[]);
+    axios
+      .get(`https://doorstepservice.onrender.com/buissness/viewapplication/${id}`)
+      .then((response) => {
+        console.log(response);
+        const data = response.data.data;
+        setData(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
     <>
       <Navigation />
- 
+
       <div
         className="container-fluid border rounded  mt-5 p-2"
         style={{ width: "70%", height: "100%", backgroundColor: "white" }}

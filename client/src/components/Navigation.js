@@ -87,8 +87,8 @@ export default function Navigation() {
           </>
         ) : role === "user" ? ( // USER ----------------------------------
           <>
-            <nav class="navbar navbar-expand-lg bg-body-light sticky-top border-bottom">
-              <div class="container-fluid">
+            <nav className="navbar navbar-expand-lg bg-body-light sticky-top border-bottom">
+              <div className="container-fluid">
                 <NavLink className="navbar-brand" to="/">
                   <img
                     className="d-inline-block align-text-center"
@@ -100,7 +100,7 @@ export default function Navigation() {
                 </NavLink>
                 <button
                   style={{ color: "white", backgroundColor: "white" }}
-                  class="navbar-toggler"
+                  className="navbar-toggler"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#navbarSupportedContent"
@@ -108,65 +108,59 @@ export default function Navigation() {
                   aria-expanded="false"
                   aria-label="Toggle navigation"
                 >
-                  <span class="navbar-toggler-icon"></span>
+                  <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                      <NavLink class="nav-link " aria-current="page" to="/">
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul className="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
+                    <li className="nav-item">
+                      <NavLink className="nav-link " aria-current="page" to="/">
                         Home
                       </NavLink>
                     </li>
-                    <li class="nav-item">
-                      <NavLink class="nav-link" to="/searchservice">
+                    <li className="nav-item">
+                      <NavLink className="nav-link" to="/searchservice">
                         Services
                       </NavLink>
                     </li>
-                    <li class="nav-item">
-                      <NavLink class="nav-link " to="/postjob">
+                    <li className="nav-item">
+                      <NavLink className="nav-link " to="/postjob">
                         Postjob
                       </NavLink>
                     </li>
-                    <li class="nav-item">
-                      <NavLink class="nav-link " to="/viewjob">
+                    <li className="nav-item">
+                      <NavLink className="nav-link " to="/viewjob">
                         Viewjobs
                       </NavLink>
                     </li>
-                    <li class="nav-item">
-                      <NavLink class="nav-link " to="/userappointments">
+                    <li className="nav-item">
+                      <NavLink className="nav-link " to="/userappointments">
                         Appointments
                       </NavLink>
                     </li>
-                    <li class="nav-item">
-                      <NavLink class="nav-link " to="/usermessages">
+                    <li className="nav-item d-none">
+                      <NavLink className="nav-link " to="/usermessages">
                         Messages
                       </NavLink>
                     </li>
                   </ul>
-                </div>
-                <div>
-                  <div
-                    style={{
-                      display: "flex",
-                      textAlign: "center",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Avatar
-                      sx={{ width: "39px", height: "39px", backgroundColor: "black" }}
-                      alt="Remy Sharp"
-                      src="#"
-                    >
-                      U
-                    </Avatar>
-                    <button
-                      onClick={logout}
-                      className="btn btn-danger"
-                      style={{ width: "70px", height: "35px", padding: "0", marginLeft: "6px" }}
-                    >
-                      Logout
-                    </button>
+
+                  <div>
+                    <div className="logout-div">
+                      <Avatar
+                        sx={{ width: "39px", height: "39px", backgroundColor: "black" }}
+                        alt="Remy Sharp"
+                        src="#"
+                      >
+                        U
+                      </Avatar>
+                      <button
+                        onClick={logout}
+                        className="btn btn-danger"
+                        style={{ width: "70px", height: "35px", padding: "0", marginLeft: "6px" }}
+                      >
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -220,7 +214,8 @@ export default function Navigation() {
                     </li>
                     <li class="nav-item dropdown">
                       <NavLink
-                        class="nav-link dropdown-toggle"
+                        className="nav-link dropdown-toggle"
+                        style={{ color: "black" }}
                         href="#"
                         role="button"
                         data-bs-toggle="dropdown"
@@ -245,7 +240,7 @@ export default function Navigation() {
                         </li>
                       </ul>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item d-none">
                       <NavLink
                         className="nav-link"
                         activeClassName="active"
@@ -255,26 +250,19 @@ export default function Navigation() {
                       </NavLink>
                     </li>
                   </ul>
-                </div>
-                <div>
-                  <div
-                    style={{
-                      display: "flex",
-                      textAlign: "center",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Avatar sx={{ width: "39px", height: "39px" }} alt="Remy Sharp" src="#">
-                      B
-                    </Avatar>
-                    <button
-                      onClick={logout}
-                      className="btn btn-warning"
-                      style={{ width: "70px", height: "35px", padding: "0", marginLeft: "6px" }}
-                    >
-                      Logout
-                    </button>
+                  <div>
+                    <div className="logout-div">
+                      <Avatar sx={{ width: "39px", height: "39px" }} alt="Remy Sharp" src="#">
+                        B
+                      </Avatar>
+                      <button
+                        onClick={logout}
+                        className="btn btn-warning"
+                        style={{ width: "70px", height: "35px", padding: "0", marginLeft: "6px" }}
+                      >
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

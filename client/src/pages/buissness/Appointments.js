@@ -26,6 +26,9 @@ export default function Appointments() {
       .get(`https://doorstepservice.onrender.com/buissness/jobfinished/${applicationId}/${jobId}`)
       .then((response) => {
         console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 

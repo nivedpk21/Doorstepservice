@@ -21,6 +21,9 @@ export default function Viewmessage() {
 
         const sortData = messageData.sort((a, b) => parseInt(a.time) - parseInt(b.time));
         setData(sortData);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
@@ -56,6 +59,9 @@ export default function Viewmessage() {
         })
         .then((response) => {
           console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     }
   };

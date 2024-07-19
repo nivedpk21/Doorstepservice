@@ -1,0 +1,18 @@
+.user-ap-div {
+  width: 50%;
+  height: 550px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+@media only screen and (max-width: 576px) {
+  .user-ap-div {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 992px) {
+  .user-ap-div {
+    width: 80%;
+  }
+}

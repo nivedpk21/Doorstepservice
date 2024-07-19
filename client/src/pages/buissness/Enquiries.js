@@ -19,36 +19,49 @@ export default function Enquiries() {
 
         const datanumber = response.data.data.length;
         console.log("length", datanumber);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
   const updateStatus = (bookingId) => {
-    axios.get(`https://doorstepservice.onrender.com/buissness/acceptbooking/${bookingId}`).then((response) => {
-      console.log(response);
+    axios
+      .get(`https://doorstepservice.onrender.com/buissness/acceptbooking/${bookingId}`)
+      .then((response) => {
+        console.log(response);
 
-      const filterData = data.filter((obj) => {
-        return obj._id != bookingId;
+        const filterData = data.filter((obj) => {
+          return obj._id != bookingId;
+        });
+        setData(filterData);
+
+        const message = response.data.message;
+        console.log("message", message);
+        toast.success(message);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      setData(filterData);
-
-      const message = response.data.message;
-      console.log("message", message);
-      toast.success(message);
-    });
   };
 
   const rejectBooking = (bookingId) => {
-    axios.get(`https://doorstepservice.onrender.com/buissness/rejectbooking/${bookingId}`).then((response) => {
-      console.log(response);
-      const message = response.data.message;
+    axios
+      .get(`https://doorstepservice.onrender.com/buissness/rejectbooking/${bookingId}`)
+      .then((response) => {
+        console.log(response);
+        const message = response.data.message;
 
-      const filterData = data.filter((obj) => {
-        return obj._id != bookingId;
+        const filterData = data.filter((obj) => {
+          return obj._id != bookingId;
+        });
+        setData(filterData);
+        console.log("message", message);
+        toast.error(message);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      setData(filterData);
-      console.log("message", message);
-      toast.error(message);
-    });
   };
 
   const [currentPage, setCurrentpage] = useState(1);

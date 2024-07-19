@@ -57,6 +57,9 @@ export default function Joblistings() {
       })
       .then((response) => {
         console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -89,7 +92,6 @@ export default function Joblistings() {
                   aria-expanded="false"
                   aria-label="Toggle navigation"
                 >
-                  {" "}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -159,7 +161,7 @@ export default function Joblistings() {
               sx={{ width: "100%", minHeight: "500px", backgroundColor: "  ", paddingTop: "20px" }}
             >
               <Container maxWidth="md">
-                <Box 
+                <Box
                   sx={{
                     backgroundColor: "white",
                     width: "100%",

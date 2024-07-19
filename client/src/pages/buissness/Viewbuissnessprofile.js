@@ -5,6 +5,7 @@ import Navigation from "../../components/Navigation";
 
 export default function Viewbuissnessprofile() {
   const token = localStorage.getItem("token");
+  const [data, setData] = useState({});
 
   useEffect(() => {
     axios
@@ -21,7 +22,6 @@ export default function Viewbuissnessprofile() {
       });
   }, []);
 
-  const [data, setData] = useState({});
   return (
     <>
       <Navigation />
@@ -82,13 +82,13 @@ export default function Viewbuissnessprofile() {
             </div>
 
             <div className="p-0 name-div">
-              <h5 style={{ color: "white", margin: "0" }}>{"data.businessname"}</h5>
-              <p style={{ color: "white", margin: "0" }}>{"data.category"}</p>
+              <h5 style={{ color: "white", margin: "0" }}>{data.businessname}</h5>
+              <p style={{ color: "white", margin: "0" }}>{data.category}</p>
             </div>
 
             <div className="p-0 location-div">
               <p style={{ color: "white", margin: "0" }}>Location</p>
-              <h5 style={{ color: "white", margin: "0" }}>{"data.city"}</h5>
+              <h5 style={{ color: "white", margin: "0" }}>{data.city}</h5>
             </div>
 
             <div className="p-0">

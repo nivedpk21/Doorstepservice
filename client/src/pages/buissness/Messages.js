@@ -17,6 +17,9 @@ export default function Messages() {
         const data = response.data.data;
         console.log("messagedata", data);
         setData(data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
   return (

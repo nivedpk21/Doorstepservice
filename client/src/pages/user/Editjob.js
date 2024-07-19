@@ -23,11 +23,16 @@ export default function Editjob() {
   console.log(token);
 
   useEffect(() => {
-    axios.get(`https://doorstepservice.onrender.com/user/viewpostedjob/${id}`).then((response) => {
-      console.log(response);
-      const jobdata = response.data.data;
-      setData(jobdata);
-    });
+    axios
+      .get(`https://doorstepservice.onrender.com/user/viewpostedjob/${id}`)
+      .then((response) => {
+        console.log(response);
+        const jobdata = response.data.data;
+        setData(jobdata);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const inputChange = (event) => {
@@ -86,6 +91,9 @@ export default function Editjob() {
         })
         .then((response) => {
           console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     }
   };

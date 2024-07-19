@@ -21,28 +21,41 @@ export default function Singlejob() {
         console.log(response);
         const data = response.data.data;
         setAddress(data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
   useEffect(() => {
-    axios.get(`https://doorstepservice.onrender.com/user/viewsinglejob/${id}`).then((response) => {
-      console.log(response);
-      const jobdata = response.data.data;
-      setData(jobdata);
-    });
+    axios
+      .get(`https://doorstepservice.onrender.com/user/viewsinglejob/${id}`)
+      .then((response) => {
+        console.log(response);
+        const jobdata = response.data.data;
+        setData(jobdata);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const deleteJob = (jobId) => {
-    axios.get(`https://doorstepservice.onrender.com/user/deletejob/${jobId}`).then((response) => {
-      console.log(response);
+    axios
+      .get(`https://doorstepservice.onrender.com/user/deletejob/${jobId}`)
+      .then((response) => {
+        console.log(response);
 
-      const message = response.data.message;
-      toast.success(message);
+        const message = response.data.message;
+        toast.success(message);
 
-      setTimeout(() => {
-        navigate("/viewjob");
-      }, 2000);
-    });
+        setTimeout(() => {
+          navigate("/viewjob");
+        }, 2000);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
