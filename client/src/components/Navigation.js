@@ -168,7 +168,7 @@ export default function Navigation() {
           </>
         ) : role == "buissness" ? ( // BUSINESS-----------------------------
           <>
-            <nav class="navbar navbar-expand-lg bg-body-light sticky-top">
+            <nav class="navbar navbar-expand-lg bg-body-light sticky-top border-bottom">
               <div class="container-fluid">
                 <button
                   class="navbar-toggler"
