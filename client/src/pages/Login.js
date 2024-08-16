@@ -110,7 +110,7 @@ export default function Login() {
               />
             </svg>
             <input
-              placeholder="admin"
+              placeholder="admin/user/business"
               title="Inpit title"
               name="username"
               onChange={inputChange}

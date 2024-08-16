@@ -3,17 +3,19 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Pagination from "../../components/Pagination";
 import Navigation from "../../components/Navigation";
+import "./enquiries.css";
 
 export default function Enquiries() {
   const token = localStorage.getItem("token");
   const [data, setData] = useState([]);
   useEffect(() => {
+    // https://doorstepservice.onrender.com
     axios
-      .get("https://doorstepservice.onrender.com/buissness/enquiries", {
+      .get("http://localhost:5000/buissness/enquiries", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response);
+        console.log(response, "response");
         const bookingData = response.data.data;
         setData(bookingData);
 
@@ -75,10 +77,7 @@ export default function Enquiries() {
     <>
       <Navigation />
       <Toaster position="top-center" reverseOrder={false} />
-      <div
-        className="border rounded p-2"
-        style={{ width: "50%", minHeight: "500px", margin: "auto", marginTop: "50px" }}
-      >
+      <div className="enquiries-div border rounded p-2">
         {currentPageposts.map((item) => (
           <div
             className="border rounded p-2"

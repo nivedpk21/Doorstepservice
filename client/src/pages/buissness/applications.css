@@ -1,0 +1,18 @@
+.applications-div {
+  width: 50%;
+  height: 500px;
+  margin-top: 50px;
+  padding: 10px;
+}
+
+@media only screen and (max-width: 576px) {
+  .applications-div {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 992px) {
+  .applications-div {
+    width: 70%;
+  }
+}

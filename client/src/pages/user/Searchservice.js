@@ -72,7 +72,7 @@ export default function Searchservice() {
           </div>
           <div className="col-12 col-sm-12 col-md-12 col-lg-4">
             <button type="button" className="btn btn-primary w-100" onClick={submit}>
-              Button
+              Search
             </button>
           </div>
         </div>
@@ -93,7 +93,7 @@ export default function Searchservice() {
               <Link
                 type="button"
                 className="btn btn-secondary btn-1"
-                to={`/bookingdetalis/${item._id}`}
+                to={`/bookservice/${item._id}`}
               >
                 Book
               </Link>

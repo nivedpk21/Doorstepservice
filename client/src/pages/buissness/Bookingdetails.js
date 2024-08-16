@@ -96,12 +96,12 @@ export default function Bookingdetails() {
           </div>
           <div className="mt-3" style={{ textAlign: "center" }}>
             <button
-                // onClick={() => {
-                //   taskcompleted(data._id);
-                // }}
+              // onClick={() => {
+              //   taskcompleted(data._id);
+              // }}
               className="btn btn-primary"
             >
-              Apply
+              Accept
             </button>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Navigation from "../../components/Navigation";
@@ -10,6 +10,8 @@ export default function Bookservice() {
   const [userData, setUserdata] = useState({});
   const [formErrors, setFormerrorrs] = useState({});
   const [isSubmit, setIssubmit] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
   const [bookingData, setBookingdata] = useState({
     title: "",
@@ -47,9 +49,10 @@ export default function Bookservice() {
     setIssubmit(true);
     setFormerrorrs(validate(bookingData));
 
-    if (Object.keys(formErrors).length === 0 && isSubmit)
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      setLoading(true);
       axios
-        .post(`https://doorstepservice.onrender.com/user/bookservice/${id}`, bookingData, {
+        .post(`https://doorstepservice.onrender.com/user/bookservice/${businessData.loginId}`, bookingData, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
@@ -57,15 +60,20 @@ export default function Bookservice() {
           console.log(message);
 
           toast.success(message);
+          setLoading(false);
+          setTimeout(() => {
+            navigate('/searchservice')
+          }, 1000);
         })
         .catch((error) => {
           console.log(error);
         });
+    }
   };
 
   useEffect(() => {
     axios
-      .get(`https://doorstepservice.onrender.com/user/viewbuissnessdetails/${id}`)
+      .get(`https://doorstepservice.onrender.com/user/viewfullbuissnessprofile/${id}`)
       .then((response) => {
         console.log(response);
         const buissnessData = response.data.data;
@@ -150,7 +158,7 @@ export default function Bookservice() {
               <label for="" class="formlabel">
                 JobType
               </label>
-              <span>{formErrors.jobtype}</span>
+              <span style={{ color: "red" }}>{formErrors.jobtype}</span>
               <select
                 onChange={inputChange}
                 style={{ height: "40px" }}
@@ -170,7 +178,7 @@ export default function Bookservice() {
               <label for="" class="formlabel">
                 Date
               </label>
-              <span>{formErrors.date}</span>
+              <span style={{ color: "red" }}>{formErrors.date}</span>
               <input
                 onChange={inputChange}
                 style={{ height: "40px" }}
@@ -205,9 +213,20 @@ export default function Bookservice() {
             </div>
           </div>
           <div className="mt-3 text-center">
-            <button onClick={submit} type="button" class="btn btn-primary">
-              Submit
-            </button>
+            {loading ? (
+              <>
+                <button type="button" className="btn btn-primary">
+                  <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                  <span role="status"> Processing...</span>
+                </button>
+              </>
+            ) : ( 
+              <>
+                <button onClick={submit} type="button" className="btn btn-primary">
+                  Book
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>

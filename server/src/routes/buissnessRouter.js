@@ -656,16 +656,19 @@ buissnessRouter.get("/jobfinished/:applicationid/:jobid", async (req, res) => {
 
 buissnessRouter.get("/enquiries", checkAuth, async (req, res) => {
   const buissness_id = req.userData.userId;
+  console.log("request received");
 
   console.log("buissnessid", buissness_id);
 
   try {
-    await bookingModel.find({ buissnessId: buissness_id, status: "0" }).then((bookingData) => {
+    const enquiryData = await bookingModel.find({ buissnessId: buissness_id, status: "0" });
+    if (enquiryData) {
+      console.log(enquiryData);
       return res.status(200).json({
-        data: bookingData,
+        data: enquiryData,
         message: "booking enquiries fetched successfully",
       });
-    });
+    }
   } catch (error) {
     console.log(error);
   }

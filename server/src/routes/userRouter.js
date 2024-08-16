@@ -451,6 +451,8 @@ userRouter.post("/search", async (req, res) => {
 
 userRouter.get("/viewfullbuissnessprofile/:id", async (req, res) => {
   const id = req.params.id;
+  console.log(id);
+  console.log("api called");
   await buissnessModel.findOne({ _id: id }).then((data) => {
     return res.status(200).json({
       data: data,

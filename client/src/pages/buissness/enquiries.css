@@ -1,0 +1,20 @@
+.enquiries-div {
+  width: 50%;
+  min-height: 500px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+@media only screen and (max-width: 576px) {
+  .enquiries-div {
+    width: 80%;
+    min-height: 500px;
+  }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 992px) {
+  .enquiries-div {
+    width: 70%;
+    min-height: 500px;
+  }
+}
